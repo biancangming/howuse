@@ -1,0 +1,50 @@
+{
+  "name": "howves",
+  "version": "0.0.0",
+  "description": "a simple Vue Composition utils",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx rollup -c",
+    "update:beta-version": "npx ts-node ./scripts/updateVersion.ts beta",
+    "update:release-version": "npx ts-node ./scripts/updateVersion.ts release",
+    "update:publish": "npx ts-node ./scripts/publish.ts",
+    "dev:docs": "npm run register:components --componentsDir=demo && vitepress dev docs",
+    "build:docs": "npm run register:components && vitepress build docs",
+    "serve:docs": "vitepress serve docs",
+    "register:components": "vitepress-rc"
+  },
+  "homepage": "https://github.com/biancangming/howves",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:biancangming/howves.git"
+  },
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.cjs",
+      "types": "./index.d.ts"
+    }
+  },
+  "keywords": [],
+  "author": "biancangming",
+  "license": "ISC",
+  "dependencies": {
+    "resize-observer-polyfill": "^1.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^16.9.1",
+    "axios": "^0.25.0",
+    "consola": "^2.15.3",
+    "cross-env": "^6.0.3",
+    "esbuild-register": "^3.0.0",
+    "nodemon": "^2.0.12",
+    "rollup": "^2.66.0",
+    "rollup-plugin-dts": "^4.1.0",
+    "rollup-plugin-esbuild": "^4.8.2",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.4",
+    "vite-svg-loader": "^2.2.0",
+    "vitepress": "^0.16.1",
+    "vitepress-theme-demoblock": "^1.2.6"
+  }
+}

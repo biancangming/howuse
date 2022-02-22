@@ -12,7 +12,8 @@ export interface HowVesAxiosOptions {
 }
 
 export interface HowVesExRequestOptions {
-    immediate?: boolean
+    immediate?: boolean,
+    delay?: number
 }
 
 export function createAxios(options: HowVesAxiosOptions) {
@@ -71,20 +72,23 @@ export function createAxios(options: HowVesAxiosOptions) {
         const error = ref<AxiosError<T>>() // axios 错误响应
         const edata = ref<T>() // axios 错误响应数据
 
-        const request = debounce(() => {
-            server.request({ ...config, cancelToken: cancelToken.token })
-                .then(r => {
-                    response.value = r
-                    data.value = r.data
-                })
-                .catch((e: AxiosError) => {
-                    error.value = e
-                    edata.value = e.response.data
-                })
-                .finally(() => {
-                    loading(false)
-                })
-        })
+        const request = debounce(
+            () => {
+                server.request({ ...config, cancelToken: cancelToken.token })
+                    .then(r => {
+                        response.value = r
+                        data.value = r.data
+                    })
+                    .catch((e: AxiosError) => {
+                        error.value = e
+                        edata.value = e.response.data
+                    })
+                    .finally(() => {
+                        loading(false)
+                    })
+            },
+            options.delay || 500
+        )
 
         const execute = () => {
             loading(true)

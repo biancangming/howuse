@@ -73,8 +73,9 @@ export function createAxios(options: HowVesAxiosOptions) {
         const edata = ref<T>() // axios 错误响应数据
 
         const request = debounce(
-            () => {
-                server.request({ ...config, cancelToken: cancelToken.token })
+            ({ params, data }: AxiosRequestConfig) => {
+                const c = { ...config, params, data }
+                server.request({ ...c, cancelToken: cancelToken.token })
                     .then(r => {
                         response.value = r
                         data.value = r.data
@@ -90,9 +91,9 @@ export function createAxios(options: HowVesAxiosOptions) {
             options.delay || 500
         )
 
-        const execute = () => {
+        const execute = (config?: AxiosRequestConfig) => {
             loading(true)
-            request()
+            request(config)
         }
 
         // 立即执行

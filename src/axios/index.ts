@@ -48,7 +48,7 @@ export function createAxios(options: HowVesAxiosOptions) {
     function useAxiosRequest<T>(config: AxiosRequestConfig, options?: HowVesExRequestOptions) {
         const isLoading = shallowRef(false)
         const isFinished = shallowRef(false)
-        const aborted = ref(false)// 请求被中断
+        const aborted = shallowRef(false)// 请求被中断
         const cancelToken: CancelTokenSource = axios.CancelToken.source()
 
         const loading = (loading: boolean) => {
@@ -91,7 +91,7 @@ export function createAxios(options: HowVesAxiosOptions) {
             options.delay || 500
         )
 
-        const execute = (config?: AxiosRequestConfig) => {
+        const execute = (config?: Pick<AxiosRequestConfig, 'params' | 'data'>) => {
             loading(true)
             request(config)
         }

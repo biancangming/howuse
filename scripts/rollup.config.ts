@@ -7,9 +7,6 @@ import type { RollupOptions } from 'rollup'
 
 const configs: RollupOptions[] = []
 
-const externals = [
-    "resize-observer-polyfill"
-]
 
 const esbuildPlugin = esbuild()
 
@@ -26,58 +23,42 @@ const esbuildMinifer = (options: ESBuildOptions) => {
     }
 }
 
-const input = 'src/index.ts'
-const iifeName = "HowVes"
-const iifeGlobals = {
-    HowVes: "HowVes"
-}
-configs.push(
-    {
-        input,
-        output: [
-            {
-                file: `dist/index.mjs`,
+const paths = ["axios"]
+
+function createConfig(path: string): RollupOptions[] {
+    const input = `src/${path}/index.ts`
+    return [
+        {
+            input,
+            output: [
+                {
+                    file: `dist/${path}/index.mjs`,
+                    format: 'es',
+                },
+                {
+                    file: `dist/${path}/index.cjs`,
+                    format: 'cjs',
+                },
+            ],
+            plugins: [
+                esbuildPlugin
+            ],
+        },
+        {
+            input,
+            output: {
+                file: `dist/${path}/index.d.ts`,
                 format: 'es',
             },
-            {
-                file: `dist/index.cjs`,
-                format: 'cjs',
-            },
-            {
-                file: `dist/index.iife.js`,
-                format: 'iife',
-                name: iifeName,
-                extend: true,
-                globals: iifeGlobals,
-            },
-            {
-                file: `dist/index.iife.min.js`,
-                format: 'iife',
-                name: iifeName,
-                extend: true,
-                globals: iifeGlobals,
-                plugins: [
-                    esbuildMinifer({
-                        minify: true,
-                    }),
-                ],
-            }
-        ],
-        plugins: [
-            esbuildPlugin
-        ],
-    },
-    {
-        input,
-        output: {
-            file: `dist/index.d.ts`,
-            format: 'es',
-        },
-        plugins: dtsPlugin,
-        external: {
-            ...externals
+            plugins: dtsPlugin,
+            external: ["axios"]
         }
-    }
-)
+    ]
+}
+
+for (const path of paths) {
+    configs.push(...createConfig(path))
+}
+
 
 export default configs

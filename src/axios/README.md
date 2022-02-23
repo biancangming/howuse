@@ -1,13 +1,17 @@
- 创建一个axios 实例
+ # Vue Axios Composition Util 
+
+ `npm i axios` 
+ 
+##  创建一个axios 实例
  
 `createAxios`
 
-返回参数 
+##  返回参数 
 
 `server`
 `useAxiosRequest`
 
-请求hook使用 `useAxiosRequest`
+###  请求hook使用 `useAxiosRequest`
 ```js
  /**
      * @param  {AxiosRequestConfig} config 

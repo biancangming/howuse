@@ -13,7 +13,8 @@ export interface HowVesAxiosOptions {
 
 export interface HowVesExRequestOptions {
     immediate?: boolean,
-    delay?: number
+    delay?: number,
+    isDebounce: boolean
 }
 
 export function createAxios(options: HowVesAxiosOptions) {
@@ -74,32 +75,33 @@ export function createAxios(options: HowVesAxiosOptions) {
         const error = ref<AxiosError<T>>() // axios 错误响应
         const edata = ref<T>() // axios 错误响应数据
 
-        const request = debounce(
-            ({ params: p, data: d }: AxiosRequestConfig) => {
-                const c = { ...config, p, d }
-                server.request({ ...c, cancelToken: cancelToken.token })
-                    .then(r => {
-                        response.value = r
-                        data.value = r.data
-                    })
-                    .catch((e: AxiosError) => {
-                        error.value = e
-                        edata.value = e.response ? e.response.data : ""
-                    })
-                    .finally(() => {
-                        loading(false)
-                    })
-            },
-            (options && options.delay) || 1
-        )
+        // 不是节流的方式
+        const preRequest = ({ params: p, data: d }: AxiosRequestConfig) => {
+            const c = { ...config, p, d }
+            server.request({ ...c, cancelToken: cancelToken.token })
+                .then(r => {
+                    response.value = r
+                    data.value = r.data
+                })
+                .catch((e: AxiosError) => {
+                    error.value = e
+                    edata.value = e.response ? e.response.data : ""
+                })
+                .finally(() => {
+                    loading(false)
+                })
+        }
 
-        const execute = (config?: Pick<AxiosRequestConfig, 'params' | 'data'>) => {
+        const request = debounce(preRequest, (options && options.delay) || 1)
+
+        const execute = (config: Pick<AxiosRequestConfig, 'params' | 'data'> = { params: {}, data: {} }) => {
             loading(true)
-            if (!config) {
-                request({ params: {}, data: {} })
-                return
+
+            if (options && options.isDebounce) {
+                request(config)
+            } else {
+                preRequest(config)
             }
-            request(config)
         }
 
         // 立即执行

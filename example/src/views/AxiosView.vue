@@ -14,7 +14,7 @@ export default defineComponent({
       url: "/anything",
     };
 
-    const { data, response, loading, execute } = useAxiosRequest(AnyThingConf, { immediate: true });
+    const { data, response, loading, execute } = useAxiosRequest(AnyThingConf, { immediate: true, isDebounce: false });
 
     execute()
     execute()

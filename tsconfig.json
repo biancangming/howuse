@@ -9,7 +9,7 @@
     "jsx": "preserve",
     "experimentalDecorators": true, /* Enable experimental support for TC39 stage 2 draft decorators. */
     "emitDecoratorMetadata": true, /* Emit design-type metadata for decorated declarations in source files. */
-    "downlevelIteration": true,/* 允许使用迭代器 */
+    "downlevelIteration": true, /* 允许使用迭代器 */
     "module": "commonjs", /* Specify what module code is generated. */
     "rootDir": "./src", /* Specify the root folder within your source files. */
     "baseUrl": "./", /* Specify the base directory to resolve non-relative module names. */
@@ -31,10 +31,7 @@
   "include": [
     "types/*.d.ts",
     "src/*",
-    "../docs/**/*.ts",
-    "../docs/**/*.d.ts",
-    "../docs/**/*.tsx",
-    "../docs/**/*.vue"
+    "*.d.ts"
   ],
   "exclude": [
     "node_modules"

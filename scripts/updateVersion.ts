@@ -5,6 +5,7 @@
 import { readFileSync, writeFileSync } from "fs"
 import path from 'path';
 import consola from 'consola';
+import { createExport, paths } from "./exportsJson";
 
 const input = process.argv
 consola.warn(input)
@@ -60,8 +61,15 @@ function createPackage() {
 //更新package.json
 function release(pkg) {
     if (!pkg) return
+
+    // 读取导出文件
+    const releasePkg = { ...pkg }
+    const exportsJ = {}
+    for (const path of paths) Object.assign(exportsJ, createExport(path))
+    releasePkg.exports = exportsJ
+
     writeFileSync(packageJsonPath, JSON.stringify(pkg, null, '  ')); //更新package.json
-    writeFileSync(releaseJsonPath, JSON.stringify(pkg, null, '  ')); //更新发布的package.json
+    writeFileSync(releaseJsonPath, JSON.stringify(releasePkg, null, '  ')); //更新发布的package.json
     consola.warn(`已更新版本号为===> ${pkg.version}`)
 }
 

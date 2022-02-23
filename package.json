@@ -1,10 +1,11 @@
 {
   "name": "howves",
-  "version": "0.0.1-beta.3",
+  "version": "0.0.1-beta.4",
   "description": "a simple Vue Composition utils",
   "main": "dist/index.js",
   "scripts": {
     "build": "npx rollup -c",
+    "build-local": "npx rollup -c rollup.config.local.js",
     "update:beta-version": "npx ts-node ./scripts/updateVersion.ts beta",
     "update:release-version": "npx ts-node ./scripts/updateVersion.ts release",
     "update:publish": "npx ts-node ./scripts/publish.ts",
@@ -16,18 +17,11 @@
     "type": "git",
     "url": "git@github.com:biancangming/howves.git"
   },
-  "exports": {
-    ".": {
-      "import": "./index.mjs",
-      "require": "./index.cjs",
-      "types": "./index.d.ts"
-    }
-  },
+  "exports": {},
   "keywords": [],
   "author": "biancangming",
   "license": "ISC",
   "dependencies": {
-    "@vue/composition-api": "^1.4.6",
     "howtools": "^0.2.1-beta.6",
     "vue-demi": "^0.12.1"
   },
@@ -38,13 +32,19 @@
     "cross-env": "^6.0.3",
     "esbuild": "^0.14.23",
     "esbuild-register": "^3.0.0",
+    "html-webpack-plugin": "^5.5.0",
     "rollup": "^2.66.0",
     "rollup-plugin-dts": "^4.1.0",
     "rollup-plugin-esbuild": "^4.8.2",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.4",
     "vite-svg-loader": "^2.2.0",
-    "vue": "^3.0.0"
+    "vue": "^2.6.14",
+    "vue-loader": "^17.0.0",
+    "vue-template-compiler": "^2.6.14",
+    "webpack": "^5.69.1",
+    "webpack-dev-server": "^4.7.4",
+    "@vue/composition-api": "^1.4.6"
   },
   "peerDependencies": {
     "@vue/composition-api": "^1.0.0-rc.1",

@@ -7,8 +7,8 @@ export type ResponseInterceptor = (response: AxiosResponse) => AxiosResponse
 
 export interface HowVesAxiosOptions {
     instanceConfig: AxiosRequestConfig,
-    requestInterceptor: RequestInterceptor
-    responseInterceptor: ResponseInterceptor
+    requestInterceptor?: RequestInterceptor
+    responseInterceptor?: ResponseInterceptor
 }
 
 export interface HowVesExRequestOptions {
@@ -27,11 +27,13 @@ export function createAxios(options: HowVesAxiosOptions) {
 
     // 请求拦截器
     server.interceptors.request.use((config) => {
+        if (!requestInterceptor) return config
         return requestInterceptor(config)
     })
 
     // 响应拦截器
     server.interceptors.response.use((response) => {
+        if (!responseInterceptor) return response
         const orginResData = response.data
         // 设置不允许修改原始data
         const userResponse = responseInterceptor(response)
@@ -73,8 +75,8 @@ export function createAxios(options: HowVesAxiosOptions) {
         const edata = ref<T>() // axios 错误响应数据
 
         const request = debounce(
-            ({ params, data }: AxiosRequestConfig) => {
-                const c = { ...config, params, data }
+            ({ params: p, data: d }: AxiosRequestConfig) => {
+                const c = { ...config, p, d }
                 server.request({ ...c, cancelToken: cancelToken.token })
                     .then(r => {
                         response.value = r
@@ -82,17 +84,21 @@ export function createAxios(options: HowVesAxiosOptions) {
                     })
                     .catch((e: AxiosError) => {
                         error.value = e
-                        edata.value = e.response.data
+                        edata.value = e.response ? e.response.data : ""
                     })
                     .finally(() => {
                         loading(false)
                     })
             },
-            options.delay || 500
+            (options && options.delay) || 1
         )
 
         const execute = (config?: Pick<AxiosRequestConfig, 'params' | 'data'>) => {
             loading(true)
+            if (!config) {
+                request({ params: {}, data: {} })
+                return
+            }
             request(config)
         }
 

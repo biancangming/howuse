@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, CancelTokenSource } from "axios"
 import { ref, shallowRef } from "vue-demi"
 import { debounce } from 'howtools';
+export * from "./help"
 
 export type RequestInterceptor = (config: AxiosRequestConfig) => AxiosRequestConfig
 export type ResponseInterceptor = (response: AxiosResponse) => AxiosResponse
@@ -77,7 +78,7 @@ export function createAxios(options: HowVesAxiosOptions) {
 
         // 不是节流的方式
         const preRequest = ({ params: p, data: d }: AxiosRequestConfig) => {
-            const c = { ...config, p, d }
+            const c = { ...config, params: p, data: d }
             server.request({ ...c, cancelToken: cancelToken.token })
                 .then(r => {
                     response.value = r
@@ -125,3 +126,4 @@ export function createAxios(options: HowVesAxiosOptions) {
         useAxiosRequest
     }
 }
+

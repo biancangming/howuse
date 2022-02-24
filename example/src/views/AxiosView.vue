@@ -1,7 +1,7 @@
-<script>
-import { defineComponent } from '@vue/composition-api'
-import { createAxios } from "howves/axios";
-
+<script lang="ts">
+import { defineComponent, watch, watchEffect } from "@vue/composition-api";
+import { createAxios, useFileDownLoad } from "howves/axios";
+import { AxiosRequestConfig } from "axios";
 const { useAxiosRequest } = createAxios({
   instanceConfig: {
     baseURL: "http://www.httpbin.org",
@@ -10,23 +10,55 @@ const { useAxiosRequest } = createAxios({
 
 export default defineComponent({
   setup() {
-    const AnyThingConf = {
+    //测试基本数据请求
+    const AnyThingConf: AxiosRequestConfig = {
       url: "/anything",
+      method: "post",
+    };
+    const { data, response, loading, execute, edata } = useAxiosRequest<any>(
+      AnyThingConf,
+      {
+        isDebounce: false,
+      }
+    );
+
+    watchEffect(() => {
+      if (data.value.code == 1) {
+        alert("错误");
+      }
+    });
+
+    watchEffect(() => {
+      edata.value.msg && alert(edata.value.msg);
+    });
+
+    execute({ params: { p: 1 }, data: { d: 1 } });
+    execute({ params: { p: 1 }, data: { d: 1 } });
+    execute({ params: { p: 1 }, data: { d: 1 } });
+
+    //测试下载文件
+    const ImageConf: AxiosRequestConfig = {
+      url: "/image/png",
+      responseType: "blob",
     };
 
-    const { data, response, loading, execute } = useAxiosRequest(AnyThingConf, { immediate: false, isDebounce: false });
+    const { response: imgRes, execute: imgExecute } =
+      useAxiosRequest(ImageConf);
 
-    execute()
-    execute()
-    execute()
+    const { finished } = useFileDownLoad({
+      response: imgRes,
+      fileName: "测试图片",
+    });
 
     return {
       data,
       loading,
-      response
-    }
+      response,
+      imgExecute,
+      finished,
+    };
   },
-})
+});
 </script>
 
 <template>
@@ -36,5 +68,7 @@ export default defineComponent({
     {{data}}
     <p></p>
     {{response}}
+    <p></p>
+    <button @click="imgExecute">下载测试</button> {{finished ?'下载完成':'请下载'}}
   </div>
 </template>

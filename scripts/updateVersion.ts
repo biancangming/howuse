@@ -67,6 +67,7 @@ function release(pkg) {
     const exportsJ = {}
     for (const path of paths) Object.assign(exportsJ, createExport(path))
     releasePkg.exports = exportsJ
+    releasePkg.scripts = {}
 
     writeFileSync(packageJsonPath, JSON.stringify(pkg, null, '  ')); //更新package.json
     writeFileSync(releaseJsonPath, JSON.stringify(releasePkg, null, '  ')); //更新发布的package.json

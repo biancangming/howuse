@@ -22,6 +22,7 @@ const releasePkg = { ...packageJson }
 const exportsJ = {}
 for (const path of paths) Object.assign(exportsJ, createExport(path))
 releasePkg.exports = exportsJ
+releasePkg.scripts = {}
 writeFileSync("example/node_modules/howves/package.json", JSON.stringify(releasePkg, null, '  ')); //更新发布的package.json
 
 export default configs

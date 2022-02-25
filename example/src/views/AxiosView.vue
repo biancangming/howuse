@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, watch, watchEffect } from "@vue/composition-api";
+import { defineComponent, watchEffect } from "@vue/composition-api";
 import { createAxios, useFileDownLoad } from "howves/axios";
 import { AxiosRequestConfig } from "axios";
 const { useAxiosRequest } = createAxios({

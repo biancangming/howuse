@@ -1,4 +1,4 @@
-import { isRef, Ref, unref, ref, shallowRef, watch } from 'vue-demi';
+import { isRef, Ref, shallowRef, watch } from 'vue-demi';
 import { AxiosResponse } from "axios"
 import { saveFileFromBlob } from "howtools";
 
@@ -31,13 +31,13 @@ export function useFileDownLoad(options?: HowVesAxiosDownloadOptions) {
 
         //读取文件类型
         const _contentType = contentType ?? headers['content-type'] //读取文件类型
-        if (!_contentType) throw new Error("contentType not empty")
+        if (!_contentType) throw new Error("contentType Cannot be empty")
 
 
         // 读取文件名称
         const dispositionRegArr = filenameReg.exec(_response.headers['content-disposition'])
         const _fileName = fileName ?? decodeURI(dispositionRegArr ? dispositionRegArr[0] : "") //读取文件类型
-        if (!_fileName) throw new Error("fileName not empty")
+        if (!_fileName) throw new Error("fileName Cannot be empty")
 
         //下载数据
         const data = cbdata ? cbdata(_response) : _response.data

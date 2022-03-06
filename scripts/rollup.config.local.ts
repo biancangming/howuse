@@ -3,11 +3,11 @@
 import { readFileSync, writeFileSync } from 'fs'
 import path from 'path'
 import type { RollupOptions } from 'rollup'
-import { createConfig, createExport } from './exportsJson'
+import { createConfig, createExport, paths } from './exportsJson'
 
 const configs: RollupOptions[] = []
 
-const paths = ["axios"]
+
 
 
 for (const path of paths) {

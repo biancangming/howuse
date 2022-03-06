@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, watchEffect } from "@vue/composition-api";
+import { defineComponent } from "@vue/composition-api";
 import { createAxios, useFileDownLoad } from "howves/axios";
 import { AxiosRequestConfig } from "axios";
 const { useAxiosRequest } = createAxios({
@@ -22,15 +22,15 @@ export default defineComponent({
       }
     );
 
-    watchEffect(() => {
-      if (data.value.code == 1) {
-        alert("错误");
-      }
-    });
+    // watchEffect(() => {
+    //   if (data.value.code == 1) {
+    //     alert("错误");
+    //   }
+    // });
 
-    watchEffect(() => {
-      edata.value.msg && alert(edata.value.msg);
-    });
+    // watchEffect(() => {
+    //   edata.value.msg && alert(edata.value.msg);
+    // });
 
     execute({ params: { p: 1 }, data: { d: 1 } });
     execute({ params: { p: 1 }, data: { d: 1 } });
@@ -40,8 +40,8 @@ export default defineComponent({
     const ImageConf: AxiosRequestConfig = {
       url: "/image/png",
       responseType: "blob",
-    };
 
+    };
     const { response: imgRes, execute: imgExecute } =
       useAxiosRequest(ImageConf);
 

@@ -8,7 +8,7 @@ const dtsPlugin = [
     dts(),
 ]
 
-export const paths = ["axios"]
+export const paths = ["axios", "core", "echarts"]
 
 // 创建导出文件
 export function createConfig(path?: string, outPath = "dist"): RollupOptions[] {

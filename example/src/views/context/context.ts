@@ -20,7 +20,7 @@ export function creatUserContext(model: User) {
 }
 
 export function useUserContext() {
-    return useContext(key)
+    return useContext<User>(key)
 }
 
 // ID 信息

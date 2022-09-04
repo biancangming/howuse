@@ -8,13 +8,8 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@vue/composition-api": "^1.4.6",
-    "ant-design-vue": "^2.2.8",
     "axios": "^0.26.0",
-    "howves": "0.0.1-beta.4",
-    "pinia": "^2.0.4",
-    "vue": "^2.6.14",
-    "vue-router": "^3.5.3"
+    "howves": "0.0.1-beta.4"
   },
   "devDependencies": {
     "@types/node": "^16.11.10",

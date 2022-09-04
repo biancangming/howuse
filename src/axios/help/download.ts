@@ -1,25 +1,21 @@
-import { isRef, Ref, shallowRef, watch } from 'vue-demi';
-import { AxiosResponse } from "axios"
+import { isRef, shallowRef, watch, type Ref } from 'vue';
+import type { AxiosResponse } from "axios"
 import { saveFileFromBlob } from "howtools";
+import { HowDownLoadExRequestOptions } from 'types/axios';
 
 declare type contentTypeStr = 'application/*' | 'application/msword' | 'application/vnd.ms-excel' | 'application/pdf' | 'application/vnd.ms-powerpoint';
 
 
-interface HowVesAxiosDownloadOptions {
-    fileName?: string,
-    contentType?: contentTypeStr,
-    cbdata?: (res: AxiosResponse) => any,
-    response?: Ref<AxiosResponse>,
-}
+
 /**
  * @param  {Ref<AxiosResponse<T>>|any} data 需要下载的blob数据
  * @param  {HowVesAxiosDownloadOptions} options?
  */
-export function useFileDownLoad(options?: HowVesAxiosDownloadOptions) {
+export function useResponseBlobDownLoad(options?: HowDownLoadExRequestOptions) {
 
     const finished = shallowRef(false)//下载完成标志
 
-    const { fileName, contentType, response, cbdata } = options || {}
+    const { fileName, contentType, cbdata } = options || {}
 
     const filenameReg = new RegExp('filename=([^;]+\\.[^\\.;]+);*')
 
@@ -45,8 +41,6 @@ export function useFileDownLoad(options?: HowVesAxiosDownloadOptions) {
         finished.value = true
     }
 
-    // 响应式则自动下载，非响应需要手动调用下载操作
-    isRef(response) && watch(response, download)
 
     return {
         finished,

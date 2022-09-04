@@ -18,7 +18,7 @@ export default defineComponent({
     const { data, response, loading, execute, edata } = useAxiosRequest<any>(
       AnyThingConf,
       {
-        isDebounce: false,
+        isDebounce: true,
       }
     );
 

@@ -1,7 +1,7 @@
 import * as echarts from 'echarts';
 
 import type { ECharts } from "echarts"
-import { onMounted, nextTick, Ref, onUnmounted } from '@vue/composition-api';
+import { onMounted, nextTick, Ref, onUnmounted } from 'vue';
 import { addResizeListener, removeResizeListener } from "howtools"
 
 export default function useECharts(el: Ref<HTMLDivElement>,

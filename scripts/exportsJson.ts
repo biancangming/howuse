@@ -1,14 +1,18 @@
 import { RollupOptions } from "rollup"
 import esbuild from 'rollup-plugin-esbuild'
 import dts from 'rollup-plugin-dts'
+import vueJsx from 'esbuild-plugin-vue-jsx';
 
-const esbuildPlugin = esbuild()
+const esbuildPlugin = esbuild({
+    // plugins: {}
+})
 
 const dtsPlugin = [
     dts(),
+    vueJsx(),
 ]
 
-export const paths = ["axios", "core", "echarts"]
+export const paths = ["axios", "core", "echarts", "components"]
 
 // 创建导出文件
 export function createConfig(path?: string, outPath = "dist"): RollupOptions[] {

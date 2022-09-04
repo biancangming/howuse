@@ -29,6 +29,21 @@ const router = new VueRouter({
       name: 'chart',
       component: () => import("../views/EchartsView.vue")
     },
+    {
+      path: '/comDemo',
+      name: 'comDemo',
+      component: () => import("../views/comDemo/IndexView.vue"),
+      redirect: {
+        name: "comDemoTable"
+      },
+      children: [
+        {
+          path: "table",
+          name: 'comDemoTable',
+          component: () => import("../views/comDemo/Table/IndexView.vue"),
+        }
+      ]
+    },
   ]
 })
 

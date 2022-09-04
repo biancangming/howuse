@@ -11,6 +11,8 @@ export default defineComponent({
     function changeTextarea(val: string) {
       obj.value = JSON.parse(val);
     }
+
+    onUN
     return {
       token,
       obj,

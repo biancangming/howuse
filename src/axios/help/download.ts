@@ -1,11 +1,7 @@
-import { isRef, shallowRef, watch, type Ref } from 'vue';
+import { shallowRef } from 'vue';
 import type { AxiosResponse } from "axios"
 import { saveFileFromBlob } from "howtools";
-import { HowDownLoadExRequestOptions } from 'types/axios';
-
-declare type contentTypeStr = 'application/*' | 'application/msword' | 'application/vnd.ms-excel' | 'application/pdf' | 'application/vnd.ms-powerpoint';
-
-
+import { HowDownLoadExRequestOptions } from "types/axios"
 
 /**
  * @param  {Ref<AxiosResponse<T>>|any} data 需要下载的blob数据

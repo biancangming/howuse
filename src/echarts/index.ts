@@ -1,26 +1,26 @@
 import * as echarts from 'echarts';
 
-import type { ECharts } from "echarts"
+import type { ECharts, EChartsOption } from "echarts"
 import { onMounted, nextTick, Ref, onUnmounted } from 'vue';
 import { addResizeListener, removeResizeListener } from "howtools"
 
-export default function useECharts(el: Ref<HTMLDivElement>,
+export default function useECharts(el: Ref ,
     theme: 'light' | 'dark' | 'default' = 'light') {
 
     //echarts图实例
     let echartInstance: ECharts | null = null;
 
     //设置默认样式数据
-    const defaultOption: echarts.EChartOption = {
+    const defaultOption: EChartsOption = {
         backgroundColor: theme == 'dark' ? 'rgba(0,0,0,0)' : 'rgba(255,555,255)'
     }
 
-    function addDefaultOption(option: echarts.EChartOption) {
+    function addDefaultOption(option: EChartsOption) {
         Object.assign(defaultOption, option)
     }
 
 
-    async function setOption(option: echarts.EChartOption) {
+    async function setOption(option: EChartsOption) {
         if (!el.value) {
             await nextTick();
             echartInstance = echarts.init(el.value, theme);

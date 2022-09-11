@@ -12,8 +12,8 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, onMounted } from "@vue/composition-api";
-import useECharts from "howves/echarts";
+import { defineComponent, ref, onMounted } from "vue";
+import useECharts from "howuse/echarts";
 export default defineComponent({
   setup() {
     const chart = ref();

@@ -7,7 +7,6 @@ import { useResponseBlobDownLoad } from './help/download';
 export * from "./help/download"
 
 
-
 export function createAxios(options: HowAxiosOptions) {
     const { instanceConfig: config, requestInterceptor, responseInterceptor, errResponseInterceptor } = options
 
@@ -135,7 +134,8 @@ export function createAxios(options: HowAxiosOptions) {
 
         // 结果响应调用下载，转换blob流
         watchEffect(() => {
-            download(unref(request.response))
+            if(!unref(request.finished)) return
+            download(unref(request.response) as AxiosResponse)
         })
 
         return {

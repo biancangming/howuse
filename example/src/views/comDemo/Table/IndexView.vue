@@ -1,15 +1,15 @@
 <template>
   <div>
-    <howTable />
+    <!-- <howTable /> -->
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "@vue/composition-api";
-import { howTable } from "howves/components";
+import { defineComponent } from "vue";
+// import { howTable } from "howuse/components";
 export default defineComponent({
-  components: {
-    howTable,
-  },
+  // components: {
+  //   howTable,
+  // },
   setup() {},
 });
 </script>

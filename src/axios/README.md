@@ -16,6 +16,7 @@
 
 `server`
 `useAxiosRequest`
+`useBlobDownload`
 
 ###  请求hook使用 `useAxiosRequest`
 ```js
@@ -25,3 +26,5 @@
      * @returns
      */
 ```
+
+### 下载流文件使用 `useBlobDownload`

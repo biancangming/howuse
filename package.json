@@ -1,54 +1,50 @@
 {
-  "name": "howves",
-  "version": "0.0.1-beta.4",
+  "name": "howuse",
+  "version": "0.0.1-beta.6",
   "description": "a simple Vue Composition utils",
   "main": "dist/index.js",
   "scripts": {
-    "build": "npx rollup -c",
+    "example:run": "cd example && vite",
+    "build": "node ./build/index.js",
     "build-local": "npx rollup -c rollup.config.local.js",
     "update:beta-version": "npx ts-node ./scripts/updateVersion.ts beta",
     "update:release-version": "npx ts-node ./scripts/updateVersion.ts release",
-    "update:publish": "npx ts-node ./scripts/publish.ts",
-    "switch2": "npx vue-demi-switch 2",
-    "switch3": "npx vue-demi-switch 3"
+    "update:publish": "npx ts-node ./scripts/publish.ts"
   },
-  "homepage": "https://github.com/biancangming/howves",
+  "homepage": "https://github.com/biancangming/howuse",
   "repository": {
     "type": "git",
-    "url": "git@github.com:biancangming/howves.git"
+    "url": "git@github.com:biancangming/howuse.git"
   },
   "exports": {},
   "keywords": [],
   "author": "biancangming",
   "license": "ISC",
   "dependencies": {
-    "howtools": "^0.2.1-beta.6",
-    "vue-demi": "^0.12.1"
+    "howtools": ">=0.2.0"
   },
   "devDependencies": {
+    "@types/echarts": "^4.9.16",
     "@types/node": "^16.9.1",
+    "@vitejs/plugin-vue": "^3.1.0",
     "axios": "^0.25.0",
     "consola": "^2.15.3",
-    "cross-env": "^6.0.3",
-    "esbuild": "^0.14.23",
-    "esbuild-register": "^3.0.0",
-    "rollup": "^2.66.0",
-    "rollup-plugin-dts": "^4.1.0",
-    "rollup-plugin-esbuild": "^4.8.2",
-    "ts-node": "^10.2.1",
-    "typescript": "^4.4.4",
+    "echarts": "^5.3.0",
+    "esbuild-register": "^3.3.3",
+    "pinia": "^2.0.21",
+    "typescript": "^4.8.3",
+    "vite": "^3.1.0",
+    "vite-plugin-static-copy": "^0.9.0",
     "vite-svg-loader": "^2.2.0",
-    "vue": "^2.6.14",
-    "vue-loader": "^17.0.0",
-    "@vue/composition-api": "^1.4.6"
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.5"
   },
   "peerDependencies": {
-    "@vue/composition-api": "^1.0.0-rc.1",
-    "vue": "^2.0.0 || >=3.0.0",
-    "howtools": "^0.2.0"
+    "howtools": ">=0.2.0",
+    "vue": "~2.7.0 || >=3.0.0"
   },
   "peerDependenciesMeta": {
-    "@vue/composition-api": {
+    "vue": {
       "optional": true
     }
   }

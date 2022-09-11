@@ -1,31 +1,36 @@
-import { fileURLToPath } from 'url'
+import { defineConfig } from "vite";
+import { resolve } from "path";
+import vue from '@vitejs/plugin-vue';
+function pathResolve(dir: string) {
+  return resolve(__dirname, ".", dir);
+}
 
-import { defineConfig } from 'vite'
-import legacy from '@vitejs/plugin-legacy'
-import { createVuePlugin as vue2 } from 'vite-plugin-vue2'
-// @ts-ignore
-import vueTemplateBabelCompiler from 'vue-template-babel-compiler'
-import scriptSetup from 'unplugin-vue2-script-setup/vite'
-
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue2({
-      jsx: true,
-      vueTemplateOptions: {
-        compiler: vueTemplateBabelCompiler
-      }
-    }),
-    scriptSetup(),
-    legacy({
-      targets: ['ie >= 11'],
-      additionalLegacyPolyfills: ['regenerator-runtime/runtime']
-    })
-  ],
+  base: "",
+  plugins: [vue()],
+  // 配置文件别名
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '@hook': fileURLToPath(new URL('../../src', import.meta.url))
+      "@": pathResolve('src'),
+      "howuse": pathResolve("../src")
+    },
+  },
+  // 打包配置
+  build: {
+    target: 'modules',
+    outDir: 'dist', //指定输出路径
+    assetsDir: 'static', // 指定生成静态资源的存放路径
+  },
+  // 本地运行配置，及反向代理配置
+  server: {
+    cors: true, // 默认启用并允许任何源
+    open: true, // 在服务器启动时自动在浏览器中打开应用程序
+    proxy: {
+      '/api': {
+        target: 'http://192.168.0.2:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
     }
   }
 })

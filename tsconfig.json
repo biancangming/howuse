@@ -1,26 +1,33 @@
 {
   "compilerOptions": {
-    "target": "es2017", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "target": "ES2017", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     "lib": [
       "es5",
       "es6",
       "dom"
     ], /* Specify a set of bundled library declaration files that describe the target runtime environment. */
+    "strict": true,
     "jsx": "preserve",
     "experimentalDecorators": true, /* Enable experimental support for TC39 stage 2 draft decorators. */
     "emitDecoratorMetadata": true, /* Emit design-type metadata for decorated declarations in source files. */
     "downlevelIteration": true, /* 允许使用迭代器 */
-    "module": "commonjs", /* Specify what module code is generated. */
-    "rootDir": "./src", /* Specify the root folder within your source files. */
+    "module": "ESNext", /* Specify what module code is generated. */
+    "moduleResolution": "Node",
+    "rootDir": "./", /* Specify the root folder within your source files. */
     "baseUrl": "./", /* Specify the base directory to resolve non-relative module names. */
     "paths": {
       "@/*": [
+        "example/src/*"
+      ],
+      "howuse/*": [
         "src/*"
       ],
-      "@howtools/*": [
-        "/src/*"
-      ],
-    }, /* Specify a set of entries that re-map imports to additional lookup locations. */
+      "types/*": [
+        "types/*"
+      ]
+    },
+    "types": ["vite/client", "node"],
+    /* Specify a set of entries that re-map imports to additional lookup locations. */
     /* Specify a file that bundles all outputs into one JavaScript file. If `declaration` is true, also designates a file that bundles all .d.ts output. */
     "outDir": "./", /* Specify an output folder for all emitted files. */
     "esModuleInterop": true, /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */ /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
@@ -30,8 +37,9 @@
   },
   "include": [
     "types/*.d.ts",
-    "src/*",
-    "*.d.ts"
+    "src/**/*.ts",
+    "example/**/*",
+    "example/**/*.vue"
   ],
   "exclude": [
     "node_modules"

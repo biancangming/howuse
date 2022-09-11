@@ -1,40 +1,50 @@
-<script>
-import { defineComponent } from '@vue/composition-api'
-import { createAxios } from "howves/axios";
+<script lang="ts" setup>
+import { createAxios } from "howuse/axios";
+import type { HowAxiosRequestConfig } from "types/axios";
 
-const { useAxiosRequest } = createAxios({
+const { useAxiosRequest, useBlobDownload } = createAxios({
   instanceConfig: {
     baseURL: "http://www.httpbin.org",
   },
 });
 
-export default defineComponent({
-  setup() {
-    const AnyThingConf = {
-      url: "/anything",
-    };
+//测试基本数据请求
+const AnyThingConf: HowAxiosRequestConfig = {
+  url: "/anything",
+  method: "post",
+};
+const { data, response, loading, execute, edata } = useAxiosRequest<any>(
+  AnyThingConf,
+  {
+    isDebounce: true,
+  }
+);
 
-    const { data, response, loading, execute } = useAxiosRequest(AnyThingConf, { immediate: false, isDebounce: false });
+execute({ params: { p: 1 }, data: { d: 1 } });
+execute({ params: { p: 1 }, data: { d: 1 } });
+execute({ params: { p: 1 }, data: { d: 1 } });
 
-    execute()
-    execute()
-    execute()
+//测试下载文件
+const ImageConf: HowAxiosRequestConfig = {
+  url: "/image/png",
+  responseType: "blob",
+};
+const { execute: imgExecute, downLoadFinished } = useBlobDownload(ImageConf, {
+  fileName: "测试图片.png",
+  immediate: false,
+});
 
-    return {
-      data,
-      loading,
-      response
-    }
-  },
-})
 </script>
 
 <template>
   <div>
     <p v-if="loading">请求中...</p>
     <p v-else>请求完成</p>
-    {{data}}
+    {{ data }}
     <p></p>
-    {{response}}
+    {{ response }}
+    <p></p>
+    <button @click="imgExecute()">下载测试</button>
+    {{ downLoadFinished ? "下载完成" : "请下载" }}
   </div>
 </template>

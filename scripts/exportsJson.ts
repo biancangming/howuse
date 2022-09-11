@@ -1,14 +1,12 @@
 import { RollupOptions } from "rollup"
 import esbuild from 'rollup-plugin-esbuild'
-import dts from 'rollup-plugin-dts'
 
-const esbuildPlugin = esbuild()
+const esbuildPlugin = esbuild({
+    // plugins: {}
+})
 
-const dtsPlugin = [
-    dts(),
-]
 
-export const paths = ["axios"]
+export const paths = ["axios", "echarts"]
 
 // 创建导出文件
 export function createConfig(path?: string, outPath = "dist"): RollupOptions[] {
@@ -36,7 +34,6 @@ export function createConfig(path?: string, outPath = "dist"): RollupOptions[] {
                 file: path ? `${outPath}/${path}/index.d.ts` : `${outPath}/index.d.ts`,
                 format: 'es',
             },
-            plugins: dtsPlugin,
             external: ["axios"]
         }
     ]
@@ -49,7 +46,6 @@ export function createExport(path: string) {
         ['./' + path]: {
             "import": `./${path}/index.mjs`,
             "require": `./${path}/index.cjs`,
-            "types": `./${path}/index.d.ts`
         }
     }
 }

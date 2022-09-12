@@ -1,17 +1,12 @@
 <script setup lang="ts">
+  import 'ant-design-vue/es/message/style/css';
 </script>
 
 <template>
-  <div id="app">
-    <header>
-      <div class="wrapper">
-        <nav>
-          <router-link to="/">Axios测试</router-link>
-          |
-          <router-link to="/chart">echarts</router-link>
-        </nav>
-      </div>
-    </header>
-    <router-view />
-  </div>
+  <router-view />
 </template>
+<style lang="less">
+body {
+  min-height: 100vh;
+}
+</style>

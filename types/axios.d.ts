@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosResponse } from "axios"
+import { AxiosRequestConfig, AxiosResponse, AxiosInstance } from "axios"
 
 declare type RequestInterceptor = (config: AxiosRequestConfig) => AxiosRequestConfig
 declare type ResponseInterceptor = (response: AxiosResponse) => AxiosResponse
@@ -8,11 +8,7 @@ declare interface HowAxiosRequestConfig extends AxiosRequestConfig {
   path?: any
 }
 
-declare interface HowAxiosOptions {
-  instanceConfig: AxiosRequestConfig,
-  requestInterceptor?: RequestInterceptor
-  responseInterceptor?: ResponseInterceptor
-  errResponseInterceptor?: ErrResponseInterceptor
+declare interface HowAxiosInstance extends AxiosRequestConfig {
 }
 
 // 额外参数

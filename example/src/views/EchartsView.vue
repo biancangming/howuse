@@ -13,12 +13,12 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
-import useECharts from "howuse/echarts";
+import { useBaseECharts } from "howuse/echarts";
 export default defineComponent({
   setup() {
     const chart = ref();
     const lineChartWidth = ref("300px");
-    const { setOption } = useECharts(chart);
+    const { setOption } = useBaseECharts(chart);
 
     onMounted(() => {
       setOption({

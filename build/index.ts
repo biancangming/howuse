@@ -3,7 +3,7 @@ import path from 'path';
 import pkg from "../package.json"
 import { writeFileSync } from "fs";
 
-const libs = ["axios"]
+const libs = ["axios", "echarts"]
 
 const _exports = {}
 

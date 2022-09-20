@@ -3,9 +3,9 @@
     <div class="code-demo">
       <div class="code-demo__title" v-if="isShowSlot('default')">
         <slot></slot>
-        <a-divider></a-divider>
       </div>
       <div class="code-demo__desc" v-if="isShowSlot('desc')">
+        <a-divider></a-divider>
         <strong>说明：</strong> <slot name="desc"></slot>
       </div>
       <a-divider orientation="left" >

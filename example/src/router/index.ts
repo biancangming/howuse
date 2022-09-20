@@ -25,9 +25,18 @@ const router = createRouter({
         {
           path: '/chart',
           name: 'chart',
-          component: () => import("../views/EchartsView.vue"),
+          component: () => import("../views/echartsView/index.vue"),
           meta: {
             title: "echarts",
+            menu: true
+          }
+        },
+        {
+          path: '/crud',
+          name: 'crud',
+          component: () => import("../views/crudView/index.vue"),
+          meta: {
+            title: "crud-antd",
             menu: true
           }
         },

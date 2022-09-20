@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "example:run": "cd example && vite",
+    "example:build": "cd example && vite build",
     "build": "node ./build/index.js",
     "build-local": "npx rollup -c rollup.config.local.js",
     "update:beta-version": "npx ts-node ./scripts/updateVersion.ts beta",
@@ -22,22 +23,25 @@
   "license": "ISC",
   "devDependencies": {
     "@mdit-vue/plugin-component": "^0.11.1",
-    "@types/echarts": "^4.9.16",
+    "@types/mockjs": "^1.0.6",
     "@types/node": "^16.9.1",
     "@types/prismjs": "^1.26.0",
     "@vitejs/plugin-vue": "^3.1.0",
+    "@vitejs/plugin-vue-jsx": "^2.0.1",
     "@yankeeinlondon/code-builder": "^1.0.7",
     "ant-design-vue": "^3.2.12",
     "axios": "^0.25.0",
     "consola": "^2.15.3",
     "echarts": "^5.3.0",
     "esbuild-register": "^3.3.3",
+    "happy-dom": "^6.0.4",
     "highlight.js": "^11.6.0",
     "less": "^4.1.3",
     "markdown-it-anchor": "^8.6.4",
     "markdown-it-custom-block": "^0.1.2",
     "markdown-it-highlightjs": "^4.0.1",
     "markdown-it-prism": "^2.3.0",
+    "mockjs": "^1.1.0",
     "pinia": "^2.0.21",
     "prismjs": "^1.29.0",
     "typescript": "^4.8.3",
@@ -59,6 +63,7 @@
     }
   },
   "dependencies": {
-    "howtools": "^0.2.2-beta.2"
+    "howtools": "^0.2.2-beta.2",
+    "mitt": "^3.0.0"
   }
 }

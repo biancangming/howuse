@@ -49,8 +49,7 @@ const { execute: imgExecute, downLoadFinished } = useBlobDownload(ImageConf, {
   <p>5. 响应默认值设置</p>
   <p>6. 增加path传参模式</p>
   <CodeView title="实例创建-请求拦截器、响应拦截器">
-    <!-- <AxiosInterceptorDemo /> -->
-    <template #desc> 在初始化创建，保留原有的 <b>AxiosInstance</b> 结构 </template>
+    <template #desc> 在初始化创建，保留原有的 <b>AxiosInstance</b> 结构。如果有必要，也可以使用默认的 <b>server</b> </template>
     <template #code>
       <AxiosInterceptorCode />
     </template>
@@ -66,7 +65,7 @@ const { execute: imgExecute, downLoadFinished } = useBlobDownload(ImageConf, {
   </CodeView>
   <CodeView title="blob文件下载">
     <useBlobDownloadDemo />
-    <template #desc> 描述 </template>
+    <template #desc> 后端经常返回流文件供前端下载，本方法封装自动读取文件名（响应头允许的话，否则自行设置）、自动读取文件类型，方便正确文件格式转换 </template>
     <template #code>
       <useBlobDownloadCode />
     </template>

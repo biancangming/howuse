@@ -90,6 +90,8 @@ export function useAntdCrudSearch(opts: { columns: SearchOpts[] }) {
 // user setting 
 export interface UserSetting {
   span?: number; // 列属性，默认分为几列， 默认是1
+  expandNumber?: number; // 展开收起数量
+  search?: boolean; // 搜索模式，按钮显示为搜索
 }
 export interface CrudFormInterface { columns: CrudFormOpts[], formSetting?: Record<string, any> , userSetting?: UserSetting}
 export function useAntdCrudForm(opts: CrudFormInterface) {

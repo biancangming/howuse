@@ -1,8 +1,5 @@
-import { useAntdCrud, useAntdCrudForm, SearchBar, CrudForm as AntdCrudForm, useAntdCrudSearch } from "./antd";
+import { CrudForm as AntdCrudForm,  useAntdCrudForm} from "./antd";
 export {
   AntdCrudForm,
-  useAntdCrud,
-  SearchBar,
-  useAntdCrudSearch,
-  useAntdCrudForm,
+  useAntdCrudForm
 }

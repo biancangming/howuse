@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2017", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "target": "ESNext", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     "lib": [
       "es5",
       "es6",
@@ -34,7 +34,8 @@
     "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */
     // "strict": true, /* Enable all strict type-checking options. */                 /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true, /* Skip type checking all .d.ts files. */
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
   },
   "include": [
     "./types/*.d.ts",

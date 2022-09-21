@@ -1,15 +1,14 @@
 {
   "name": "howuse",
-  "version": "0.0.1-beta.6",
+  "version": "0.0.1-beta.7",
   "description": "a simple Vue Composition utils",
   "main": "dist/index.js",
   "scripts": {
     "example:run": "cd example && vite",
     "example:build": "cd example && vite build",
     "build": "node ./build/index.js",
-    "build-local": "npx rollup -c rollup.config.local.js",
-    "update:beta-version": "npx ts-node ./scripts/updateVersion.ts beta",
-    "update:release-version": "npx ts-node ./scripts/updateVersion.ts release",
+    "update:beta-version": "node ./scripts/updateVersion.js beta",
+    "update:release-version": "node ./scripts/updateVersion.js release",
     "update:publish": "npx ts-node ./scripts/publish.ts"
   },
   "homepage": "https://github.com/biancangming/howuse",
@@ -44,6 +43,7 @@
     "mockjs": "^1.1.0",
     "pinia": "^2.0.21",
     "prismjs": "^1.29.0",
+    "ts-node": "^10.9.1",
     "typescript": "^4.8.3",
     "unplugin-auto-import": "^0.11.2",
     "unplugin-vue-components": "^0.22.4",

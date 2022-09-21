@@ -1,7 +1,7 @@
 import path from 'path';
 import type { UserConfigExport } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy'
-const pathResolve = (name: string) => path.resolve(__dirname, name)
+export const pathResolve = (name: string) => path.resolve(__dirname, name)
 /**
  * @param  {string} name 库名称
  */
@@ -17,6 +17,7 @@ export function libConfig(name: string): UserConfigExport {
       rollupOptions: {
         external: ['vue', name],
       },
+      emptyOutDir: false,
     },
     plugins: [
       viteStaticCopy({

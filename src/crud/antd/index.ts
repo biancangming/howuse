@@ -1,6 +1,4 @@
-import { Column, CrudFormOpts } from "types/crud";
-import { SearchOpts } from 'types/crud';
-import SearchBar from "./components/SearchBar.vue"
+import { CrudFormOpts } from "types/crud";
 import CrudForm from "./components/CrudForm.vue"
 import emitter from './emit';
 
@@ -13,12 +11,6 @@ export interface OperationOpts {
   icon: "",
   type: "primary" | "danger" | "link"
 }
-
-
-export function useAntdCrud(options: { columns: Column[] }) {
-
-}
-
 
 export const widgetChange = Symbol("widgetChange")
 export const update = {
@@ -78,14 +70,6 @@ function useUpdate(){
     }
 }
 
-export function useAntdCrudSearch(opts: { columns: SearchOpts[] }) {
-  provide<SearchOpts[]>(SearchInjectKey, opts.columns)
-
-  return {
-    ...useUpdate()
-  }
-}
-
 // formSetting form 表单总体配置
 // user setting 
 export interface UserSetting {
@@ -103,6 +87,5 @@ export function useAntdCrudForm(opts: CrudFormInterface) {
 }
 
 export {
-  SearchBar,
-  CrudForm
+  CrudForm,
 }

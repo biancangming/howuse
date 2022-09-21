@@ -1,5 +1,6 @@
 import { isArray } from "howtools";
-
+import emitter from '../../emit';
+import { widgetChange } from "../../index"
 // 修改item值传递到seachbar , args 用于兼容原始的change事件
 export function useChange(props, emit) { 
   if (props.defaultValue && (props.type === "date-range" || props.type === "time-range")) {
@@ -9,10 +10,12 @@ export function useChange(props, emit) {
   }
   function change(val, ...args) {
     if(!props.dataIndex) return
-    emit("change", {
+    emitter.emit(widgetChange, {
       dataIndex: props.dataIndex,
       val: val || props.defaultValue,
     });
+    console.log(1111111);
+    
     props.extraAttrs.onChange && props.extraAttrs.onChange.call(props, val || props.defaultValue, ...args)
   }
   return change

@@ -1,5 +1,5 @@
 <template>
-  <a-input @change="changeInput" v-model:value="inputVal" v-bind="{..._extraAttrs}"/>
+  <a-input @change="changeInput" v-model:value="inputVal" v-bind="{..._extraAttrs}" autocomplete="off"/>
 </template>
 <script lang="ts" setup>
 import { update } from "../..";
@@ -12,7 +12,8 @@ const change = useChange(props, emit)
 const inputVal = ref()
 
 const _extraAttrs = computed(() => {
-  const defaultRet = { ...props.extraAttrs, defaultValue: props.defaultValue }
+  const defaultRet = { ...props.extraAttrs }
+  inputVal.value = props.defaultValue
   Reflect.deleteProperty(defaultRet, "onChange")
   return defaultRet
 })

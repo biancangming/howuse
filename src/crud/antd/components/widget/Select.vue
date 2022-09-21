@@ -34,7 +34,7 @@ const isSelectMultiple = computed(() => props.extraAttrs.mode === "multiple" || 
 const all = computed(() => props.extraAttrs.all === true)
 // 参数配置
 const _extraAttrs = computed(() => {
-  const defaultRet = { ...props.extraAttrs, defaultValue: props.defaultValue }
+  const defaultRet = { ...props.extraAttrs }
   Reflect.deleteProperty(defaultRet, "onChange")
   // 是否展示全部下拉选项，默认不展示
   const { api, name, value, mode, onSearch } = props.extraAttrs;
@@ -50,8 +50,7 @@ const _extraAttrs = computed(() => {
 
   // mode="multiple" or mode="tags"
   if (mode === "multiple" || mode === "tags") {
-    defaultRet.defaultValue = []
-    models.selectVals = []
+    models.selectVals = props.defaultValue || []
   }
 
   // 如果onSearch存在，则认为是搜索选项，则默认设置如下三个参数

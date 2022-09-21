@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { RuleObject } from "ant-design-vue/es/form/interface"
 export interface Column {
   title: string;
   dataIndex: string;
@@ -19,9 +19,25 @@ export interface SearchOpts {
   type?: SearchItemType;
   defaultValue?: any; // 默认值
   extraAttrs?: Record<string, any>; // 额外属性，用于传入原生组的属性，方便扩展设置
-  ref?: string | string[]; // 关联函数，如果添加了关联，会自动将所关联函数的所有对象暴露给当前函数，方便调用 , 值为任意dataIndex
-  $refs?: Record<string, any>; // 不要自己去设置，没有用
 
   // extraAttrs 扩展说明
   //api?: Promise<any>; // 个别组件需要, 如果需要参与全局拦截器，请传入axios实例，并且保证response未被重写
+}
+
+// type RuleObject = {
+//   required: ?boolean;
+//   message: ?string;
+//   enum?: string;
+//   len?: number;
+//   max?: number;
+//   min?: number;
+//   pattern?: RegExp;
+//   transform?: (val) => any;
+//   trigger?: 'blur' | 'change' | ['change', 'blur'];
+//   type?: "string" | "number" | "boolean" | "method" | "regexp" | "integer" | "float" | "array" | "object" | "enum" | "date" | "url" | "hex" | "email" | "any";
+//   validator?: (rule, value, cb) => void;
+//   whitespace?: boolean;
+// }
+export interface CrudFormOpts extends SearchOpts {
+  rules?: RuleObject[]
 }

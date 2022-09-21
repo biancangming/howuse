@@ -1,36 +1,12 @@
 <template>
   <div>
-    <SearchBar :props="searchColumns" @search="seachHeader" />
+    <AntdCrudForm :props="searchColumns" @search="seachHeader" />
   </div>
 </template>
 <script lang="ts" setup>
 import { server } from "./request";
-import { useAntdCrud, SearchBar, useAntdCrudSearch } from "howuse/crud";
-import { Column } from "types/crud";
+import {  AntdCrudForm, useAntdCrudForm } from "howuse/crud";
 import { SearchOpts } from "types/crud";
-
-const columns: Column[] = [
-  {
-    title: "ID",
-    dataIndex: "id",
-  },
-  {
-    title: "姓名",
-    dataIndex: "username",
-  },
-  {
-    title: "入库日期",
-    dataIndex: "date",
-  },
-  {
-    title: "邮箱",
-    dataIndex: "email",
-  },
-  {
-    title: "描述",
-    dataIndex: "description",
-  },
-];
 
 const searchColumns: SearchOpts[] = [
   {
@@ -68,7 +44,6 @@ const searchColumns: SearchOpts[] = [
     label: "下拉选择",
     dataIndex: "select",
     type: "select",
-    ref: "select2",
     extraAttrs: {
       api: server({url: "/user/selectList"}),
       all: true, // 是否显示全部，默认无
@@ -153,7 +128,7 @@ const searchColumns: SearchOpts[] = [
 function seachHeader(result: any) {
   console.log(result);
 }
-useAntdCrud({ columns });
-const { updateInputValue, updateSelectDropdownAndValue ,updateSelectDropdownValue } = useAntdCrudSearch({ columns: searchColumns });
+
+const { updateInputValue, updateSelectDropdownAndValue ,updateSelectDropdownValue } = useAntdCrudForm({ columns: searchColumns, userSetting: { span: 6 }, formSetting: { labelCol: {span: 6 },  wrapperCol: { span: 17 }} });
 </script>
 <style lang="less" scoped></style>

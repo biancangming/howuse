@@ -1,20 +1,20 @@
 <template>
   <!-- 日期/日期时间选择器 -->
-  <a-date-picker v-if="props.type === 'date'" @change="changeDatePicker" v-bind="_extraAttrs"></a-date-picker>
+  <a-date-picker v-if="props.type === 'date'" @change="changeDatePicker" v-model:value="datePicker" v-bind="_extraAttrs"></a-date-picker>
   <!-- 日期/日期时间范围选择器 -->
-  <a-range-picker v-else-if="props.type === 'date-range'" @change="changeRangeDatePicker" v-bind="_extraAttrs">
+  <a-range-picker v-else-if="props.type === 'date-range'" @change="changeRangeDatePicker" v-model:value="datePicker" v-bind="_extraAttrs">
   </a-range-picker>
   <!-- 时间选择器 -->
-  <a-time-picker v-else-if="props.type === 'time'" @change="changeTimePicker" v-bind="_extraAttrs" />
+  <a-time-picker v-else-if="props.type === 'time'" @change="changeTimePicker" v-model:value="datePicker" v-bind="_extraAttrs" />
   <!-- 时间范围选择器 -->
-  <a-time-range-picker v-else-if="props.type === 'time-range'" @change="changeTimeRangePicker" v-bind="_extraAttrs" />
+  <a-time-range-picker v-else-if="props.type === 'time-range'" @change="changeTimeRangePicker" v-model:value="datePicker" v-bind="_extraAttrs" />
   <!--下拉选择器 -->
 </template>
 <script lang="ts" setup>
 import _props from "../itemcomposition/props";
 import { isEmpty } from "howtools";
 import { useChange } from '../itemcomposition/change';
-
+const datePicker = ref()
 
 const props = defineProps(_props);
 
@@ -25,13 +25,13 @@ const change = useChange(props, emit)
 
 // 参数配置
 const _extraAttrs = computed<Record<string, any>>(() => {
-  const defaultRet = { ...props.extraAttrs, defaultValue: props.defaultValue }
+  const defaultRet = { ...props.extraAttrs }
   Reflect.deleteProperty(defaultRet, "onChange")
   if (props.type === "time-range" || props.type === "date-range") {
-    if (isEmpty(defaultRet.defaultValue)) { defaultRet.defaultValue = [null, null] }
+    if (isEmpty(defaultRet.defaultValue)) { datePicker.value = props.defaultValue || [null, null] }
     return defaultRet
   } else if (props.type === "time" || props.type === "date") {
-    if (!defaultRet.defaultValue) { defaultRet.defaultValue = null }
+    if (!defaultRet.defaultValue) { datePicker.value = props.defaultValue || null }
     return defaultRet
   } else {
     return defaultRet;

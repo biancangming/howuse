@@ -26,15 +26,14 @@ const isSelectMultiple = computed(() => props.extraAttrs.multiple === true)
 
 // 参数配置
 const _extraAttrs = computed(() => {
-  const defaultRet = { ...props.extraAttrs, defaultValue: props.defaultValue }
+  const defaultRet = { ...props.extraAttrs }
   Reflect.deleteProperty(defaultRet, "onChange")
   // 是否展示全部下拉选项，默认不展示
   const { api, multiple } = props.extraAttrs;
 
   // mode="multiple" or mode="tags"
   if (multiple === true) {
-    defaultRet.defaultValue = []
-    models.selectVals = []
+    models.selectVals = props.defaultValue || []
   }
 
   // 自定义api直接返回响应值作为select下拉值，默认往下取三层

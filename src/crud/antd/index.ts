@@ -23,6 +23,8 @@ export const update = {
   updateInputValue : Symbol("updateInputValue"),
   updateSelectValue : Symbol("updateSelectValue"),
   updateSelectDropdownValue : Symbol("updateSelectDropdownValue"),
+  updateSelectTreeValue : Symbol("updateSelectTreeValue"),
+  updateSelectTreeDropdownValue : Symbol("updateSelectTreeDropdownValue"),
 }
 
 export function useAntdCrudSearch(opts: { columns: SearchOpts[] }) {
@@ -50,11 +52,30 @@ export function useAntdCrudSearch(opts: { columns: SearchOpts[] }) {
     updateSelectDropdownValue(dataIndex, data)
   }
 
+  // 修改 select 输入框 内容
+  function updateSelectTreeValue(dataIndex: string, value: string | number | undefined) {
+    emitter.emit(update.updateSelectTreeValue, {dataIndex, value})
+  }
+
+  // 修改 select 下拉数据内容
+  function updateSelectTreeDropdownValue(dataIndex: string, value: any) {
+    emitter.emit(update.updateSelectTreeDropdownValue, {dataIndex, value})
+  }
+
+  // 修改 select 数值并且重置 value ，一般用于联动框清除value所用
+  function updateSelectTreeDropdownAndValue(dataIndex: string, data: any, value : string | number | undefined = undefined) {
+    updateSelectTreeValue(dataIndex, value)
+    updateSelectTreeDropdownValue(dataIndex, data)
+  }
+
   return {
     updateInputValue,
     updateSelectValue,
     updateSelectDropdownValue,
-    updateSelectDropdownAndValue
+    updateSelectDropdownAndValue,
+    updateSelectTreeValue,
+    updateSelectTreeDropdownValue,
+    updateSelectTreeDropdownAndValue,
   }
 }
 

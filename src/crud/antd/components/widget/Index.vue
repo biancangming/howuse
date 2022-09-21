@@ -1,10 +1,12 @@
 <template>
   <Input v-if="props.type === 'input'" v-bind="props"/>
   <Select v-else-if="props.type === 'select'" v-bind="props"/>
+  <TreeSelect v-else-if="props.type === 'tree-select'" v-bind="props"/>
   <DatePicker v-else v-bind="props"/>
 </template>
 <script lang="ts" setup>
 import Select from "./Select.vue"
+import TreeSelect from "./TreeSelect.vue"
 import Input from "./Input.vue"
 import DatePicker from "./DatePicker.vue"
 

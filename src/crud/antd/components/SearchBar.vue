@@ -34,6 +34,7 @@ function search() {
   emit("search", fromModel);
 }
 
+// 初始化收集所有传入的参数
 onMounted(() => {
   for(const opts of searchOpts){
     fromModel[opts.dataIndex] = opts.defaultValue

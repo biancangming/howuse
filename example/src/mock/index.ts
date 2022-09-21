@@ -1,5 +1,6 @@
 import "./crud/list"
 import "./crud/select"
+import "./crud/area"
 
 
 export function Success(data: any) {

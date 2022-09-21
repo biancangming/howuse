@@ -13,7 +13,7 @@ export function useChange(props, emit) {
       dataIndex: props.dataIndex,
       val: val || props.defaultValue,
     });
-    props.extraAttrs.onChange && props.extraAttrs.onChange.call(props, ...args)
+    props.extraAttrs.onChange && props.extraAttrs.onChange.call(props, val || props.defaultValue, ...args)
   }
   return change
 }

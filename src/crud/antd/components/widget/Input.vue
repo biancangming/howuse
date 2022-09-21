@@ -1,5 +1,5 @@
 <template>
-  <a-input @change="changeInput" v-model:value="inputVal" v-bind="{..._extraAttrs}" />
+  <a-input @change="changeInput" v-model:value="inputVal" v-bind="{..._extraAttrs}"/>
 </template>
 <script lang="ts" setup>
 import { update } from "../..";
@@ -21,6 +21,7 @@ const _extraAttrs = computed(() => {
 emitter.on(update.updateInputValue,({dataIndex, value}: any)=>{
   if(dataIndex == props.dataIndex){
     inputVal.value = value
+    change(value)
   }
 })
 

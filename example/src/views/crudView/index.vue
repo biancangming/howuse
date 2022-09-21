@@ -97,12 +97,54 @@ const searchColumns: SearchOpts[] = [
       maxTagCount: 1,
     },
   },
+  {
+    label: "搜索",
+    dataIndex: "search",
+    type: "select",
+    extraAttrs: {
+      api: server({url: "/user/selectList"}),
+      name: "name",
+      value: "id",
+      placeholder: "请输入搜索内容",
+      allowClear: true,
+      onSearch(val: string){ // 精简选项，默认存在onSeach开启搜索，如果声明 show-search 、filter-option等则忽略内部开关
+        server({url: "/user/selectList", data: {name: val}}).then(res=>{
+          updateSelectDropdownValue("search", res.data.data || [])
+        })
+      }
+    },
+  },
+  {
+    label: "联动1",
+    dataIndex: "link1",
+    type: "select",
+    extraAttrs: {
+      api: server({url: "/area/city1"}),
+      name: "name",
+      value: "id",
+      onChange(val: string, { name }){ 
+        server({url: "/area/city2", data: {name}}).then(res=>{
+          updateSelectDropdownAndValue("link2", res.data.data || [])
+        })
+      }
+    },
+  },
+  {
+    label: "联动2",
+    dataIndex: "link2",
+    type: "select",
+    extraAttrs: {
+      name: "name",
+      value: "id",
+      placeholder: "请选择"
+    },
+  },
 ];
 
 function seachHeader(result: any) {
   console.log(result);
 }
 useAntdCrud({ columns });
-const { updateInputValue } = useAntdCrudSearch({ columns: searchColumns });
+const { updateInputValue, updateSelectDropdownAndValue ,updateSelectDropdownValue } = useAntdCrudSearch({ columns: searchColumns });
 </script>
 <style lang="less" scoped></style>

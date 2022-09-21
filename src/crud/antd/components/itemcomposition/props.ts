@@ -16,7 +16,7 @@ export default {
   },
   defaultValue: {
     // 默认值设置
-    default: "",
+    default: undefined,
     type: [String, Number, Array, null, undefined] as PropType<any>,
   },
   extraAttrs: {

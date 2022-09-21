@@ -12,6 +12,8 @@
 </template>
 <script lang="ts" setup>
 import { SelectValue } from "ant-design-vue/es/select";
+import { update } from "../..";
+import emitter from "../../emit";
 import { useChange } from "../itemcomposition/change";
 import _props from "../itemcomposition/props";
 import { findArrayFromObj } from "../itemcomposition/utils";
@@ -23,7 +25,7 @@ const models = reactive({
   selectOpts: [], // 存储select下拉选项数据
   selectOptsName: "", // 存储select下拉选项展示的名字
   selectOptsVal: "", // 存储select下拉选项值的key
-  selectVal: "",// 下拉选框的值，不设置会造成无法选中，antd-vue 的问题
+  selectVal: undefined,// 下拉选框的值，不设置会造成无法选中，antd-vue 的问题
   selectVals: []
 });
 
@@ -35,8 +37,8 @@ const _extraAttrs = computed(() => {
   const defaultRet = { ...props.extraAttrs, defaultValue: props.defaultValue }
   Reflect.deleteProperty(defaultRet, "onChange")
   // 是否展示全部下拉选项，默认不展示
-  const { api, name, value, mode } = props.extraAttrs;
-  if (!api) console.warn("传入下拉选项api参数不正确，请参考axios 文档构造");
+  const { api, name, value, mode, onSearch } = props.extraAttrs;
+  // if (!api) console.warn("传入下拉选项api参数不正确，请参考axios 文档构造");
   if (!name || !value) {
     console.warn(
       "selcet 必须在 extraAttrs 指定参数 name value 分别代表select下拉数据的显示的名字和选定的值"
@@ -52,20 +54,53 @@ const _extraAttrs = computed(() => {
     models.selectVals = []
   }
 
+  // 如果onSearch存在，则认为是搜索选项，则默认设置如下三个参数
+  if(onSearch){
+    if(props.extraAttrs["filter-option"] === undefined || props.extraAttrs["filterOption"] === undefined){
+      defaultRet["filter-option"] = false
+    }
+    if(props.extraAttrs["show-search"] === undefined || props.extraAttrs["showSearch"] === undefined){
+      defaultRet["show-search"] = true
+    }
+    if(props.extraAttrs["show-arrow"] === undefined || props.extraAttrs["showArrow"] === undefined){
+      defaultRet["show-arrow"] = false
+    }
+  }
+
   // 自定义api直接返回响应值作为select下拉值，默认往下取三层
   const responseKey = props.extraAttrs.responseKey || "data"
-  api.then((res) => {
-    models.selectOpts = findArrayFromObj(res, responseKey) as never[]
-  });
+
+  if(api && api.then){
+    api.then((res) => {
+      models.selectOpts = findArrayFromObj(res, responseKey) as never[]
+    });
+  }else{
+    console.warn("传入下拉选项api参数不正确，请参考axios 文档构造");
+  }
 
   return defaultRet
 })
 
+// 监听事件 - 更新输入框数值
+emitter.on(update.updateSelectValue,({dataIndex, value}: any)=>{
+  if(dataIndex == props.dataIndex){
+    isSelectMultiple ? models.selectVals = value : models.selectVal = value
+    changeSelectPicker(value)
+  }
+})
+
+// 监听事件 - 更新下拉数据
+emitter.on(update.updateSelectDropdownValue,({dataIndex, value}: any)=>{
+  if(dataIndex == props.dataIndex){
+    models.selectVals = []
+    models.selectVal = undefined
+    models.selectOpts = value
+  }
+})
+
 // 下拉选择
 function changeSelectPicker(val: SelectValue) {
-  change(val, val)
+  const option = models.selectOpts.find(it=>it[models.selectOptsVal] === val)
+  change(val, option)
 }
 </script>
-<style lang="less" scoped>
-
-</style>

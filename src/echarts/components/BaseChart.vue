@@ -13,8 +13,18 @@ const props = defineProps({
   option: {
     default: () => ({}),
     type: Object as PropType<EChartsOption>
+  },
+  use: {
+    default: () => [],
+    type: Object as PropType<any>
   }
 })
+
+if(!props.use || props.use.length === 0){
+  console.error("提示：必须传入可用的echart组件")
+}else{
+  echarts.use(props.use)
+}
 
 defineExpose({
   getInstance: echartInstance()

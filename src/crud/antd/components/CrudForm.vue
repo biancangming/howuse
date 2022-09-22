@@ -40,9 +40,10 @@
 </template>
 <script lang="ts" setup>
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue';
-import { CrudFormInterface, FormInjectKey, widgetChange, UserSetting } from '../index';
+import { Emitter, EventType } from 'mitt';
+import { CrudFormInterface, FormInjectKey, widgetChange, UserSetting, mittInjectKey } from '../index';
 import Widget from "./widget/Index.vue"
-import emitter from '../emit';
+const emitter = inject<Emitter<Record<EventType, unknown>>>(mittInjectKey)
 
 const emit = defineEmits<{
   (e: "submit", values: any): void,
@@ -69,7 +70,7 @@ const userSetting = computed<UserSetting>(() => {
   }
   return setting
 })
-emitter.on(widgetChange, (opts: any) => {
+emitter?.on(widgetChange, (opts: any) => {
   Reflect.set(fromModel, opts.dataIndex, opts.val)
 })
 

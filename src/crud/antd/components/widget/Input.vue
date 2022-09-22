@@ -2,10 +2,11 @@
   <a-input @change="changeInput" v-model:value="inputVal" v-bind="{..._extraAttrs}" autocomplete="off"/>
 </template>
 <script lang="ts" setup>
-import { update } from "../..";
+import { Emitter, EventType } from "mitt";
+import { mittInjectKey, update } from "../..";
 import { useChange } from "../itemcomposition/change";
 import _props from "../itemcomposition/props";
-import emitter from '../../emit';
+const emitter = inject<Emitter<Record<EventType, unknown>>>(mittInjectKey)
 const props = defineProps(_props);
 const emit = defineEmits(["change"]);
 const change = useChange(props, emit)
@@ -19,7 +20,7 @@ const _extraAttrs = computed(() => {
 })
 
 // 监听事件
-emitter.on(update.updateInputValue,({dataIndex, value}: any)=>{
+emitter?.on(update.updateInputValue,({dataIndex, value}: any)=>{
   if(dataIndex == props.dataIndex){
     inputVal.value = value
     change(value)

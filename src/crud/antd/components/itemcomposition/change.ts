@@ -12,11 +12,11 @@ export function useChange(props, emit) {
     if(!props.dataIndex) return
     emitter.emit(widgetChange, {
       dataIndex: props.dataIndex,
-      val: val || props.defaultValue,
+      val: val,
     });
     console.log(1111111);
     
-    props.extraAttrs.onChange && props.extraAttrs.onChange.call(props, val || props.defaultValue, ...args)
+    props.extraAttrs.onChange && props.extraAttrs.onChange.call(props, val , ...args)
   }
   return change
 }

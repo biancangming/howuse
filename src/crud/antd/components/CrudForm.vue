@@ -1,6 +1,6 @@
 <template>
-  <a-form ref="formRef" @finish="handleFinish" @validate="handleValidate" @finishFailed="handleFinishFailed"
-    v-bind="forms.formSetting || {}" autocomplete="off" :model="fromModel">
+  <a-form ref="formRef" @finish="handleFinish" @validate="handleValidate" @finishFailed="handleFinishFailed" v-bind="forms.formSetting || {}"
+    autocomplete="off" :model="fromModel">
     <a-row :gutter="24">
       <template v-for="(p, index) in forms.columns" :key="p.dataIndex" v-if="refresh">
         <a-col :span="userSetting.span" v-show="expand || index < (userSetting.expandNumber || 0)">
@@ -44,6 +44,12 @@ import { CrudFormInterface, FormInjectKey, widgetChange, UserSetting } from '../
 import Widget from "./widget/Index.vue"
 import emitter from '../emit';
 
+const emit = defineEmits<{
+  (e: "submit", values: any): void,
+  (e: "fail", errors): void,
+  (e: "validate", []): void,
+}>()
+
 const refresh = ref(true); // 重置组件状态
 // 选择完之后数据收集
 const fromModel: Record<string, string> = reactive({});
@@ -74,15 +80,15 @@ onMounted(() => {
   }
 })
 
-const handleFinish = (values: any) => {
-  console.log(values, "===");
+const handleFinish = values => {
+  emit("submit", values)
 };
 const handleFinishFailed = errors => {
-  console.log(errors);
+  emit("fail", errors)
 };
 
 const handleValidate = (...args) => {
-  console.log(args);
+  emit("validate", args)
 };
 
 function reset() {

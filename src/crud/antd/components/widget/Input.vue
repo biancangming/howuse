@@ -28,7 +28,9 @@ emitter.on(update.updateInputValue,({dataIndex, value}: any)=>{
 
 // 修改输入框 a-input
 function changeInput(e: Event) {
+  
   const val = (e.target as any).value
+  
   change(val, e)
 }
 </script>

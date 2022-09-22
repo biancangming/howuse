@@ -1,5 +1,5 @@
 <template>
-  <p>基于antd 构建 ， 快速开发curd 表单提交，未开发完整功能，仅供辅助表格等提供辅助操作</p>
+  <p>基于ant-design-vue 3.2.12 构建 ， 快速开发curd 表单提交，未开发完整功能，仅供辅助表格等提供辅助操作</p>
   <CodeView title="curd 顶部搜索构建">
     <useAntdCrudSearchDemo />
     <template #desc> 在初始化创建，保留原有的 <b>AxiosInstance</b> 结构。如果有必要，也可以使用默认的 <b>server</b> </template>

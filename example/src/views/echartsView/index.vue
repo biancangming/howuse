@@ -8,19 +8,19 @@
     <b>简要说明：</b>
   </p>
   <p>1. 在原生代码基础上增加页面响应式自适应</p>
-  <CodeView title="基础用法">
-    <useBaseEChartstDemo />
+  <CodeView title="自适应折线图，其它类似">
+    <LineChartDemo />
     <template #desc>
       本方法实用高度定制的echarts图标， 默认已加载 GridComponent, LegendComponent, TooltipComponent, CanvasRenderer, SVGRenderer 常用的这几个模块
     </template>
     <template #code>
-      <useBaseEChartsCode />
+      <LineChartCode />
     </template>
   </CodeView>
 </template>
 <script lang="ts" setup>
-import useBaseEChartstDemo from "./demo/useBaseECharts/index.vue";
-import useBaseEChartsCode from "./demo/useBaseECharts/index.md";
+import LineChartDemo from "./demo/LineChart/index.vue";
+import LineChartCode from "./demo/LineChart/index.md";
 import CodeView from "@/components/CodeView.vue";
 </script>
 <style lang="less" scoped></style>

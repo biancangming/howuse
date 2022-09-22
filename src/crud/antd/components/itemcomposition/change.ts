@@ -14,7 +14,6 @@ export function useChange(props, emit) {
       dataIndex: props.dataIndex,
       val: val,
     });
-    console.log(1111111);
     
     props.extraAttrs.onChange && props.extraAttrs.onChange.call(props, val , ...args)
   }

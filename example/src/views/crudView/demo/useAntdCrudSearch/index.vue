@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AntdCrudForm :props="searchColumns" @search="seachHeader" />
+    <AntdCrudForm :columns="searchColumns" @search="seachHeader" @register="register"/>
   </div>
 </template>
 <script lang="ts" setup>
@@ -129,6 +129,6 @@ function seachHeader(result: any) {
   console.log(result);
 }
 
-const { updateInputValue, updateSelectDropdownAndValue ,updateSelectDropdownValue } = useAntdCrudForm({ columns: searchColumns, userSetting: { span: 6, search: true, expandNumber: 4 }, formSetting: { labelCol: {span: 6 },  wrapperCol: { span: 17 }} });
+const { updateInputValue, updateSelectDropdownAndValue ,updateSelectDropdownValue, register } = useAntdCrudForm({ userSetting: { span: 6, search: true, expandNumber: 4 }, formSetting: { labelCol: {span: 6 },  wrapperCol: { span: 17 }} });
 </script>
 <style lang="less" scoped></style>

@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import { SelectValue } from "ant-design-vue/es/select";
 import { Emitter, EventType } from "mitt";
-import { mittInjectKey, update } from "../..";
+import { mittInjectKey, update } from "..";
 import { useChange } from "../itemcomposition/change";
 import _props from "../itemcomposition/props";
 import { findArrayFromObj } from "../itemcomposition/utils";

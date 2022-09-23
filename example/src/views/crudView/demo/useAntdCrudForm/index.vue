@@ -1,9 +1,9 @@
 
 <template>
-  <CrudForm />
+  <AntdCrudForm :columns="columns" @register="register"/>
 </template>
 <script lang="ts" setup>
-import { useAntdCrudForm, CrudForm } from 'howuse/crud/antd';
+import { useAntdCrudForm, AntdCrudForm } from 'howuse/crud';
 import { CrudFormOpts } from 'types/crud';
 const columns: CrudFormOpts[] = [
   {
@@ -29,7 +29,8 @@ const columns: CrudFormOpts[] = [
     ]
   }
 ]
-useAntdCrudForm({ columns })
+useAntdCrudForm()
+const { register } = useAntdCrudForm({userSetting:{span: 12}})
 </script>
 <style lang="less" scoped>
 

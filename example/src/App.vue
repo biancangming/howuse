@@ -1,9 +1,15 @@
 <script setup lang="ts">
-  import 'ant-design-vue/es/message/style/css';
+import 'ant-design-vue/es/message/style/css';
+import zhCN from 'ant-design-vue/es/locale/zh_CN';
+import dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn';
+dayjs.locale('zh-cn');
 </script>
 
 <template>
-  <router-view />
+  <a-config-provider :locale="zhCN">
+    <router-view />
+  </a-config-provider>
 </template>
 <style lang="less">
 body {

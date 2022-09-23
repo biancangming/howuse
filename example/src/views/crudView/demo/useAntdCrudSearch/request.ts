@@ -5,6 +5,6 @@ export const { useAxiosRequest, server } = createAxios({
   baseURL: "",
 });
 
-export function useDefRequest(config: HowAxiosRequestConfig, options?: HowExRequestOptions) {
-  return useAxiosRequest(config, options)
+export function useDefRequest<T>(config: HowAxiosRequestConfig, options?: HowExRequestOptions) {
+  return useAxiosRequest<T>(config, options)
 }

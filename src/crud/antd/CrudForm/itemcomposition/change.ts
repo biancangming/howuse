@@ -1,6 +1,6 @@
 import { isArray } from "howtools";
 import { Emitter, EventType } from "mitt";
-import { mittInjectKey, widgetChange } from "../../index"
+import { mittInjectKey, widgetChange } from ".."
 // 修改item值传递到seachbar , args 用于兼容原始的change事件
 export function useChange(props, emit) { 
   const emitter = inject<Emitter<Record<EventType, unknown>>>(mittInjectKey)

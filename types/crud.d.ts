@@ -24,20 +24,7 @@ export interface SearchOpts {
   //api?: Promise<any>; // 个别组件需要, 如果需要参与全局拦截器，请传入axios实例，并且保证response未被重写
 }
 
-// type RuleObject = {
-//   required: ?boolean;
-//   message: ?string;
-//   enum?: string;
-//   len?: number;
-//   max?: number;
-//   min?: number;
-//   pattern?: RegExp;
-//   transform?: (val) => any;
-//   trigger?: 'blur' | 'change' | ['change', 'blur'];
-//   type?: "string" | "number" | "boolean" | "method" | "regexp" | "integer" | "float" | "array" | "object" | "enum" | "date" | "url" | "hex" | "email" | "any";
-//   validator?: (rule, value, cb) => void;
-//   whitespace?: boolean;
-// }
 export interface CrudFormOpts extends SearchOpts {
-  rules?: RuleObject[]
+  rules?: RuleObject[],
+  [propName: string]: any; // 可携带任意其它参数
 }

@@ -3,7 +3,7 @@
 </template>
 <script lang="ts" setup>
 import { Emitter, EventType } from "mitt";
-import { mittInjectKey, update } from "../..";
+import { mittInjectKey, update } from "..";
 import { useChange } from "../itemcomposition/change";
 import _props from "../itemcomposition/props";
 const emitter = inject<Emitter<Record<EventType, unknown>>>(mittInjectKey)

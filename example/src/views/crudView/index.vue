@@ -14,6 +14,20 @@
       <useAntdCrudFormCode />
     </template>
   </CodeView>
+  <CodeView title="基础表格构建">
+    <tableDemo />
+    <template #desc> 自动预留了action 插槽用于操作，不写则不会有该选项 </template>
+    <template #code>
+      <tableCode />
+    </template>
+  </CodeView>
+  <CodeView title="综合示例">
+    <crudCompositionDemo />
+    <template #desc> 综合示例 </template>
+    <template #code>
+      <crudCompositionCode />
+    </template>
+  </CodeView>
 </template>
 <script lang="ts" setup>
 import CodeView from "@/components/CodeView.vue";
@@ -21,6 +35,10 @@ import useAntdCrudSearchCode from "./demo/useAntdCrudSearch/index.md";
 import useAntdCrudSearchDemo from "./demo/useAntdCrudSearch/index.vue";
 import useAntdCrudFormDemo from "./demo/useAntdCrudForm/index.vue";
 import useAntdCrudFormCode from "./demo/useAntdCrudForm/index.md";
+import tableDemo from "./demo/Table/index.vue";
+import tableCode from "./demo/Table/index.md";
+import crudCompositionDemo from "./demo/crudComposition/index.vue";
+import crudCompositionCode from "./demo/crudComposition/index.md";
 </script>
 <style lang="less" scoped>
 

@@ -1,16 +1,10 @@
 import mitt from "mitt";
-import { CrudFormOpts } from "types/crud";
-import CrudForm from "./components/CrudForm.vue"
+import CrudForm from "./CrudForm.vue"
 
 export const SearchInjectKey = Symbol("_search_bar_inject")
 export const FormInjectKey = Symbol("_form_inject")
 export const UpdateInjectKey = Symbol("_update_inject")
 
-export interface OperationOpts {
-  api: "",
-  icon: "",
-  type: "primary" | "danger" | "link"
-}
 
 export const widgetChange = Symbol("widgetChange")
 export const mittInjectKey = Symbol("mitt") // 事件总线
@@ -77,15 +71,21 @@ export interface UserSetting {
   span?: number; // 列属性，默认分为几列， 默认是1
   expandNumber?: number; // 展开收起数量
   search?: boolean; // 搜索模式，按钮显示为搜索
+  include?: string[]; // 包含哪些字段，不设置则是全部
 }
-export interface CrudFormInterface { columns: CrudFormOpts[], formSetting?: Record<string, any>, userSetting?: UserSetting }
-export function useAntdCrudForm(opts: CrudFormInterface) {
+export interface CrudFormInterface { formSetting?: Record<string, any>, userSetting?: UserSetting }
+export function useAntdCrudForm(opts: CrudFormInterface = {}) {
   const emitter = mitt()
   provide(mittInjectKey, emitter) // 确保多个表单共存是，避免事件传递给其他同类组件
-  provide<CrudFormInterface>(FormInjectKey, opts)
+  // provide<CrudFormInterface>(FormInjectKey, opts)
+
+  function register(setProps){
+    setProps(opts)
+  }
 
   return {
-    ...useUpdate(emitter)
+    ...useUpdate(emitter),
+    register
   }
 }
 

@@ -1,11 +1,10 @@
 <template>
+  <AntdCrudForm :columns="columns"  @register="registerSearch"/>
   <AntdBaseTable :columns="columns" :actions="actions" :dataSource="data.data" :scroll="{x: 1500}" />
-  <a-modal :visible="visible" title="编辑/新增" @cancel="visible=false" @ok="visible=false">
-    <AntdCrudForm :columns="columns" @register="register" :footer="false" />
-  </a-modal>
+  <AntdCrudFormDrawer width="450px" v-model:visible="visible" title="编辑/新增" :columns="columns" @register="register" @submit="submit"/>
 </template>
 <script lang="ts" setup>
-import { AntdBaseTable, AntdCrudForm, useAntdCrudForm } from "howuse/crud"
+import { AntdBaseTable, AntdCrudForm, useAntdCrudForm, AntdCrudFormDrawer } from "howuse/crud"
 import { useDefRequest } from '../useAntdCrudSearch/request';
 import { message } from 'ant-design-vue';
 import { CrudFormOpts } from "types/crud";
@@ -30,7 +29,10 @@ const columns: CrudFormOpts[] = [
   {
     label: "日期",
     dataIndex: "date",
-    type: "time"
+    type: "date",
+    extraAttrs: {
+      format: "YYYY-MM-DD"
+    }
   },
   {
     label: "描述",
@@ -70,6 +72,7 @@ const actions = [
   },
 ]
 
+// 侧栏设置
 const { register } = useAntdCrudForm(
   {
     userSetting: {
@@ -79,4 +82,21 @@ const { register } = useAntdCrudForm(
       { labelCol: { span: 4 }, wrapperCol: { span: 17 } }
   }
 )
+
+// 顶部搜索栏设置
+const { register: registerSearch } = useAntdCrudForm(
+  {
+    userSetting: {
+      span: 8,
+      search: true,
+      include: ["date", "username"] // 取dataIndex，设置了此选项，则表单只包含这些字段，且顺序和这里保持一致
+    },
+    formSetting:
+      { labelCol: { span: 5 }, wrapperCol: { span: 17 } }
+  }
+)
+
+function submit(obj){
+  message.success(JSON.stringify(obj))
+}
 </script>

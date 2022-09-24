@@ -11,7 +11,7 @@ export interface Column {
   operation?: OperationOpts[]
 }
 
-export type SearchItemType = "input" | "select" | "tree-select" | "date" | "date-range" | "time" | "time-range"
+export type SearchItemType = "input" | "select" | "tree-select" | "switch" | "slider" | "radio" | "checkbox" | "rate" | "upload" | "date" | "date-range" | "time" | "time-range"
 
 export interface SearchOpts {
   label: string;

@@ -64,5 +64,7 @@ function changeTimeRangePicker(date: any, dateString: [string, string]) {
 }
 </script>
 <style lang="less" scoped>
-
+.ant-picker{
+  width: 100%;
+}
 </style>

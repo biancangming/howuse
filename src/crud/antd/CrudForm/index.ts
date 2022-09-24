@@ -1,5 +1,8 @@
 import mitt from "mitt";
 import CrudForm from "./CrudForm.vue"
+import CrudFormModal from "./CrudFormModal.vue"
+import CrudFormDrawer from "./CrudFormDrawer.vue"
+import { CrudFormOpts } from "types/crud";
 
 export const SearchInjectKey = Symbol("_search_bar_inject")
 export const FormInjectKey = Symbol("_form_inject")
@@ -10,6 +13,14 @@ export const widgetChange = Symbol("widgetChange")
 export const mittInjectKey = Symbol("mitt") // 事件总线
 export const update = {
   updateInputValue: Symbol("updateInputValue"),
+  updateSwitchValue: Symbol("updateSwitchValue"),
+  updateSliderValue: Symbol("updateSliderValue"),
+  updateRadioValue: Symbol("updateRadioValue"),
+  updateRadioGroupValue: Symbol("updateRadioGroupValue"),
+  updateCheckboxValue: Symbol("updateCheckboxValue"),
+  updateCheckboxGroupValue: Symbol("updateCheckboxGroupValue"),
+  updateRateValue: Symbol("updateRateValue"),
+  updateUploadValue: Symbol("updateUploadValue"),
   updateSelectValue: Symbol("updateSelectValue"),
   updateSelectDropdownValue: Symbol("updateSelectDropdownValue"),
   updateSelectTreeValue: Symbol("updateSelectTreeValue"),
@@ -20,6 +31,46 @@ function useUpdate(emitter) {
   // 修改页面input 输入框内容
   function updateInputValue(dataIndex: string, value: string | number | undefined) {
     emitter.emit(update.updateInputValue, { dataIndex, value })
+  }
+
+  // 修改swithch 的值
+  function updateSwitchValue(dataIndex: string, value: boolean) {
+    emitter.emit(update.updateSwitchValue, { dataIndex, value })
+  }
+
+  // 修改 Silder 的值
+  function updateSliderValue(dataIndex: string, value: number) {
+    emitter.emit(update.updateSliderValue, { dataIndex, value })
+  }
+
+  // 修改 Radio 的值
+  function updateRadioValue(dataIndex: string, value: string | number | undefined) {
+    emitter.emit(update.updateRadioValue, { dataIndex, value })
+  }
+
+  // 修改 Radio 选项的值
+  function updateRadioGroupValue(dataIndex: string, value: string | number | undefined) {
+    emitter.emit(update.updateRadioGroupValue, { dataIndex, value })
+  }
+
+  // 修改 checkbox 的值
+  function updateCheckboxValue(dataIndex: string, value: string | number | undefined) {
+    emitter.emit(update.updateCheckboxValue, { dataIndex, value })
+  }
+
+  // 修改 Checkbox 选项的值
+  function updateCheckboxGroupValue(dataIndex: string, value: string | number | undefined) {
+    emitter.emit(update.updateCheckboxGroupValue, { dataIndex, value })
+  }
+  
+  // 修改 Rate 的值
+  function updateRateValue(dataIndex: string, value: number) {
+    emitter.emit(update.updateRateValue, { dataIndex, value })
+  }
+
+  // 修改 Upload 的值
+  function updateUploadValue(dataIndex: string, value: any[]) {
+    emitter.emit(update.updateUploadValue, { dataIndex, value })
   }
 
   // 修改 select 输入框 内容
@@ -54,8 +105,21 @@ function useUpdate(emitter) {
     updateSelectTreeDropdownValue(dataIndex, data)
   }
 
+  // 更新所有数据的值，通畅在需要批量更改数据的时候，使用
+  function updateAnyValue(columns: CrudFormOpts[], anyVal: Record<string, any>){
+
+  }
+
   return {
     updateInputValue,
+    updateSwitchValue,
+    updateSliderValue,
+    updateRadioValue,
+    updateRadioGroupValue,
+    updateCheckboxValue,
+    updateCheckboxGroupValue,
+    updateRateValue,
+    updateUploadValue,
     updateSelectValue,
     updateSelectDropdownValue,
     updateSelectDropdownAndValue,
@@ -91,4 +155,6 @@ export function useAntdCrudForm(opts: CrudFormInterface = {}) {
 
 export {
   CrudForm,
+  CrudFormModal,
+  CrudFormDrawer
 }

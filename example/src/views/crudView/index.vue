@@ -2,14 +2,12 @@
   <p>基于ant-design-vue 3.2.12 构建 ， 快速开发curd 表单提交，未开发完整功能，仅供辅助表格等提供辅助操作</p>
   <CodeView title="curd 顶部搜索构建">
     <useAntdCrudSearchDemo />
-    <template #desc> 在初始化创建，保留原有的 <b>AxiosInstance</b> 结构。如果有必要，也可以使用默认的 <b>server</b> </template>
     <template #code>
       <useAntdCrudSearchCode />
     </template>
   </CodeView>
   <CodeView title="curd 表单构建">
     <useAntdCrudFormDemo />
-    <template #desc> 在初始化创建，保留原有的 <b>AxiosInstance</b> 结构。如果有必要，也可以使用默认的 <b>server</b> </template>
     <template #code>
       <useAntdCrudFormCode />
     </template>
@@ -23,7 +21,9 @@
   </CodeView>
   <CodeView title="综合示例">
     <crudCompositionDemo />
-    <template #desc> 综合示例 </template>
+    <template #desc> 综合示例, 提供了三种表单模式，分别是<code>AntdCrudFormModal</code> <code>AntdCrudFormDrawer</code> <code>AntdCrudForm</code> 
+    <p>示例中为了简单演示，使用了相同的 columns ， 实际使用当中，根据实际情况而定。</p>
+    </template>
     <template #code>
       <crudCompositionCode />
     </template>

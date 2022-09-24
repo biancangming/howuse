@@ -18,7 +18,7 @@
             <a-space>
               <a-button style="margin: 0 8px" @click="() => reset()">重置</a-button>
               <a-button type="primary" html-type="submit">查询</a-button>
-              <a style="font-size: 12px" @click="expand = !expand">
+              <a style="font-size: 12px" @click="expand = !expand" v-if="_columns.length >= (myProps.userSetting?.expandNumber || 0)">
                 <template v-if="expand">
                   <UpOutlined />
                 </template>
@@ -61,17 +61,15 @@ const props = defineProps({
 })
 
 // 加工后的 columns
-const _columns = computed(()=> {
+const _columns = computed(() => {
   const include = unref(myProps).userSetting?.include || []
-  if(include.length === 0){
+  if (include.length === 0) { // include 长度是 0 就显示全部
     return props.columns
-  }else{
+  } else {
     const _include: CrudFormOpts[] = []
-    for(const inc of include){
-      const item = props.columns.find(item=> item.dataIndex === inc)
-      if(item){
-        _include.push(item)
-      }
+    for (const inc of include) {
+      const item = props.columns.find(item => item.dataIndex === inc)
+      if (item) _include.push(item)
     }
     return _include
   }
@@ -95,18 +93,18 @@ const formRef = ref() // 表单对象
 const expand = ref(false)
 
 // 接收父级设置的参数
-const { props: myProps, setProps } = useProps<{ formSetting?: Record<string, any>, userSetting?: UserSetting }>({ userSetting: {}, formSetting: {}}, (forms)=>{
-    const setting = forms.userSetting || {}
-    if (setting.span === undefined) {
-      setting.span = 24
-    }
-    if (setting.expandNumber == undefined) {
-      setting.expandNumber = 6
-    }
-    return {
-      formSetting: forms.formSetting,
-      userSetting: setting,
-    }
+const { props: myProps, setProps } = useProps<{ formSetting?: Record<string, any>, userSetting?: UserSetting }>({ userSetting: {}, formSetting: {} }, (forms) => {
+  const setting = forms.userSetting || {}
+  if (setting.span === undefined) {
+    setting.span = 24
+  }
+  if (setting.expandNumber == undefined) {
+    setting.expandNumber = 6
+  }
+  return {
+    formSetting: forms.formSetting,
+    userSetting: setting,
+  }
 })
 
 
@@ -117,24 +115,32 @@ emitter?.on(widgetChange, (opts: any) => {
 // 初始化收集所有传入的参数
 onMounted(() => {
   for (const opts of props.columns) {
-    Reflect.set(fromModel, opts.dataIndex, opts.defaultValue)
+    if(opts.type === "switch" && opts.defaultValue === undefined){
+      Reflect.set(fromModel, opts.dataIndex, false)
+    }else if(opts.type === "slider" && opts.defaultValue === undefined){
+      Reflect.set(fromModel, opts.dataIndex, 0)
+    }else if(opts.type === "rate" && opts.defaultValue === undefined){
+      Reflect.set(fromModel, opts.dataIndex, 0)
+    }else if(opts.type === "upload" && opts.defaultValue === undefined){
+      Reflect.set(fromModel, opts.dataIndex, [])
+    }else if(opts.type === "select" && opts.defaultValue === undefined && opts.extraAttrs?.all === true){
+      Reflect.set(fromModel, opts.dataIndex, "")
+    }else{
+      Reflect.set(fromModel, opts.dataIndex, opts.defaultValue)
+    }
   }
 
   emit("register", setProps)
 })
 
 const handleFinish = values => {
-  console.log(values);
-  
   emit("submit", values)
 };
 const handleFinishFailed = errors => {
-  console.log(errors);
   emit("fail", errors)
 };
 
 const handleValidate = (...args) => {
-  console.log(args);
   emit("validate", args)
 };
 

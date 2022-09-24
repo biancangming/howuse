@@ -23,7 +23,13 @@ const change = useChange(props, emit)
 
 const emitter = inject<Emitter<Record<EventType, unknown>>>(mittInjectKey)
 
-const models = reactive({
+const models = reactive<{
+    selectOpts: any[];
+    selectOptsName: string;
+    selectOptsVal: string;
+    selectVal: SelectValue;
+    selectVals: any[];
+  }>({
   selectOpts: [], // 存储select下拉选项数据
   selectOptsName: "", // 存储select下拉选项展示的名字
   selectOptsVal: "", // 存储select下拉选项值的key
@@ -53,6 +59,8 @@ const _extraAttrs = computed(() => {
   // mode="multiple" or mode="tags"
   if (mode === "multiple" || mode === "tags") {
     models.selectVals = props.defaultValue || []
+  }else {
+    models.selectVal = props.extraAttrs?.all ? "" : undefined
   }
 
   // 如果onSearch存在，则认为是搜索选项，则默认设置如下三个参数
@@ -94,7 +102,7 @@ emitter?.on(update.updateSelectValue,({dataIndex, value}: any)=>{
 emitter?.on(update.updateSelectDropdownValue,({dataIndex, value}: any)=>{
   if(dataIndex == props.dataIndex){
     models.selectVals = []
-    models.selectVal = undefined
+    models.selectVal = props.extraAttrs?.all ? "" : undefined
     models.selectOpts = value
   }
 })

@@ -10,6 +10,7 @@ export function useChange(props, emit) {
     }
   }
   function change(val, ...args) {
+    
     if(!props.dataIndex) return
     emitter?.emit(widgetChange, {
       dataIndex: props.dataIndex,

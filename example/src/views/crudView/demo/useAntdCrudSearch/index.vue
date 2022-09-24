@@ -1,12 +1,13 @@
 <template>
   <div>
-    <AntdCrudForm :columns="searchColumns" @search="seachHeader" @register="register"/>
+    <AntdCrudForm :columns="searchColumns" @submit="seachHeader" @register="register"/>
   </div>
 </template>
 <script lang="ts" setup>
 import { server } from "./request";
 import {  AntdCrudForm, useAntdCrudForm } from "howuse/crud";
 import { SearchOpts } from "types/crud";
+import { message, Upload } from 'ant-design-vue';
 
 const searchColumns: SearchOpts[] = [
   {
@@ -18,6 +19,73 @@ const searchColumns: SearchOpts[] = [
     label: "年龄",
     dataIndex: "age",
     defaultValue: "18",
+  },
+  {
+    label: "开关",
+    dataIndex: "switch",
+    type: "switch",
+  },
+  {
+    label: "选锤子",
+    dataIndex: "chui",
+    type: "radio",
+    extraAttrs: {
+      api: server({url: "/user/chui"}),
+      name: "name",
+      value: "id",
+      responseKey: "data", // 用于响应值的key， 默认为data，默认根据此key在响应结果查询三次，直到找到对应数组。否则空数组
+    },
+  },
+  {
+    label: "多选锤子",
+    dataIndex: "chuimuch",
+    type: "checkbox",
+    extraAttrs: {
+      api: server({url: "/user/chui"}),
+      name: "name",
+      value: "id",
+      responseKey: "data", // 用于响应值的key， 默认为data，默认根据此key在响应结果查询三次，直到找到对应数组。否则空数组
+    },
+  },
+  {
+    label: "评个分",
+    dataIndex: "mark",
+    type: "rate",
+  },
+  {
+    label: "进度",
+    dataIndex: "slider",
+    type: "slider",
+    defaultValue: 10,
+  },
+  {
+    label: "上传文件",
+    dataIndex: "upload",
+    type: "upload",
+    defaultValue: [
+      {
+        uid: '1',
+        name: 'xxx.png',
+        status: 'done',
+        response: 'Server Error 500', // custom error message to show
+        url: 'http://www.baidu.com/xxx.png',
+      }
+    ],
+    extraAttrs: {
+      beforeUpload(file){
+        if(file.size > 1024){
+          message.error("文件大小不能超过1M")
+          return Upload.LIST_IGNORE
+        }
+      },
+      onChange({file}){
+        if(file.status === "uploading"){
+          message.warning("正在上传")
+        }else{
+          message.error(`上传完成，${file.error}`)
+        }
+      }
+    }
   },
   {
     label: "入库日期",
@@ -61,7 +129,6 @@ const searchColumns: SearchOpts[] = [
     type: "select",
     extraAttrs: {
       api: server({url: "/user/selectList"}),
-      all: true, // 是否显示全部，默认无
       name: "name",
       value: "id",
       responseKey: "data", // 用于响应值的key， 默认为data，默认根据此key在响应结果查询三次，直到找到对应数组。否则空数组
@@ -126,7 +193,7 @@ const searchColumns: SearchOpts[] = [
 ];
 
 function seachHeader(result: any) {
-  console.log(result);
+  message.success(JSON.stringify(result, null, 2))
 }
 
 const { updateInputValue, updateSelectDropdownAndValue ,updateSelectDropdownValue, register } = useAntdCrudForm({ userSetting: { span: 6, search: true, expandNumber: 4 }, formSetting: { labelCol: {span: 6 },  wrapperCol: { span: 17 }} });

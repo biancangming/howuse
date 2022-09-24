@@ -27,7 +27,6 @@ const operations = computed(() => {
   divEle.remove()
   
   const textPix = props.actions.map(item=> item.label).join("").length * textWidth; // 计算大概文字宽度，常规是16px
-  console.log(textPix + (props.actions.length - 1) * 8);
   
   return {
     title: "操作",
@@ -37,6 +36,3 @@ const operations = computed(() => {
   }
 })
 </script>
-<style lang="less" scoped>
-
-</style>

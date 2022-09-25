@@ -1,17 +1,17 @@
 <template>
   <a-table>
-    <template #bodyCell="{ column }">
+    <template #bodyCell="{ text, record, index, column }">
       <template v-if="column.dataIndex === 'operation'">
         <a-space size="small" align="start">
           <template v-for="ac in props.actions" :key="ac.dataIndex">
             <a-popconfirm
               v-if="ac.confirm"
               :title="ac.confirm"
-              @confirm="handleOperation(ac, column)"
+              @confirm="handleOperation(ac, text, record, index, column )"
             >
               <a @click.stop>{{ ac.label }}</a>
             </a-popconfirm>
-            <a v-else @click.stop="handleOperation(ac, column)">{{ ac.label }}</a>
+            <a v-else @click.stop="handleOperation(ac, text, record, index, column )">{{ ac.label }}</a>
           </template>
         </a-space>
       </template>
@@ -27,9 +27,9 @@ const props = defineProps({
   }
 })
 
-function handleOperation(action, column: any){
+function handleOperation(action, text, record, index, column ){
   if(action?.onClick){
-    action.onClick(column)
+    action.onClick({text, record, index, column})
   }
 }
 </script>

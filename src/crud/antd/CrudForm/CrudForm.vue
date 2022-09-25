@@ -5,8 +5,8 @@
       <template v-for="(p, index) in _columns" :key="p.dataIndex" v-if="refresh">
         <a-col :span="myProps.userSetting?.span" v-show="expand || index < (myProps.userSetting?.expandNumber || 0)">
           <a-form-item :label="p.label" :name="p.dataIndex" :rules="p.rules || []">
-            <Widget :type="p.type" :default-value="p.defaultValue" :dataIndex="p.dataIndex"
-              :extra-attrs="p.extraAttrs" />
+            <Widget :type="p.type" :default-value="p.defaultValue" :dataIndex="p.dataIndex" :extra-attrs="p.extraAttrs"
+              :mittKey="myProps.mittKey" />
           </a-form-item>
         </a-col>
       </template>
@@ -18,7 +18,8 @@
             <a-space>
               <a-button style="margin: 0 8px" @click="() => reset()">重置</a-button>
               <a-button type="primary" html-type="submit">查询</a-button>
-              <a style="font-size: 12px" @click="expand = !expand" v-if="_columns.length >= (myProps.userSetting?.expandNumber || 0)">
+              <a style="font-size: 12px" @click="expand = !expand"
+                v-if="_columns.length >= (myProps.userSetting?.expandNumber || 0)">
                 <template v-if="expand">
                   <UpOutlined />
                 </template>
@@ -43,7 +44,7 @@
 <script lang="ts" setup>
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue';
 import { Emitter, EventType } from 'mitt';
-import { widgetChange, UserSetting, mittInjectKey } from './index';
+import { widgetChange, UserSetting } from './index';
 import type { CrudFormOpts } from "types/crud"
 import Widget from "./widget/Index.vue"
 import { PropType } from 'vue';
@@ -75,13 +76,11 @@ const _columns = computed(() => {
   }
 })
 
-const emitter = inject<Emitter<Record<EventType, unknown>>>(mittInjectKey)
-
 const emit = defineEmits<{
   (e: "submit", values: any): void,
   (e: "fail", errors): void,
   (e: "validate", []): void,
-  (e: "register", any): void,
+  (e: "register", any, any2: CrudFormOpts[]): void,
 }>()
 
 const refresh = ref(true); // 重置组件状态
@@ -93,7 +92,7 @@ const formRef = ref() // 表单对象
 const expand = ref(false)
 
 // 接收父级设置的参数
-const { props: myProps, setProps } = useProps<{ formSetting?: Record<string, any>, userSetting?: UserSetting }>({ userSetting: {}, formSetting: {} }, (forms) => {
+const { props: myProps, setProps } = useProps<{ formSetting?: Record<string, any>, userSetting?: UserSetting, mittKey: string }>({ userSetting: {}, formSetting: {}, mittKey: "" }, (forms) => {
   const setting = forms.userSetting || {}
   if (setting.span === undefined) {
     setting.span = 24
@@ -104,34 +103,43 @@ const { props: myProps, setProps } = useProps<{ formSetting?: Record<string, any
   return {
     formSetting: forms.formSetting,
     userSetting: setting,
+    mittKey: forms.mittKey
   }
 })
 
-
-emitter?.on(widgetChange, (opts: any) => {
-  Reflect.set(fromModel, opts.dataIndex, opts.val)
+onMounted(() => {
+  const mitter = inject<Emitter<Record<EventType, unknown>>>(unref(myProps).mittKey)
+  mitter?.on(widgetChange, (opts: any) => {
+    Reflect.set(fromModel, opts.dataIndex, opts.val)
+  })
 })
 
 // 初始化收集所有传入的参数
 onMounted(() => {
   for (const opts of props.columns) {
-    if(opts.type === "switch" && opts.defaultValue === undefined){
+    if (opts.type === "switch" && opts.defaultValue === undefined) {
       Reflect.set(fromModel, opts.dataIndex, false)
-    }else if(opts.type === "slider" && opts.defaultValue === undefined){
+    } else if (opts.type === "slider" && opts.defaultValue === undefined) {
       Reflect.set(fromModel, opts.dataIndex, 0)
-    }else if(opts.type === "rate" && opts.defaultValue === undefined){
+    } else if (opts.type === "rate" && opts.defaultValue === undefined) {
       Reflect.set(fromModel, opts.dataIndex, 0)
-    }else if(opts.type === "upload" && opts.defaultValue === undefined){
+    } else if (opts.type === "upload" && opts.defaultValue === undefined) {
       Reflect.set(fromModel, opts.dataIndex, [])
-    }else if(opts.type === "select" && opts.defaultValue === undefined && opts.extraAttrs?.all === true){
+    } else if (opts.type === "select" && opts.defaultValue === undefined && opts.extraAttrs?.all === true) {
       Reflect.set(fromModel, opts.dataIndex, "")
-    }else{
+    } else {
       Reflect.set(fromModel, opts.dataIndex, opts.defaultValue)
     }
   }
-
-  emit("register", setProps)
 })
+
+// 修正正确的columns
+watch(_columns, (columns) => {
+  emit("register", setProps, columns)
+},
+  {
+    immediate: true
+  })
 
 const handleFinish = values => {
   emit("submit", values)

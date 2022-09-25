@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { SelectValue } from "ant-design-vue/es/tree-select";
 import { Emitter, EventType } from "mitt";
-import { mittInjectKey, update } from "..";
+import { update } from "..";
 import { useChange } from "../itemcomposition/change";
 import _props from "../itemcomposition/props";
 import { findArrayFromObj } from "../itemcomposition/utils";
@@ -15,7 +15,7 @@ const props = defineProps(_props);
 const emit = defineEmits(["change"]);
 const change = useChange(props, emit)
 
-const emitter = inject<Emitter<Record<EventType, unknown>>>(mittInjectKey)
+const emitter = inject<Emitter<Record<EventType, unknown>>>(props.mittKey)
 
 const models = reactive({
   selectOpts: [], // 存储select下拉选项数据

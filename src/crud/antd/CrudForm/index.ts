@@ -2,7 +2,8 @@ import mitt from "mitt";
 import CrudForm from "./CrudForm.vue"
 import CrudFormModal from "./CrudFormModal.vue"
 import CrudFormDrawer from "./CrudFormDrawer.vue"
-import { CrudFormOpts } from "types/crud";
+import { CrudFormOpts } from 'types/crud';
+import { uuid } from "howtools";
 
 export const SearchInjectKey = Symbol("_search_bar_inject")
 export const FormInjectKey = Symbol("_form_inject")
@@ -11,6 +12,7 @@ export const UpdateInjectKey = Symbol("_update_inject")
 
 export const widgetChange = Symbol("widgetChange")
 export const mittInjectKey = Symbol("mitt") // 事件总线
+
 export const update = {
   updateInputValue: Symbol("updateInputValue"),
   updateSwitchValue: Symbol("updateSwitchValue"),
@@ -21,6 +23,7 @@ export const update = {
   updateCheckboxGroupValue: Symbol("updateCheckboxGroupValue"),
   updateRateValue: Symbol("updateRateValue"),
   updateUploadValue: Symbol("updateUploadValue"),
+  updateAnyDatePicker: Symbol("updateAnyDatePicker"),
   updateSelectValue: Symbol("updateSelectValue"),
   updateSelectDropdownValue: Symbol("updateSelectDropdownValue"),
   updateSelectTreeValue: Symbol("updateSelectTreeValue"),
@@ -62,7 +65,7 @@ function useUpdate(emitter) {
   function updateCheckboxGroupValue(dataIndex: string, value: string | number | undefined) {
     emitter.emit(update.updateCheckboxGroupValue, { dataIndex, value })
   }
-  
+
   // 修改 Rate 的值
   function updateRateValue(dataIndex: string, value: number) {
     emitter.emit(update.updateRateValue, { dataIndex, value })
@@ -71,6 +74,11 @@ function useUpdate(emitter) {
   // 修改 Upload 的值
   function updateUploadValue(dataIndex: string, value: any[]) {
     emitter.emit(update.updateUploadValue, { dataIndex, value })
+  }
+
+  // 修改 任意时间日期选择器 的值
+  function updateAnyDatePicker(dataIndex: string, value: any[]) {
+    emitter.emit(update.updateAnyDatePicker, { dataIndex, value })
   }
 
   // 修改 select 输入框 内容
@@ -105,11 +113,6 @@ function useUpdate(emitter) {
     updateSelectTreeDropdownValue(dataIndex, data)
   }
 
-  // 更新所有数据的值，通畅在需要批量更改数据的时候，使用
-  function updateAnyValue(columns: CrudFormOpts[], anyVal: Record<string, any>){
-
-  }
-
   return {
     updateInputValue,
     updateSwitchValue,
@@ -120,6 +123,7 @@ function useUpdate(emitter) {
     updateCheckboxGroupValue,
     updateRateValue,
     updateUploadValue,
+    updateAnyDatePicker,
     updateSelectValue,
     updateSelectDropdownValue,
     updateSelectDropdownAndValue,
@@ -132,6 +136,7 @@ function useUpdate(emitter) {
 // formSetting form 表单总体配置
 // user setting 
 export interface UserSetting {
+  key?: string;// 同一个组件内多个表单共存时需要设置
   span?: number; // 列属性，默认分为几列， 默认是1
   expandNumber?: number; // 展开收起数量
   search?: boolean; // 搜索模式，按钮显示为搜索
@@ -140,15 +145,86 @@ export interface UserSetting {
 export interface CrudFormInterface { formSetting?: Record<string, any>, userSetting?: UserSetting }
 export function useAntdCrudForm(opts: CrudFormInterface = {}) {
   const emitter = mitt()
-  provide(mittInjectKey, emitter) // 确保多个表单共存是，避免事件传递给其他同类组件
-  // provide<CrudFormInterface>(FormInjectKey, opts)
+  const mittKey = "mitt_" + uuid()
+  provide(mittKey, emitter) // 确保多个表单共存是，避免事件传递给其他同类组件
+  const columns: CrudFormOpts[] = []
 
-  function register(setProps){
-    setProps(opts)
+  function register(setProps, _columns) {
+    setProps({...opts, mittKey})
+    columns.length = 0
+    columns.push(..._columns)
   }
 
+  const updateEmit = useUpdate(emitter)
+
+  // 更新所有数据的值，通畅在需要批量更改数据的时候，使用
+  function updateAnyValue(anyVal: Record<string, any>) {
+    const _update = () => {
+      // "input" | "select" | "tree-select" | "switch" | "slider" | "radio" | "checkbox" | "rate" | "upload" | "date" | "date-range" | "time" | "time-range"
+      for (const [dataIndex, val] of Object.entries(anyVal)) {
+        const column = columns.find(item => item.dataIndex === dataIndex)
+        if (column) {
+          if (!column.type) column.type = "input" // 默认输入框是inpute
+
+          switch (column.type) {
+            case 'input':
+              updateEmit.updateInputValue(dataIndex, val)
+              break;
+            case 'select':
+              updateEmit.updateSelectValue(dataIndex, val)
+              break;
+            case 'tree-select':
+              updateEmit.updateSelectTreeValue(dataIndex, val)
+              break;
+            case 'switch':
+              updateEmit.updateSwitchValue(dataIndex, val)
+              break;
+            case 'slider':
+              updateEmit.updateSliderValue(dataIndex, val)
+              break;
+            case 'radio':
+              updateEmit.updateRadioValue(dataIndex, val)
+              break;
+            case 'checkbox':
+              updateEmit.updateCheckboxGroupValue(dataIndex, val)
+              break;
+            case 'rate':
+              updateEmit.updateRadioValue(dataIndex, val)
+              break;
+            case 'upload':
+              updateEmit.updateUploadValue(dataIndex, val)
+              break;
+            case 'date':
+              updateEmit.updateAnyDatePicker(dataIndex, val)
+              break;
+            case 'date-range':
+              updateEmit.updateAnyDatePicker(dataIndex, val)
+              break;
+            case 'time':
+              updateEmit.updateAnyDatePicker(dataIndex, val)
+              break;
+            case 'time-range':
+              updateEmit.updateAnyDatePicker(dataIndex, val)
+              break;
+            default:
+              break;
+          }
+        }
+      }
+    }
+
+    if (columns.length === 0) {
+      setTimeout(() => _update(), 500)
+    } else {
+      _update()
+    }
+
+  }
+
+
   return {
-    ...useUpdate(emitter),
+    ...updateEmit,
+    updateAnyValue,
     register
   }
 }

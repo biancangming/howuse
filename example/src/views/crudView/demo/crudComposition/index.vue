@@ -31,13 +31,13 @@ const columns: CrudFormOpts[] = [
     dataIndex: "date",
     type: "date",
     extraAttrs: {
-      format: "YYYY-MM-DD"
+      format: "YYYY-MM-DD",
     }
   },
   {
     label: "描述",
     dataIndex: "description",
-    ellipsis: true
+    ellipsis: true,
   },
   {
     label: "邮件",
@@ -50,9 +50,10 @@ const actions = [
   {
     label: "编辑",
     dataIndex: "edit",
-    onClick(column) {
+    onClick({text, record, index, column}) {
+      // 键值对 
+      updateAnyValue(record)
       visible.value = true
-      message.success("我是编辑")
     }
   },
   {
@@ -73,7 +74,7 @@ const actions = [
 ]
 
 // 侧栏设置
-const { register } = useAntdCrudForm(
+const { register, updateAnyValue, updateInputValue } = useAntdCrudForm(
   {
     userSetting: {
       include: ["username", "description", "date"] // 取dataIndex，设置了此选项，则表单只包含这些字段，且顺序和这里保持一致
@@ -83,8 +84,8 @@ const { register } = useAntdCrudForm(
   }
 )
 
-// 顶部搜索栏设置
-const { register: registerSearch } = useAntdCrudForm(
+// // 顶部搜索栏设置
+const { register: registerSearch, updateInputValue: updateInputSearchValue } = useAntdCrudForm(
   {
     userSetting: {
       span: 8,

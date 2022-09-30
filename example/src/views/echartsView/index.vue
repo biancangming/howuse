@@ -62,16 +62,4 @@ import BaseEchartCode from "./demo/BaseChart/index.md";
 import MapChartDemo from "./demo/MapChart/index.vue";
 import MapChartCode from "./demo/MapChart/index.md";
 import CodeView from "@/components/CodeView.vue";
-import codeJson from "howuse/echarts/data/code.json"
-import { useGeoJsonMap } from '../../../../src/echarts/composition/uesGeoMap';
-useGeoJsonMap({ code: "610500", name: "tongchuan" })
-// for(const item of codeJson){
-//   item.code = `${item.code}`.padEnd(6, "0")
-//   if(item.children){
-//     for(const item2 of item.children || []){
-//       item2.code = `${item2.code}`.padEnd(6, "0")
-//     }
-//   }
-// }
-// console.log(codeJson);
 </script>

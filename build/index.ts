@@ -9,9 +9,9 @@ const _exports = {}
 
 for (const lib of libs) {
   _exports[`./${lib}`] = {
-    "import": `./${lib}.es.js`,
-    "require": `./${lib}.cjs.js`,
-    "types": `./${lib}.d.ts`,
+    "import": `./${lib}/${lib}.es.js`,
+    "require": `./${lib}/${lib}.cjs.js`,
+    "types": `./${lib}/index.d.ts`,
   }
 }
 

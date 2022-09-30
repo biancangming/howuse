@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 /// <reference types="unplugin-vue2-script-setup/shims" />
 
-declare module '*.vue' {
+declare module "*" {
     import type { ComponentOptions } from 'vue'
     const Component: ComponentOptions
     export default Component

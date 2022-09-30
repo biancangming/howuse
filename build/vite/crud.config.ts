@@ -1,30 +1,42 @@
 import { defineConfig } from "vite";
 import { pathResolve } from '../util';
-import { viteStaticCopy } from 'vite-plugin-static-copy'
+import AutoImport from "unplugin-auto-import/vite"
+import Components from 'unplugin-vue-components/vite'
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
+import dts from 'vite-plugin-dts'
+
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
   build: {
     lib: {
       entry: pathResolve(`../src/crud/index.ts`),
-      name: 'howuse',
+      name: 'crud',
       fileName: (format) => `crud.${format}.js`,
       formats: ['es', "cjs"],
     },
     rollupOptions: {
-      external: ['vue', 'ant-design-vue', '@ant-design/icons-vue'],
+      external: ['vue', /^ant-design-vue\/.+/, '@ant-design/icons-vue', "*.css", "*.less"],
+      output: {
+        banner: "/** Create By biancangming **/"
+      }
     },
-    emptyOutDir: false,
     cssCodeSplit: false,
+    outDir: "dist/crud"
   },
   plugins: [
     vue(),
-    viteStaticCopy({
-      targets: [
-        {
-          src: `types/crud.d.ts`, dest: `.`
-        }
-      ]
-    })
+    cssInjectedByJsPlugin(),
+    dts({
+      entryRoot: pathResolve(`../src/crud`),
+      cleanVueFileName: true,
+    }),
+    AutoImport({
+      imports: ["vue"],
+    }),
+    Components({
+      resolvers: [AntDesignVueResolver()]
+    }),
   ]
 })

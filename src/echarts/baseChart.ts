@@ -4,7 +4,7 @@ import { GridComponent, LegendComponent, TooltipComponent } from "echarts/compon
 import { CanvasRenderer, SVGRenderer } from "echarts/renderers"
 import { onMounted, nextTick, Ref, onUnmounted } from 'vue';
 import { addResizeListener, removeResizeListener } from "howtools"
-import type { HowEchartsInitOpts } from "types/echarts"
+import type { HowEchartsInitOpts } from "./types/echarts"
 import { createDef } from '../utils/util';
 import { EChartsType } from 'echarts/core';
 

@@ -1,9 +1,16 @@
 <template>
-  <Table :columns="[...columns, operations]" :actions="actions" v-bind="$attrs" :dataSource="[{operation:11}]"></Table>
+  <Table :columns="[...columns, operations]" :actions="actions" v-bind="$attrs" :dataSource="[{operation:11}]">
+      <template #title></template>
+      <template v-for="slot in slots">
+        <slot :name="slot"></slot>
+      </template>
+  </Table>
 </template>
 <script lang="ts" setup>
 import Table from "./components/Table.vue"
 import { PropType } from 'vue';
+
+const slots = useSlots()
 
 const props = defineProps({
   columns: {

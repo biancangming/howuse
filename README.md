@@ -17,3 +17,4 @@
 # 一些神器收集
 `import printJS from 'print-js'`
 文档： https://printjs.crabbly.com/#documentation
+

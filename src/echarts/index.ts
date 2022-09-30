@@ -1,4 +1,5 @@
 import { useBaseECharts } from "./baseChart"
+import { useGeoJsonMap } from "./composition/uesGeoMap"
 import BarEchart from "./components/BarChart.vue"
 import BaseChart from "./components/BaseChart.vue"
 import BoxplotChart from "./components/BoxplotChart.vue"
@@ -25,6 +26,7 @@ import TreemapChart from "./components/TreemapChart.vue"
 
 export {
     useBaseECharts,
+    useGeoJsonMap,
     BarEchart,
     BaseChart,
     BoxplotChart,

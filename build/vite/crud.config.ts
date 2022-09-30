@@ -17,7 +17,7 @@ export default defineConfig({
       formats: ['es', "cjs"],
     },
     rollupOptions: {
-      external: ['vue', /^ant-design-vue\/.+/, '@ant-design/icons-vue', "*.css", "*.less"],
+      external: ['vue', /^ant-design-vue\/.+/, '@ant-design/icons-vue'],
       output: {
         banner: "/** Create By biancangming **/"
       }

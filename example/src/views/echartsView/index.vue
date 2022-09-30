@@ -1,9 +1,7 @@
 <template>
-  <b
-    >echarts
+  <b>echarts
     被阿帕奇合并之后，api在5.0开始发生一些不可逆转的转变，按需加载发生极大转变，建议使用
-    5.0.1 + 版本，本模块基于5.3 + 版本实现 , 该版本内置typescript无需额外安装</b
-  >
+    5.0.1 + 版本，本模块基于5.3 + 版本实现 , 该版本内置typescript无需额外安装</b>
   <p>
     <b>简要说明：</b>
   </p>
@@ -36,6 +34,21 @@
       <BaseEchartCode />
     </template>
   </CodeView>
+  <CodeView title="地图模块演示">
+    <Suspense>
+      <MapChartDemo />
+      <template #fallback>
+        Loading...
+      </template>
+    </Suspense>
+    <template #desc>
+      适合组合图，例如柱状图和折线图组合使用，本示例还是用了toolbox
+      <p>传入的code值参考  <b>https://gitee.com/bsxbl/geojson/raw/master/code.json</b></p>
+    </template>
+    <template #code>
+      <MapChartCode />
+    </template>
+  </CodeView>
 </template>
 <script lang="ts" setup>
 import LineChartDemo from "./demo/LineChart/index.vue";
@@ -46,6 +59,19 @@ import PieEchartDemo from "./demo/PieEchart/index.vue";
 import PieEchartCode from "./demo/PieEchart/index.md";
 import BaseEchartDemo from "./demo/BaseChart/index.vue";
 import BaseEchartCode from "./demo/BaseChart/index.md";
+import MapChartDemo from "./demo/MapChart/index.vue";
+import MapChartCode from "./demo/MapChart/index.md";
 import CodeView from "@/components/CodeView.vue";
+import codeJson from "howuse/echarts/data/code.json"
+import { useGeoJsonMap } from '../../../../src/echarts/composition/uesGeoMap';
+useGeoJsonMap({ code: "610500", name: "tongchuan" })
+// for(const item of codeJson){
+//   item.code = `${item.code}`.padEnd(6, "0")
+//   if(item.children){
+//     for(const item2 of item.children || []){
+//       item2.code = `${item2.code}`.padEnd(6, "0")
+//     }
+//   }
+// }
+// console.log(codeJson);
 </script>
-<style lang="less" scoped></style>

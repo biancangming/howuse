@@ -10,7 +10,7 @@ import AutoImport from "unplugin-auto-import/vite"
 import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import CustomBlock from "markdown-it-custom-block"
-
+import topLevelAwait from 'vite-plugin-top-level-await'
 
 function pathResolve(dir: string) {
   return resolve(__dirname, ".", dir);
@@ -23,6 +23,10 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/],
     }),
     vueJsx(),
+    topLevelAwait({
+      promiseExportName: '__tla',
+      promiseImportName: i => `__tla_${i}`
+    }),
     Markdown({
       builders: [code()],
       markdownItSetup(md) {

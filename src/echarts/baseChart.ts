@@ -1,6 +1,6 @@
 import * as echarts from 'echarts/core';
 import type { EChartsOption } from "echarts"
-import { GridComponent, LegendComponent, TooltipComponent } from "echarts/components"
+import { GridComponent, LegendComponent, TooltipComponent, TitleComponent } from "echarts/components"
 import { CanvasRenderer, SVGRenderer } from "echarts/renderers"
 import { onMounted, nextTick, Ref, onUnmounted } from 'vue';
 import { addResizeListener, removeResizeListener } from "howtools"
@@ -8,7 +8,7 @@ import type { HowEchartsInitOpts } from "./types/echarts"
 import { createDef } from '../utils/util';
 import { EChartsType } from 'echarts/core';
 
-echarts.use([GridComponent, LegendComponent, TooltipComponent])
+echarts.use([GridComponent, LegendComponent, TooltipComponent, TitleComponent])
 
 
 export function useBaseECharts(el: Ref<HTMLDivElement>, theme?: string | object, opts?: HowEchartsInitOpts) {

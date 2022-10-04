@@ -31,6 +31,7 @@ export function useBaseECharts(el: Ref<HTMLDivElement>, theme?: string | object,
   async function setOption(option: EChartsOption) {
     if (!el.value) {
       await nextTick();
+      if(echartInstance){ echartInstance.dispose() } //*预防实例多次创建，导致告警。在创建前检测是否需要销毁实例
       echartInstance = echarts.init(el.value, theme);
     }
     if (!echartInstance) throw new Error("echarts 实例没有创建成功");

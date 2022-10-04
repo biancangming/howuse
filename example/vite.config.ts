@@ -30,7 +30,6 @@ export default defineConfig({
     Markdown({
       builders: [code()],
       markdownItSetup(md) {
-        md.use(require('markdown-it-anchor'))
         md.use(CustomBlock, {
           code(url) {
             const file = fs.readFileSync(url).toString()

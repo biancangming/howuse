@@ -45,10 +45,10 @@
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue';
 import { Emitter, EventType } from 'mitt';
 import { widgetChange, UserSetting } from './index';
-import type { CrudFormOpts } from "types/crud"
 import Widget from "./widget/Index.vue"
 import { PropType } from 'vue';
 import { useProps } from "../../../utils/useProps"
+import { CrudFormOpts } from 'types/crud';
 
 const props = defineProps({
   columns: {

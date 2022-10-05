@@ -3,7 +3,7 @@ import path from 'path';
 import pkg from "../package.json"
 import { writeFileSync } from "fs";
 
-const libs = ["axios", "echarts", "crud"]
+const libs = ["axios", "echarts", "crud", "vueComponent"]
 
 const _exports = {}
 
@@ -20,6 +20,7 @@ for (const lib of libs) {
     await build({ configFile: path.join(__dirname, `./vite/axios.config.ts`) })
     await build({ configFile: path.join(__dirname, `./vite/echarts.config.ts`) })
     await build({ configFile: path.join(__dirname, `./vite/crud.config.ts`) })
+    await build({ configFile: path.join(__dirname, `./vite/vueComponent.config.ts`) })
   }
 )()
 // --------------------------------------------------

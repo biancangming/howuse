@@ -40,6 +40,15 @@ const router = createRouter({
             menu: true
           }
         },
+        {
+          path: '/component',
+          name: 'component',
+          component: () => import("../views/vueComponents/index.vue"),
+          meta: {
+            title: "组件配置",
+            menu: true
+          }
+        },
       ]
     },
 

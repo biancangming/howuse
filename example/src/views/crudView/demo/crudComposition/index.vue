@@ -1,6 +1,10 @@
 <template>
   <AntdCrudForm :columns="columns"  @register="registerSearch"/>
-  <AntdBaseTable :columns="columns" :actions="actions" :dataSource="data.data" :scroll="{x: 1500}" />
+  <AntdBaseTable :columns="columns" :actions="actions" :dataSource="data.data" :scroll="{x: 1500}" >
+    <template #title>
+      <a-button type="primary" @click="addInfo">新增</a-button>
+    </template>
+  </AntdBaseTable>
   <AntdCrudFormDrawer width="450px" v-model:visible="visible" title="编辑/新增" :columns="columns" @register="register" @submit="submit"/>
 </template>
 <script lang="ts" setup>
@@ -96,6 +100,11 @@ const { register: registerSearch, updateInputValue: updateInputSearchValue } = u
       { labelCol: { span: 5 }, wrapperCol: { span: 17 } }
   }
 )
+
+function addInfo(){
+  updateAnyValue({})
+  visible.value = true
+}
 
 function submit(obj){
   message.success(JSON.stringify(obj))

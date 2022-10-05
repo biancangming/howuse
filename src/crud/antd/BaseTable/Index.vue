@@ -1,9 +1,8 @@
 <template>
   <Table :columns="[...columns, operations]" :actions="actions" v-bind="$attrs" :dataSource="[{operation:11}]">
-      <template #title></template>
-      <template v-for="slot in slots">
-        <slot :name="slot"></slot>
-      </template>
+    <template v-for="(_,name) in slots" #[name]>
+      <slot :name="name"></slot>
+    </template>
   </Table>
 </template>
 <script lang="ts" setup>
@@ -32,14 +31,14 @@ const operations = computed(() => {
   document.body.appendChild(divEle)
   const textWidth = divEle.clientWidth // 计算页面文字宽度
   divEle.remove()
-  
-  const textPix = props.actions.map(item=> item.label).join("").length * textWidth; // 计算大概文字宽度，常规是16px
-  
+
+  const textPix = props.actions.map(item => item.label).join("").length * textWidth; // 计算大概文字宽度，常规是16px
+
   return {
     title: "操作",
     dataIndex: "operation",
     fixed: 'right',
-    width: `${ textPix + (props.actions.length - 1) * 8 + 32}px` // 32 是默认padding 距离
+    width: `${textPix + (props.actions.length - 1) * 8 + 32}px` // 32 是默认padding 距离
   }
 })
 </script>

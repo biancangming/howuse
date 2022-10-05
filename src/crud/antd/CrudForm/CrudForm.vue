@@ -10,8 +10,14 @@
           </a-form-item>
         </a-col>
       </template>
+      <a-col :span="myProps.userSetting?.span" v-if="btnInline">
+        <a-space style="float: right">
+          <a-button style="margin: 0 8px" @click="() => reset()">重置</a-button>
+          <a-button type="primary" html-type="submit">查询</a-button>
+        </a-space>
+      </a-col>
     </a-row>
-    <slot name="footer">
+    <slot name="footer" v-if="!btnInline">
       <a-form-item :label-col="{span: 0}" :wrapper-col="{span: 24}" v-if="footer">
         <template v-if="myProps.userSetting?.search">
           <div style="float: right">
@@ -32,10 +38,12 @@
           </div>
         </template>
         <template v-else>
-          <a-space>
-            <a-button @click="reset()">重置</a-button>
-            <a-button type="primary" html-type="submit">确定</a-button>
-          </a-space>
+          <div style="text-align:end">
+            <a-space>
+              <a-button @click="reset()">重置</a-button>
+              <a-button type="primary" html-type="submit">确定</a-button>
+            </a-space>
+          </div>
         </template>
       </a-form-item>
     </slot>
@@ -59,6 +67,16 @@ const props = defineProps({
     type: Boolean,
     default: true
   }
+})
+
+// 搜索模式按钮位置摆放，如果在不存在展开情况，且只有一行按钮时，这行按钮不构成一行，则按钮放置在末尾
+const btnInline = computed(()=>{
+  if(!props.footer) return false 
+  const expandNumber = unref(myProps).userSetting?.expandNumber || 0
+  if(!expandNumber) return false
+  const spanNumber = 24 / (unref(myProps).userSetting?.span || 24)
+  const columnsLen = unref(_columns).length
+  return columnsLen < spanNumber
 })
 
 // 加工后的 columns

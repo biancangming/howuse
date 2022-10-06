@@ -11,7 +11,7 @@ export interface GeoMapOpts {
   name: string; // 注册map名称
   data?: any
 }
-const defaultGeoBaseUrl = "http://echartsgeojson.bianbingdang.com"
+const defaultGeoBaseUrl = "//echartsgeojson.bianbingdang.com"
 
 // 默认数据路径查找
 function defaultGeoJsonData(code: AreaCode) {

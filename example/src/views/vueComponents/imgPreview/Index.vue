@@ -1,6 +1,7 @@
 <template>
   <!-- 文件预览 -->
   <ImgPreview :imageList="imgList" />
+  <a-divider></a-divider>
   <div>
     <a-button type="primary" @click="openImg()">无图预览</a-button>
   </div>

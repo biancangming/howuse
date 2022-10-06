@@ -1,12 +1,11 @@
 <template>
-  <Transition name="custom-classes" enter-active-class="animate__animated animate__faster animate__zoomIn" leave-active-class="animate__animated animate__faster animate__zoomOut">
-    <Draggable :class="prefixCls" v-slot="{ x, y }" :handle="handle" :prevent-default="true" v-if="visible"
-      :position="position">
-      <div :class="`${prefixCls}__move`" ref="handle">
-        <div :class="`${prefixCls}__move--title`">
-          <slot name="header" :x="x" :y="y"></slot>
+  <Mask :visible="visible">
+    <div :class="prefixCls">
+      <div :class="`${prefixCls}__header`" ref="handle">
+        <div :class="`${prefixCls}__header--title`">
+          {{title}}
         </div>
-        <div :class="`${prefixCls}__move--close`" @click="close">X</div>
+        <div :class="`${prefixCls}__header--close`" @click="close">X</div>
       </div>
       <div :class="`${prefixCls}__content`">
         <slot></slot>
@@ -14,20 +13,21 @@
       <div :class="`${prefixCls}__footer`" v-if="isShowSlot('footer')">
         <slot name="footer"></slot>
       </div>
-    </Draggable>
-  </Transition>
+    </div>
+  </Mask>
 </template>
 <script lang="ts" setup>
 import { usePrefixCls } from '../../less/useDesign';
 import { useVModel } from '@vueuse/core'
-import { UseDraggable as Draggable } from './component'
 import { PropType } from 'vue';
+import { Mask } from '..';
+
 const slots = useSlots()
 const isShowSlot = (name: string) => !!slots[name];
 
 const handle = ref<HTMLElement | null>(null)
 
-const prefixCls = usePrefixCls("drag-dialog")
+const prefixCls = usePrefixCls("jsonmask-dialog")
 
 const props = defineProps({
   visible: {
@@ -37,12 +37,19 @@ const props = defineProps({
   position: {
     default: [0, 0],
     type: Array as unknown as PropType<[number, number]>
+  },
+  title: {
+    default: "",
+    type: String
+  },
+  closeExtraFunc: {
+    default: () => ({}),
+    type: Function
   }
 })
 
 const emit = defineEmits<{
   (e: "update:visible", visible: boolean): void;
-  (e: "update:position", visible: boolean): void;
   (e: "after-close", visible: boolean): void;
 }>()
 
@@ -53,10 +60,11 @@ useVModel(props, "visible", emit)
 function close() {
   emit("update:visible", false)
   emit("after-close", false)
+  props.closeExtraFunc()
 }
 </script>
 <style lang="less" scoped>
-@prefix-cls: ~'@{namespace}-drag-dialog';
+@prefix-cls: ~'@{namespace}-jsonmask-dialog';
 
 .@{prefix-cls} {
   min-width: 100px;
@@ -67,9 +75,8 @@ function close() {
   position: fixed;
   z-index:~'@{defaultZIndex}';
 
-  &__move {
+  &__header {
     min-height: 55px;
-    cursor: move;
     border-bottom: 1px solid #f0f0f0;
     border-radius: 2px 2px 0 0;
 

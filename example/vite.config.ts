@@ -78,6 +78,10 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,
+        modifyVars: {
+          namespace: "howuse",
+          defaultZIndex: 1000,
+        },
       }
     }
   },

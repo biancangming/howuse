@@ -1,5 +1,5 @@
 <template>
-  <a-a-image-preview-group>
+  <a-image-preview-group>
     <slot v-if="!imageList.length || $slots.default"></slot>
     <template v-else>
       <template v-for="item in getImageList" :key="item.src">
@@ -10,7 +10,7 @@
         </a-image>
       </template>
     </template>
-  </a-a-image-preview-group>
+  </a-image-preview-group>
 </template>
 <script lang="ts" setup>
 import { isString } from 'howtools';

@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from "@/layout/index.vue"
+import About from "@/views/about/Index.vue"
 import AxiosView from '../views/axiosView/index.vue'
 
 const router = createRouter({
@@ -13,6 +14,15 @@ const router = createRouter({
         name: "axios"
       },
       children: [
+        // {
+        //   path: "/",
+        //   name: "about",
+        //   component: About,
+        //   meta: {
+        //     title: "简介",
+        //     menu: true
+        //   }
+        // },
         {
           path: '/axios',
           name: 'axios',

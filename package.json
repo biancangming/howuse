@@ -30,6 +30,7 @@
     "@vitejs/plugin-vue-jsx": "^2.0.1",
     "@vueuse/core": "^9.3.0",
     "@yankeeinlondon/code-builder": "^1.0.7",
+    "animate.css": "^4.1.1",
     "ant-design-vue": "^3.2.12",
     "axios": "^0.25.0",
     "consola": "^2.15.3",

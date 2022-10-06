@@ -1,8 +1,10 @@
 <template>
-  <Draggable :class="prefixCls" v-slot="{ x, y }" :handle="handle" :prevent-default="true" v-if="visible"
-    v-model:position="position">
-    <slot :x="x" :y="y"></slot>
-  </Draggable>
+  <Transition name="custom-classes" enter-active-class="animate__animated animate__faster animate__zoomIn" leave-active-class="animate__animated animate__faster animate__zoomOut">
+    <Draggable :class="prefixCls" v-slot="{ x, y }" :handle="handle" :prevent-default="true" v-if="visible"
+      v-model:position="position">
+      <slot :x="x" :y="y"></slot>
+    </Draggable>
+  </Transition>
 </template>
 <script lang="ts" setup>
 import { usePrefixCls } from '../../less/useDesign';

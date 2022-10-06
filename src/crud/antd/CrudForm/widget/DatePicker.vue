@@ -16,7 +16,7 @@
 </template>
 <script lang="ts" setup>
 import _props from "../itemcomposition/props";
-import { isEmpty } from "howtools";
+import { isEmpty, isArray } from 'howtools';
 import { useChange } from '../itemcomposition/change';
 import { Emitter, EventType } from "mitt";
 import { update } from "..";
@@ -77,24 +77,52 @@ function changeTimeRangePicker(date: any, dateString: [string, string]) {
 
 // 监听事件 - 更新单选数值
 emitter?.on(update.updateAnyDatePicker, ({ dataIndex, value }: any) => {
+  // 修复错误的时间格式
+  const fixValue = () => {
+    const isValid = (val: any) => dayjs(val).isValid()
+    if (isArray(value)) {
+      if (isValid(value[0]) && isValid(value[1])) {
+        return [dayjs(new Date(value[0] as string)), dayjs(new Date(value[1] as string))]
+      } else {
+        if (!(value[0] === "" && value[1] === "")) {
+          console.warn("传入的时间格式似乎不正确，请检查，一般为两个字符串元组")
+        }
+        return [undefined, undefined]
+      }
+    } else {
+      if (isValid(value)) {
+        return dayjs(new Date(value))
+      } else {
+        if (!(value === "")) {
+          console.warn("传入的时间格式似乎不正确，请检查，一般为字符串")
+        }
+        return undefined
+      }
+    }
+  }
+
+  const _fixVal = fixValue()
+
+  // 根据类型，选择时间选择器
   if (dataIndex == props.dataIndex) {
     switch (props.type) {
       case 'date':
-        changeDatePicker(value, value)
+        changeDatePicker(_fixVal, value)
         break;
       case 'time':
-        changeTimePicker(value, value)
+        changeTimePicker(_fixVal, value)
         break;
       case 'date-range':
-        changeRangeDatePicker(value, value)
+        changeRangeDatePicker(_fixVal, value)
         break;
       case 'time-range':
-        changeTimeRangePicker(value, value)
+        changeTimeRangePicker(_fixVal, value)
         break;
       default:
         break;
     }
-    datePicker.value = dayjs(new Date(value))
+
+    datePicker.value = _fixVal
   }
 })
 

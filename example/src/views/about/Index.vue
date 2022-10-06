@@ -2,5 +2,12 @@
   <About />
 </template>
 <script lang="ts" setup>
+import "@/assets/github-markdown-light.css";
 import About from "./about.md"
+
+onMounted(()=>{
+  document.querySelectorAll('a[href^="http"]').forEach(a=>{
+    a.setAttribute('target', '_blank');
+  })
+})
 </script>

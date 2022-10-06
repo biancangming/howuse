@@ -77,7 +77,11 @@ function useUpdate(emitter) {
   }
 
   // 修改 任意时间日期选择器 的值
-  function updateAnyDatePicker(dataIndex: string, value: any[]) {
+  function updateAnyDatePicker(dataIndex: string, value: any[] | any) {
+    if(value === ""){
+      emitter.emit(update.updateAnyDatePicker, { dataIndex, value: null })
+      return
+    }
     emitter.emit(update.updateAnyDatePicker, { dataIndex, value })
   }
 
@@ -189,7 +193,7 @@ export function useAntdCrudForm(opts: CrudFormInterface = {}) {
               updateEmit.updateCheckboxGroupValue(dataIndex, val)
               break;
             case 'rate':
-              updateEmit.updateRadioValue(dataIndex, val)
+              updateEmit.updateRateValue(dataIndex, val)
               break;
             case 'upload':
               updateEmit.updateUploadValue(dataIndex, val)

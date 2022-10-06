@@ -11,18 +11,18 @@ const router = createRouter({
       name: "Layout",
       component: Layout,
       redirect: {
-        name: "axios"
+        name: "about"
       },
       children: [
-        // {
-        //   path: "/",
-        //   name: "about",
-        //   component: About,
-        //   meta: {
-        //     title: "简介",
-        //     menu: true
-        //   }
-        // },
+        {
+          path: "/",
+          name: "about",
+          component: About,
+          meta: {
+            title: "简介",
+            menu: true
+          }
+        },
         {
           path: '/axios',
           name: 'axios',

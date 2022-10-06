@@ -1,9 +1,11 @@
 <template>
-  <teleport :to="props.to" v-if="visible">
-    <div :style="{'background-color': bgColor }" :class="['mask-wrapper', positionClass]" @click="handleMask">
-      <slot></slot>
-    </div>
-  </teleport>
+    <teleport :to="props.to">
+      <Transition name="custom-classes" enter-active-class="animate__animated animate__faster animate__zoomIn" leave-active-class="animate__animated animate__faster animate__zoomOut">
+          <div v-if="visible" :style="{'background-color': bgColor }" :class="['mask-wrapper', positionClass]" @click="handleMask">
+            <slot></slot>
+          </div>
+      </Transition>
+    </teleport>
 </template>
 <script lang="ts" setup>
 import { PropType, TeleportProps } from 'vue';

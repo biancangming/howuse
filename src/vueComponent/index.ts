@@ -1,4 +1,5 @@
 import "../less/howuse.less"
+import "animate.css" // 动画库地址：https://animate.style/
 import Mask from "./mask/Index.vue"
 import ImgPreview from "./imgPreview/Index.vue"
 import { createImgPreview } from "./imgPreview/functional"

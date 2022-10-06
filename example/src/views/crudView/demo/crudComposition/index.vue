@@ -1,11 +1,12 @@
 <template>
-  <AntdCrudForm :columns="columns"  @register="registerSearch"/>
-  <AntdBaseTable :columns="columns" :actions="actions" :dataSource="data.data" :scroll="{x: 1500}" >
+  <AntdCrudForm :columns="columns" @register="registerSearch" />
+  <AntdBaseTable :columns="columns" :actions="actions" :dataSource="data.data" :scroll="{x: 1500}">
     <template #title>
       <a-button type="primary" @click="addInfo">新增</a-button>
     </template>
   </AntdBaseTable>
-  <AntdCrudFormDrawer width="450px" v-model:visible="visible" title="编辑/新增" :columns="columns" @register="register" @submit="submit"/>
+  <AntdCrudFormDrawer width="450px" v-model:visible="visible" title="编辑/新增" :columns="columns" @register="register"
+    @submit="submit" />
 </template>
 <script lang="ts" setup>
 import { AntdBaseTable, AntdCrudForm, useAntdCrudForm, AntdCrudFormDrawer } from "howuse/crud"
@@ -54,7 +55,7 @@ const actions = [
   {
     label: "编辑",
     dataIndex: "edit",
-    onClick({text, record, index, column}) {
+    onClick({ text, record, index, column }) {
       // 键值对 
       updateAnyValue(record)
       visible.value = true
@@ -101,12 +102,18 @@ const { register: registerSearch, updateInputValue: updateInputSearchValue } = u
   }
 )
 
-function addInfo(){
-  updateAnyValue({})
+function addInfo() {
+  updateAnyValue({
+    date: "",
+    description: "",
+    email: "",
+    id: "",
+    username: "",
+  })
   visible.value = true
 }
 
-function submit(obj){
+function submit(obj) {
   message.success(JSON.stringify(obj))
 }
 </script>

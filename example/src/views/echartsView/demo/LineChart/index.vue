@@ -3,10 +3,12 @@
     <p class="flex">
     <h1 style="text-align: center">当前宽度：{{ lineChartWidth }}</h1>
     <b>自适应测试：</b>
-    <button @click="lineChartWidth = `${300}px`">300px宽</button>
-    <button @click="lineChartWidth = `${500}px`">500px宽</button>
-    <button @click="lineChartWidth = `${800}px`">800px宽</button>
-    <button @click="lineChartWidth = `100%`">100%宽</button>
+    <div>
+      <button @click="lineChartWidth = `${300}px`">300px宽</button>
+      <button @click="lineChartWidth = `${500}px`">500px宽</button>
+      <button @click="lineChartWidth = `${800}px`">800px宽</button>
+      <button @click="lineChartWidth = `100%`">100%宽</button>
+    </div>
     </p>
     <div style="height: 300px;" :style="{width: `${lineChartWidth}`}">
       <LineChart :option="option"></LineChart>
@@ -51,8 +53,9 @@ const option: EChartsOption = {
 <style scoped>
 .flex {
   display: flex;
-  width: 500px;
+  width: 600px;
   margin: auto;
   justify-content: space-around;
+  align-items: center;
 }
 </style>

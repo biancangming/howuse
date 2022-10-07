@@ -23,6 +23,17 @@ export default defineConfig({
     cssCodeSplit: false,
     outDir: "dist/vueComponent"
   },
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+        modifyVars: {
+          namespace: "howuse",
+          defaultZIndex: 1000,
+        },
+      }
+    }
+  },
   plugins: [
     vue(),
     cssInjectedByJsPlugin(),

@@ -1,7 +1,7 @@
 <template>
   <JsonPreview :data="data" />
   <a-divider></a-divider>
-  <a-button type="primary" @click="openJson">指令模式打开</a-button>
+  <a-button type="primary" @click="openJson">命令模式打开</a-button>
 </template>
 <script lang="ts" setup>
 import { JsonPreview, createJsonPreview } from 'howuse/vueComponent';
@@ -18,6 +18,3 @@ function openJson() {
   })
 }
 </script>
-<style lang="less" scoped>
-
-</style>

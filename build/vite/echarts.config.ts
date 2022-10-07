@@ -14,7 +14,7 @@ export default defineConfig({
       formats: ['es', "cjs"],
     },
     rollupOptions: {
-      external: ['vue', /^echarts\/.+/],
+      external: ['vue', /^echarts/],
       output:{
         banner: "/** Create By biancangming **/",
       }

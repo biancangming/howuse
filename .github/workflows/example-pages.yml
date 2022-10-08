@@ -20,14 +20,11 @@ jobs:
         run: |  
           npm i 
           npm run example:build
-      - name: publish pages
-        run: |
-          cd example
       - name: push 
         uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: gh-pages
-          build_dir: dist
+          build_dir: example/dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

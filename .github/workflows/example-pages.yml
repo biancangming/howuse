@@ -31,17 +31,18 @@ jobs:
           # mv dist/* temp/
           # cd temp
           git init
-          git remote add origin https://github.com/biancangming/howusedocs.git
+          git remote add origin ${{ secrets.GHTOKEN }}@https://github.com/biancangming/howusedocs.git
           git config --global user.email 942242856@qq.com
           git config --global user.name yigechengzipro
           git add .
           git commit -m "update 更新文档"
-      - name: push 
-        uses: ad-m/github-push-action@master
-        with:
-          force: true
-          branch: "master"
-          repository: https://github.com/biancangming/howusedocs.git
-          github_token: ${{ secrets.GHTOKEN }}
+          git push -f origin master
+      # - name: push 
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     force: true
+      #     branch: "master"
+      #     repository: https://github.com/biancangming/howusedocs.git
+      #     github_token: ${{ secrets.GHTOKEN }}
 
       

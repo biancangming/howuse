@@ -31,7 +31,7 @@ jobs:
           # mv dist/* temp/
           # cd temp
           git init
-          git remote add origin ${{ secrets.GHTOKEN }}@https://github.com/biancangming/howusedocs.git
+          git remote add origin ${{ secrets.GHTOKEN }}@github.com/biancangming/howusedocs.git
           git config --global user.email 942242856@qq.com
           git config --global user.name yigechengzipro
           git add .

@@ -7,6 +7,6 @@
   </CodeView>
 </template>
 <script lang="ts" setup>
-import JsonPreviewDemo from "./jsonPreview/Index.vue"
+import JsonPreviewDemo from "./jsonPreview/index.vue"
 import JsonPreviewCode from "./jsonPreview/Index.md"
 </script>

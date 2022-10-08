@@ -7,6 +7,6 @@
   </CodeView>
 </template>
 <script lang="ts" setup>
-import imgPreviewDemo from "./imgPreview/Index.vue"
+import imgPreviewDemo from "./imgPreview/index.vue"
 import imgPreviewCode from "./imgPreview/Index.md"
 </script>

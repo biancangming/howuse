@@ -10,7 +10,7 @@
   </CodeView>
 </template>
 <script lang="ts" setup>
-import DragDialogDemo from "./dragDialog/Index.vue"
+import DragDialogDemo from "./dragDialog/index.vue"
 import DragDialogCode from "./dragDialog/Index.md"
 </script>
 <style lang="less" scoped>

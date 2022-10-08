@@ -22,7 +22,7 @@ jobs:
           npm run example:build
       - name: publish pages
         run: |
-          # cd example
+          cd example/dist
           # mkdir temp 
           # cd temp
           # git clone https://github.com/biancangming/howusedocs.git
@@ -30,6 +30,8 @@ jobs:
           # pwd
           # mv dist/* temp/
           # cd temp
+          git init
+          git remote add origin https://github.com/biancangming/howusedocs.git
           git config --global user.email 942242856@qq.com
           git config --global user.name yigechengzipro
           git add .

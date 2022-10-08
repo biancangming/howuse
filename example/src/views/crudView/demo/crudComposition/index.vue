@@ -9,10 +9,10 @@
     @submit="submit" />
 </template>
 <script lang="ts" setup>
-import { AntdBaseTable, AntdCrudForm, useAntdCrudForm, AntdCrudFormDrawer } from "howuse/crud"
-import { useDefRequest } from '../useAntdCrudSearch/request';
+import { AntdBaseTable, AntdCrudForm, useAntdCrudForm, AntdCrudFormDrawer } from "howuse/crud/antd"
 import { message } from 'ant-design-vue';
-import { CrudFormOpts } from "types/crud";
+import type { CrudFormOpts } from "howuse/crud/antd";
+import { useDefRequest } from "@/mock/request";
 
 const visible = ref(false)
 

@@ -19,6 +19,10 @@ function pathResolve(dir: string) {
 
 export default defineConfig({
   base: "",
+  define: {
+    __VUE_OPTIONS_API__: false,
+    __VUE_PROD_DEVTOOLS__: false,
+  },
   plugins: [
     vue({
       include: [/\.vue$/, /\.md$/],
@@ -62,7 +66,8 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": pathResolve('src'),
-      "howuse": pathResolve("../src")
+      "howuse": pathResolve("../src"),
+      vue: "vue/dist/vue.esm-browser.prod",
     },
   },
   // 打包配置
@@ -88,7 +93,7 @@ export default defineConfig({
   // 本地运行配置，及反向代理配置
   server: {
     cors: true, // 默认启用并允许任何源
-    open: true, // 在服务器启动时自动在浏览器中打开应用程序
+    // open: true, // 在服务器启动时自动在浏览器中打开应用程序
     proxy: {
       '/api': {
         target: 'http://192.168.0.2:8080',

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 // import Down from "./demo/useBlobDownload.md";
 import { createAxios } from "howuse/axios";
-import type { HowAxiosRequestConfig } from "types/axios";
+import type { HowAxiosRequestConfig } from "howuse/axios";
 import CodeView from "@/components/CodeView.vue";
 import AxiosInterceptorCode from "./demo/AxiosInterceptor/index.md";
 import useBlobDownloadDemo from "./demo/useBlobDownload/index.vue";

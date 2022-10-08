@@ -5,6 +5,7 @@ import { debounce } from 'howtools';
 import { HowAxiosRequestConfig, HowExRequestOptions, HowDownLoadExRequestOptions, HowAxiosInstance } from "./types/axios";
 import { useResponseBlobDownLoad } from './help/download';
 export * from "./help/download"
+export * from "./types/axios.d"
 
 
 export function createAxios(config: HowAxiosInstance) {

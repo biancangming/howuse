@@ -1,6 +1,6 @@
-import "./crud/list"
-import "./crud/select"
-import "./crud/area"
+import "./data/list"
+import "./data/select"
+import "./data/area"
 
 
 export function Success(data: any) {

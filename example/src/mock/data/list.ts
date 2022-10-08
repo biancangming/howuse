@@ -1,5 +1,6 @@
 import Mock from "mockjs"
 import { Success } from ".."
+import { mock } from "../request"
 
 const userList = Mock.mock({
   "data|10": [
@@ -13,9 +14,7 @@ const userList = Mock.mock({
   ]
 })
 
-Mock.mock("/user/list", 'get', (req: any) => {
-  return Success(userList)
-})
+mock.onGet("/user/list").reply(200, Success(userList))
 
 
 const userList2 = Mock.mock({
@@ -30,6 +29,4 @@ const userList2 = Mock.mock({
   ]
 })
 
-Mock.mock("/user/list2", 'get', (req: any) => {
-  return Success(userList2)
-})
+mock.onGet("/user/list2").reply(200, Success(userList2))

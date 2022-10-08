@@ -3,8 +3,8 @@
   <AntdCrudForm :columns="columns" @register="register"/>
 </template>
 <script lang="ts" setup>
-import { useAntdCrudForm, AntdCrudForm } from 'howuse/crud';
-import { CrudFormOpts } from 'types/crud';
+import { useAntdCrudForm, AntdCrudForm } from 'howuse/crud/antd';
+import type { CrudFormOpts } from 'howuse/crud/antd';
 const columns: CrudFormOpts[] = [
   {
     label: "姓名",

@@ -2,7 +2,7 @@ import mitt from "mitt";
 import CrudForm from "./CrudForm.vue"
 import CrudFormModal from "./CrudFormModal.vue"
 import CrudFormDrawer from "./CrudFormDrawer.vue"
-import { CrudFormOpts } from 'types/crud';
+import { CrudFormOpts } from '../types/crud';
 import { uuid } from "howtools";
 
 export const SearchInjectKey = Symbol("_search_bar_inject")

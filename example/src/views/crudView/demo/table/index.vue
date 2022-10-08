@@ -2,8 +2,8 @@
   <AntdBaseTable :columns="columns" :actions="actions" :dataSource="data.data" :scroll="{x: 1500}"/>
 </template>
 <script lang="ts" setup>
-import { AntdBaseTable } from "howuse/crud"
-import { useDefRequest } from '../useAntdCrudSearch/request';
+import { AntdBaseTable } from "howuse/crud/antd"
+import { useDefRequest } from "@/mock/request"
 import { message } from 'ant-design-vue';
 
 const { data } = useDefRequest<{ data: [] }>({ url: "/user/list2" }, { immediate: true })
@@ -58,6 +58,3 @@ const actions = [
   },
 ]
 </script>
-<style lang="less" scoped>
-
-</style>

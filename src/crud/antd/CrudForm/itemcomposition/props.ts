@@ -1,4 +1,4 @@
-import { SearchItemType } from "types/crud";
+import type { SearchItemType } from "../../types/crud";
 import { PropType } from "vue";
 
 export default {

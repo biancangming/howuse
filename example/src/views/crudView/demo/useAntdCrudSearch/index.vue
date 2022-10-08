@@ -4,10 +4,10 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { server } from "./request";
-import {  AntdCrudForm, useAntdCrudForm } from "howuse/crud";
-import { SearchOpts } from "types/crud";
+import { AntdCrudForm, useAntdCrudForm } from "howuse/crud/antd";
+import type { SearchOpts } from "howuse/crud/antd";
 import { message, Upload } from 'ant-design-vue';
+import { server } from "@/mock/request";
 
 const searchColumns: SearchOpts[] = [
   {

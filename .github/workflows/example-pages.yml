@@ -33,7 +33,7 @@ jobs:
           git config --global user.email 942242856@qq.com
           git config --global user.name yigechengzipro
           git add .
-          git commit -m "update 更新文档" - a
+          git commit -m "update 更新文档"
       - name: push 
         uses: ad-m/github-push-action@master
         with:

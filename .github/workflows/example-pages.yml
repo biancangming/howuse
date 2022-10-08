@@ -22,6 +22,14 @@ jobs:
           npm run example:build
       - name: publish pages
         run: |
+          cd example
+          mkdir temp 
+          cd temp
+          git clone https://github.com/biancangming/howusedocs.git
+          cd ..
+          pwd
+          mv dist/* temp/
+          cd temp
           git config --global user.email 942242856@qq.com
           git config --global user.name yigechengzipro
           git add .

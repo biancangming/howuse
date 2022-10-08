@@ -1,0 +1,37 @@
+name: "git pages"
+on: 
+  push:
+    branches:
+      - "dev"
+
+# 作业
+jobs:
+  build-example-dev:
+    runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        node-version: [16.13.0]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "16.13.0"
+      - name: package example page
+        run: |  
+          npm i 
+          npm run example:build
+      - name: publish pages
+        run: |
+          git config --global user.email 942242856@qq.com
+          git config --global user.name yigechengzipro
+          git add .
+          git commit -m "update 更新文档" - a
+      - name: push 
+        uses: ad-m/github-push-action@master
+        with:
+          force: true
+          branch: "master"
+          repository: https://github.com/biancangming/howusedocs.git
+          github_token: ${{ secrets.GHTOKEN }}
+
+      

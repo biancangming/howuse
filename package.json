@@ -1,9 +1,10 @@
 {
   "name": "howuse",
-  "version": "0.0.1-beta.12",
+  "version": "0.0.1-beta.13",
   "description": "a simple Vue Composition utils",
   "main": "dist/index.js",
   "scripts": {
+    "use-nvm": "nvm use 16.13.0",
     "example:run": "cd example && vite",
     "example:build": "cd example && vite build",
     "build": "node ./build/index.js",

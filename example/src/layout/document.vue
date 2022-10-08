@@ -1,24 +1,25 @@
 <template>
-  <a-layout>
-    <a-layout-header style="background: rgba(255,255,255,.7)" class="howuse-layout-sticky">
-      <div :class="prefixCls">
-        <div :class="`${prefixCls}__title`">
-          <span :class="`${prefixCls}__title--logo`" title="一个好用的vue增强库">howuse</span>
-          <span :class="`${prefixCls}__title--desc`">一个好用的vue增强库</span>
-        </div>
-        <div :class="`${prefixCls}__action`">
-          <a-menu v-model:selectedKeys="actionSelectedKeys" mode="horizontal">
-            <a-menu-item @click="$router.push({name: 'about'})" key="about">简介</a-menu-item>
-            <a-menu-item @click="$router.push({name: 'started'})" key="fastStart">快速上手</a-menu-item>
-            <a-menu-item @click="$router.push({name: 'document'})" key="document">文档</a-menu-item>
-          </a-menu>
-          <a href="https://github.com/biancangming/howuse" style="color:#000" class="github" target="_blank">
-            <github-outlined />
-          </a>
-        </div>
-      </div>
-    </a-layout-header>
-    <router-view />
+  <a-layout hasSider>
+    <a-layout-sider style="background: rgba(255,255,255,.7);border-right: 1px solid #f0f0f0;"
+      :style="{ overflow: 'auto', position: 'fixed', left: 0, top: '64px', bottom: 0 }">
+      <a-menu v-model:selectedKeys="selectedKeys" mode="inline">
+        <template v-for="r in menus" :key="r.routerName">
+          <a-menu-item-group>
+            <template #title>{{r.title}}</template>
+            <a-menu-item :key="s.routerName" v-for="s in r.children || []" @click="$router.push({name: s.routerName})">
+              {{s.title}}</a-menu-item>
+          </a-menu-item-group>
+        </template>
+      </a-menu>
+    </a-layout-sider>
+    <a-layout-content :style="{
+      padding: '16px',
+      background: '#fff',
+      width: 'calc(100vw - 232px)',
+      marginLeft: '200px',
+    }">
+      <router-view />
+    </a-layout-content>
   </a-layout>
 </template>
 <script lang="ts" setup>
@@ -27,7 +28,6 @@ import { useSessionStorage } from "@vueuse/core";
 import { ref } from "vue";
 import { usePrefixCls } from '../../../src/less/useDesign';
 import menus from '../router/menu';
-
 
 const selectedKeys = useSessionStorage("_menu_about", ["axios"])
 const actionSelectedKeys = useSessionStorage("_menu_action", ["about"])

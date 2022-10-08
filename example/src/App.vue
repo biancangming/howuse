@@ -15,4 +15,10 @@ dayjs.locale('zh-cn');
 body {
   min-height: 100vh;
 }
+
+.app-container {
+  margin: 12px 16px;
+  padding: 24px;
+  background-color: #FFF;
+}
 </style>

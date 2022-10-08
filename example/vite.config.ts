@@ -9,6 +9,7 @@ import code from '@yankeeinlondon/code-builder'
 import AutoImport from "unplugin-auto-import/vite"
 import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import CustomBlock from "markdown-it-custom-block"
 import topLevelAwait from 'vite-plugin-top-level-await'
 // import svgLoader from 'vite-svg-loader'

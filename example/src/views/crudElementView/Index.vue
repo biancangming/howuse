@@ -1,3 +1,3 @@
 <template>
-  <RouterView/>
+  开发中...
 </template>

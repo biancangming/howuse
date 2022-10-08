@@ -35,8 +35,8 @@ import useAntdCrudSearchCode from "./demo/useAntdCrudSearch/index.md";
 import useAntdCrudSearchDemo from "./demo/useAntdCrudSearch/index.vue";
 import useAntdCrudFormDemo from "./demo/useAntdCrudForm/index.vue";
 import useAntdCrudFormCode from "./demo/useAntdCrudForm/index.md";
-import tableDemo from "./demo/Table/index.vue";
-import tableCode from "./demo/Table/index.md";
+import tableDemo from "./demo/table/index.vue";
+import tableCode from "./demo/table/index.md";
 import crudCompositionDemo from "./demo/crudComposition/index.vue";
 import crudCompositionCode from "./demo/crudComposition/index.md";
 </script>

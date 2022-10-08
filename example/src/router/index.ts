@@ -60,7 +60,7 @@ const router = createRouter({
             {
               path: '/crudElement',
               name: 'crudElement',
-              component: () => import("../views/crudElementView/index.vue"),
+              component: () => import("../views/crudElementView/any.vue"),
             },
             {
               path: '/component',

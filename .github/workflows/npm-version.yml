@@ -9,8 +9,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "16.13.0"
-      - run: npm run build
+      - run: |
+         npm i
+         npm run build
       - name: publish npm 
         uses: JS-DevTools/npm-publish@v1
         with:
+          package_path: dist
           token: ${{ secrets.NPM_TOKEN }}

@@ -18,6 +18,8 @@
 
 ## 注意点
 
+内置组件均以`How`作为开头，在代码当中方便辨认
+
 这个库所以示例涉及UI部分，可能使用了第三方UI库，例如：`ant-design-vue`作为示例，如果使用其它库，复制代码之后，修改对应部分即可。
 
 如有任何问题，可以在这里提问。https://github.com/biancangming/howuse/issues

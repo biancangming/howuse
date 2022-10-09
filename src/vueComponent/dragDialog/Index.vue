@@ -2,18 +2,23 @@
   <Transition name="custom-classes" enter-active-class="animate__animated animate__faster animate__zoomIn" leave-active-class="animate__animated animate__faster animate__zoomOut">
     <Draggable :class="prefixCls" v-slot="{ x, y }" :handle="handle" :prevent-default="true" v-if="visible"
       :position="position">
-      <div :class="`${prefixCls}__move`" ref="handle">
-        <div :class="`${prefixCls}__move--title`">
-          <slot name="header" :x="x" :y="y"></slot>
+      <template v-if="any">
+        <div style="user-select: none;"><slot :x="x" :y="y"></slot></div>
+      </template>
+      <template v-else>
+        <div :class="`${prefixCls}__move`" ref="handle">
+          <div :class="`${prefixCls}__move--title`">
+              <slot name="header" :x="x" :y="y"></slot>
+          </div>
+          <div :class="`${prefixCls}__move--close`" @click="close">X</div>
         </div>
-        <div :class="`${prefixCls}__move--close`" @click="close">X</div>
-      </div>
-      <div :class="`${prefixCls}__content`">
-        <slot></slot>
-      </div>
-      <div :class="`${prefixCls}__footer`" v-if="isShowSlot('footer')">
-        <slot name="footer"></slot>
-      </div>
+        <div :class="`${prefixCls}__content`">
+          <slot></slot>
+        </div>
+        <div :class="`${prefixCls}__footer`" v-if="isShowSlot('footer')">
+          <slot name="footer"></slot>
+        </div>
+      </template>
     </Draggable>
   </Transition>
 </template>
@@ -37,6 +42,10 @@ const props = defineProps({
   position: {
     default: [0, 0],
     type: Array as unknown as PropType<[number, number]>
+  },
+  any: {
+    default: false,
+    type: Boolean
   }
 })
 

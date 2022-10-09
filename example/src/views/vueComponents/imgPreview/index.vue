@@ -1,13 +1,13 @@
 <template>
   <!-- 文件预览 -->
-  <ImgPreview :imageList="imgList" />
+  <how-img-preview :imageList="imgList" />
   <a-divider></a-divider>
   <div>
     <a-button type="primary" @click="openImg()">无图预览</a-button>
   </div>
 </template>
 <script lang="ts" setup>
-import { ImgPreview, createImgPreview } from "howuse/vueComponent"
+import { HowImgPreview, createImgPreview } from "howuse/vueComponent"
 import { ImageProps } from "howuse/vueComponent/imgPreview/typing";
 
 const imgList: ImageProps[] = [

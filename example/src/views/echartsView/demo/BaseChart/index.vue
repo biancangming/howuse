@@ -1,10 +1,10 @@
 <template>
   <div style="height: 300px;">
-    <BaseChart :option="option" :use="use"></BaseChart>
+    <how-base-chart :option="option" :use="use"></how-base-chart>
   </div>
 </template>
 <script lang="ts" setup>
-import { BaseChart } from "howuse/echarts";
+import { HowBaseChart } from "howuse/echarts";
 import { EChartsOption } from 'echarts';
 import { BarChart, LineChart } from "echarts/charts"
 import { ToolboxComponent } from "echarts/components"

@@ -1,11 +1,11 @@
 <template>
   <div style="height: 600px;">
-    <MapChart :option="option" v-if="mapVisible" />
+    <how-map-chart :option="option" v-if="mapVisible" />
   </div>
 </template>
 <script lang="ts" setup>
 import { EChartsOption } from 'echarts';
-import { MapChart, useGeoJsonMap } from 'howuse/echarts';
+import { HowMapChart, useGeoJsonMap } from 'howuse/echarts';
 const mapVisible = ref(false) // 控制地图显示时间，等待地图注册成功再显示，防止无意义报错
 const option: EChartsOption = {
   color: ["red"],

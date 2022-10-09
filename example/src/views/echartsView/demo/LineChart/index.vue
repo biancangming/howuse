@@ -11,13 +11,13 @@
     </div>
     </p>
     <div style="height: 300px;" :style="{width: `${lineChartWidth}`}">
-      <LineChart :option="option"></LineChart>
+      <how-line-chart :option="option"></how-line-chart>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import { ref } from "vue";
-import { LineChart } from "howuse/echarts";
+import { HowLineChart } from "howuse/echarts";
 import { EChartsOption } from 'echarts';
 const lineChartWidth = ref("100%");
 

@@ -1,5 +1,5 @@
 <template>
-  <Mask :visible="visible">
+  <how-mask :visible="visible" :is-bg="false">
     <div :class="prefixCls">
       <div :class="`${prefixCls}__header`" ref="handle">
         <div :class="`${prefixCls}__header--title`">
@@ -14,13 +14,13 @@
         <slot name="footer"></slot>
       </div>
     </div>
-  </Mask>
+  </how-mask>
 </template>
 <script lang="ts" setup>
 import { usePrefixCls } from '../../less/useDesign';
 import { useVModel } from '@vueuse/core'
 import { PropType } from 'vue';
-import { Mask } from '..';
+import { HowMask } from '..';
 
 const slots = useSlots()
 const isShowSlot = (name: string) => !!slots[name];

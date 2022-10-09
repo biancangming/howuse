@@ -1,6 +1,6 @@
 import { useBaseECharts } from "./baseChart"
 import { useGeoJsonMap } from "./composition/uesGeoMap"
-import BarEchart from "./components/BarChart.vue"
+import BarChart from "./components/BarChart.vue"
 import BaseChart from "./components/BaseChart.vue"
 import BoxplotChart from "./components/BoxplotChart.vue"
 import CandlestickChart from "./components/CandlestickChart.vue"
@@ -27,27 +27,27 @@ import TreemapChart from "./components/TreemapChart.vue"
 export {
     useBaseECharts,
     useGeoJsonMap,
-    BarEchart,
-    BaseChart,
-    BoxplotChart,
-    CandlestickChart,
-    CustomChart,
-    EffectScatterChart,
-    FunnelChart,
-    GaugeChart,
-    GraphChart,
-    HeatmapChart,
-    LineChart,
-    LinesChart,
-    MapChart,
-    ParallelChart,
-    PictorialBarChart,
-    PieChart,
-    RadarChart,
-    SankeyChart,
-    ScatterChart,
-    SunburstChart,
-    ThemeRiverChart,
-    TreeChart,
-    TreemapChart,
+    BarChart as HowBarChart,
+    BaseChart as HowBaseChart,
+    BoxplotChart as HowBoxplotChart,
+    CandlestickChart as HowCandlestickChart,
+    CustomChart as HowCustomChart,
+    EffectScatterChart as HowEffectScatterChart,
+    FunnelChart as HowFunnelChart,
+    GaugeChart as HowGaugeChart,
+    GraphChart as HowGraphChart,
+    HeatmapChart as HowHeatmapChart,
+    LineChart as HowLineChart,
+    LinesChart as HowLinesChart,
+    MapChart as HowMapChart,
+    ParallelChart as HowParallelChart,
+    PictorialBarChart as HowPictorialBarChart,
+    PieChart as HowPieChart,
+    RadarChart as HowRadarChart,
+    SankeyChart as HowSankeyChart,
+    ScatterChart as HowScatterChart,
+    SunburstChart as HowSunburstChart,
+    ThemeRiverChart as HowThemeRiverChart,
+    TreeChart as HowTreeChart,
+    TreemapChart as HowTreemapChart,
 }

@@ -1,10 +1,10 @@
 <template>
   <div style="height: 300px;">
-    <PieChart :option="option"></PieChart>
+    <how-pie-chart :option="option"></how-pie-chart>
   </div>
 </template>
 <script lang="ts" setup>
-import { PieChart } from "howuse/echarts";
+import { HowPieChart } from "howuse/echarts";
 import { EChartsOption } from 'echarts';
 
 const option: EChartsOption = {

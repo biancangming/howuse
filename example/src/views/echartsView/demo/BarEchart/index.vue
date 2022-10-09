@@ -1,10 +1,10 @@
 <template>
   <div style="height: 300px;">
-    <BarEchart :option="option"></BarEchart>
+    <how-bar-chart :option="option"></how-bar-chart>
   </div>
 </template>
 <script lang="ts" setup>
-import { BarEchart } from "howuse/echarts";
+import { HowBarChart } from "howuse/echarts";
 import { EChartsOption } from 'echarts';
 
 const option: EChartsOption = {

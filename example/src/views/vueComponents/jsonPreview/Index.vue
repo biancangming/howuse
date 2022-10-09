@@ -1,10 +1,10 @@
 <template>
-  <JsonPreview :data="data" />
+  <how-json-preview :data="data" />
   <a-divider></a-divider>
   <a-button type="primary" @click="openJson">命令模式打开</a-button>
 </template>
 <script lang="ts" setup>
-import { JsonPreview, createJsonPreview } from 'howuse/vueComponent';
+import { HowJsonPreview, createJsonPreview } from 'howuse/vueComponent';
 
 const data = {
   "name": "网站",

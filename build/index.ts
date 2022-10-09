@@ -1,7 +1,7 @@
 import { build } from "vite";
 import path from 'path';
 import pkg from "../package.json"
-import { writeFileSync } from "fs";
+import { writeFileSync, readFileSync } from "fs";
 
 const libs = ["axios", "echarts", "crud", "vueComponent"]
 
@@ -29,8 +29,10 @@ pkg.exports = _exports
 Reflect.deleteProperty(pkg, "scripts")
 
 const destPackageJsonPath = path.resolve(__dirname, "../dist/package.json")
+const destReadmePath = path.resolve(__dirname, "../dist/README.md")
 
 
 setTimeout(() => {
   writeFileSync(destPackageJsonPath, JSON.stringify(pkg, null, '  '))
+  writeFileSync(destReadmePath, readFileSync(path.resolve(__dirname, "../README.md")))
 }, 1500)

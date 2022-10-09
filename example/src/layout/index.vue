@@ -38,7 +38,7 @@ const prefixCls = usePrefixCls("header")
 .howuse-layout-sticky {
   position: sticky;
   top: 0;
-  z-index: 20000;
+  z-index: 100;
   backdrop-filter: saturate(50%) blur(8px);
 }
 

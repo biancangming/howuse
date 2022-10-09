@@ -1,6 +1,6 @@
 {
   "name": "howuse",
-  "version": "0.0.1-beta.14",
+  "version": "0.0.1-beta.15",
   "description": "a simple Vue Composition utils",
   "main": "dist/index.js",
   "scripts": {
@@ -18,7 +18,12 @@
     "url": "git@github.com:biancangming/howuse.git"
   },
   "exports": {},
-  "keywords": ["vue3", "vite" ,"ant-design-vue", "element-plus"],
+  "keywords": [
+    "vue3",
+    "vite",
+    "ant-design-vue",
+    "element-plus"
+  ],
   "author": "biancangming",
   "license": "ISC",
   "devDependencies": {

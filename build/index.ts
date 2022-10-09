@@ -1,7 +1,12 @@
 import { build } from "vite";
 import path from 'path';
 import pkg from "../package.json"
-import { writeFileSync, readFileSync } from "fs";
+import { writeFileSync, readFileSync, existsSync, mkdirSync } from "fs";
+
+// 创建dist 文件夹
+if(!existsSync(path.resolve(__dirname, "../dist"))){
+  mkdirSync(path.resolve(__dirname, "../dist"))
+}
 
 const libs = ["axios", "echarts", "crud", "vueComponent"]
 
@@ -30,9 +35,5 @@ Reflect.deleteProperty(pkg, "scripts")
 
 const destPackageJsonPath = path.resolve(__dirname, "../dist/package.json")
 const destReadmePath = path.resolve(__dirname, "../dist/README.md")
-
-
-setTimeout(() => {
-  writeFileSync(destPackageJsonPath, JSON.stringify(pkg, null, '  '))
-  writeFileSync(destReadmePath, readFileSync(path.resolve(__dirname, "../README.md")))
-}, 1500)
+writeFileSync(destPackageJsonPath, JSON.stringify(pkg, null, '  '))
+writeFileSync(destReadmePath, readFileSync(path.resolve(__dirname, "../README.md")))

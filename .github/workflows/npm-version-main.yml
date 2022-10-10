@@ -2,9 +2,9 @@ name: npm publish
 on: 
   push:
     branches:
-      - "dev"
+      - "main"
     paths:
-        - "package.json"
+      - "package.json"
 
 jobs:
   publish:
@@ -20,6 +20,6 @@ jobs:
       - name: publish npm 
         uses: JS-DevTools/npm-publish@v1
         with:
-          tag: beta
+          tag: latest
           package_path: dist
           token: ${{ secrets.NPM_TOKEN }}

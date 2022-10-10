@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - "dev"
+    paths:
+      - "example/**"
 
 # 作业
 jobs:

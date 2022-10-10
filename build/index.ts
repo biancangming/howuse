@@ -8,7 +8,7 @@ if(!existsSync(path.resolve(__dirname, "../dist"))){
   mkdirSync(path.resolve(__dirname, "../dist"))
 }
 
-const libs = ["axios", "echarts", "crud", "vueComponent"]
+const libs = ["axios", "echarts", "crud", "vueComponent", "pdf"]
 
 const _exports = {}
 
@@ -26,6 +26,7 @@ for (const lib of libs) {
     await build({ configFile: path.join(__dirname, `./vite/echarts.config.ts`) })
     await build({ configFile: path.join(__dirname, `./vite/crud.config.ts`) })
     await build({ configFile: path.join(__dirname, `./vite/vueComponent.config.ts`) })
+    await build({ configFile: path.join(__dirname, `./vite/pdf.config.ts`) })
   }
 )()
 // --------------------------------------------------

@@ -15,6 +15,7 @@
 | howuse/axios  | "axios": "^0.25.0" |
 | howuse/echarts  | "echarts": "^5.3.0" |
 | howuse/crud/antd  | "ant-design-vue": "^3.2.12" |
+| howuse/pdf  | "jspdf": "^2.5.1","html2canvas": "^1.4.1" |
 
 ## 注意点
 

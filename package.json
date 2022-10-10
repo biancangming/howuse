@@ -45,6 +45,8 @@
     "esbuild-register": "^3.3.3",
     "happy-dom": "^6.0.4",
     "highlight.js": "^11.6.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "less": "^4.1.3",
     "markdown-it-custom-block": "^0.1.2",
     "mockjs": "^1.1.0",
@@ -73,7 +75,7 @@
     }
   },
   "dependencies": {
-    "howtools": "^0.2.2-beta.2",
+    "howtools": "^0.2.2-beta.4",
     "mitt": "^3.0.0",
     "vite-plugin-dts": "^1.6.4"
   }

@@ -40,7 +40,6 @@ const router = createRouter({
               component: AxiosView,
               meta: {
                 title: "axios",
-                menu: true
               }
             },
             {
@@ -48,8 +47,14 @@ const router = createRouter({
               name: 'chart',
               component: () => import("../views/echartsView/index.vue"),
               meta: {
-                title: "echarts",
-                menu: true
+                title: "echarts",          }
+            },
+            {
+              path: '/jsPDF',
+              name: 'jsPDF',
+              component: () => import("../views/pdfjsView/index.vue"),
+              meta: {
+                title: "jsPDF",
               }
             },
             {

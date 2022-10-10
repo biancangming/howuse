@@ -11,11 +11,12 @@
 
 1. axios vue3 响应式增强，支持响应中断、自响应、默认节流 （完成）
 2. echarts vue3 组件，基础composition-api （完成）
-3. 基于ant-design-vue 的crud （完成）
-4. 基于element-plus 的crud （0%）
-5. 额外vue组件，（常用的UI组件，但主流UI框架不具备的组件），动画库依赖：https://animate.style/
+3. pdf 插件，方便将网页元素下载为图片和 pdf（99%）
+4. 基于ant-design-vue 的crud （完成）
+5. 基于element-plus 的crud （0%）
+6. 额外vue组件，（常用的UI组件，但主流UI框架不具备的组件），动画库依赖：https://animate.style/
    - 蒙版 （完成）
    - 图片预览，命令模式、组件模式 （完成）
    - json 数据预览 (完成)
    - 可拖拽弹窗、且可以操作弹窗底部数据（完成）
-6. 基于高德地图的常用操作封装（0%）
+7. 基于高德地图的常用操作封装（0%）

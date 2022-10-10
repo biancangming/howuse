@@ -5,7 +5,7 @@
 </template>
 <script lang="ts" setup>
 import "@/assets/github-markdown-light.css";
-import About from "./started.md"
+import About from "../../../../README.md"
 
 onMounted(() => {
   document.querySelectorAll('a[href^="http"]').forEach(a => {

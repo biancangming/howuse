@@ -50,23 +50,31 @@ const option: EChartsOption = {
         color: "#FFF"
       },
       data: [
-        { name: '韩城市', value: 4822023 },
-        { name: '白水县', value: 38000000 },
-        { name: '澄城县', value: 6553255 },
-        { name: '蒲城县', value: 2949131 },
-        { name: '合阳县', value: 299131 },
-        { name: '大荔县', value: 2949131 },
-        { name: '富平县', value: 30000000 },
-        { name: '临渭区', value: 25000000 },
-        { name: '华州区', value: 294913 },
-        { name: '华阴市', value: 5500000 },
-        { name: '潼关县', value: 1949131 },
+        // 这里需要注意的是，一些提供商的地区命名存在区别，比如 白水县 称作 白水、韩城市 称作 韩城
+        { name: '韩城', value: 4822023 },
+        { name: '白水', value: 38000000 },
+        { name: '澄城', value: 6553255 },
+        { name: '蒲城', value: 2949131 },
+        { name: '合阳', value: 299131 },
+        { name: '大荔', value: 2949131 },
+        { name: '富平', value: 30000000 },
+        { name: '临渭', value: 25000000 },
+        { name: '华州', value: 294913 },
+        { name: '华阴', value: 5500000 },
+        { name: '潼关', value: 1949131 },
       ]
     }
   ]
 };
 
-useGeoJsonMap({ code: "610500", name: "weinan" }).then(() => {
+/**
+ *  type "default" | "custom" | "datav" | "cnGeoJson"
+ *  default 是自建服务的地图，可能不准确，更新不及时
+ *  custom 传统方式，需要额外输入一个 data 传入geojson数据
+ *  datav  http://datav.aliyun.com/portal/school/atlas/area_selector 服务似乎下架了2022/10/11 官网一直提示服务升级中
+ *  cnGeoJson geojson.cn 数据
+ */
+useGeoJsonMap({ code: "610500", name: "weinan", type: "cnGeoJson" }).then(() => {
   mapVisible.value = true
 }) // name 是必传条件
 </script>

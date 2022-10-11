@@ -43,7 +43,11 @@
     </Suspense>
     <template #desc>
       适合组合图，例如柱状图和折线图组合使用，本示例还是用了toolbox
-      <p>传入的code值参考  <b>https://gitee.com/bsxbl/geojson/raw/master/code.json</b></p>
+      <p>传入的code值参考  <b>https://gitee.com/bsxbl/geojson/raw/master/code.json 或者 https://www.mca.gov.cn/article/sj/xzqh/2020/202006/202008310601.shtml</b></p>
+      <p>本插件使用100000，表示国内地图</p>
+      <p>下载各大洲geojson：https://geojson-maps.ash.ms/</p>
+      <p>国内geojson：https://geojson.cn/</p>
+      <p>边界生成器： http://datav.aliyun.com/portal/school/atlas/area_generator#3.86/102.834000/34.951000</p>
     </template>
     <template #code>
       <MapChartCode />

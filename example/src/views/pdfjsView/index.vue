@@ -8,9 +8,17 @@
       <UseHtmlAsImageCode />
     </template>
   </CodeView>
+  <CodeView title="pdf预览示例">
+    <PreviewPdfDemo />
+    <template #code>
+      <PreviewPdfCode />
+    </template>
+  </CodeView>
 </template>
 <script lang="ts" setup>
 import UseHtmlAsImageDemo from "./demo/useHtmlAsImage/index.vue";
 import UseHtmlAsImageCode from "./demo/useHtmlAsImage/index.md";
+import PreviewPdfDemo from "./demo/previewPdf/index.vue";
+import PreviewPdfCode from "./demo/previewPdf/index.md";
 </script>
 <style lang="less" scoped></style>

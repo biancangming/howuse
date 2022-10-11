@@ -1,0 +1,1 @@
+@[js](./src/views/pdfjsView/demo/previewPdf/index.vue)

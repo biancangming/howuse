@@ -1,43 +1,15 @@
 import axios from "axios"
-import type { AxiosError, AxiosRequestConfig, AxiosResponse, CancelTokenSource } from "axios"
+import type { AxiosError, AxiosResponse, CancelTokenSource } from "axios"
 import { ref, shallowRef, computed, unref, watchEffect } from 'vue';
-import { debounce, isNumber } from 'howtools';
-import { HowAxiosRequestConfig, HowAxiosOptions, HowExRequestOptions, HowDownLoadExRequestOptions } from "types/axios";
+import { debounce } from 'howtools';
+import { HowAxiosRequestConfig, HowExRequestOptions, HowDownLoadExRequestOptions, HowAxiosInstance } from "./types/axios";
 import { useResponseBlobDownLoad } from './help/download';
 export * from "./help/download"
+export * from "./types/axios.d"
 
 
-export function createAxios(options: HowAxiosOptions) {
-    const { instanceConfig: config, requestInterceptor, responseInterceptor, errResponseInterceptor } = options
-
-    const server = axios.create({
-        ...config,
-        baseURL: config.baseURL,
-    });
-
-    // 请求拦截器
-    server.interceptors.request.use((config) => {
-        const c = config as HowAxiosRequestConfig
-        for (const key in c.path) {
-            config.url = config.url?.replace(`{${key}}`, c.path[key])
-        }
-        delete c.path
-        if (!requestInterceptor) return c
-        return requestInterceptor(c as AxiosRequestConfig)
-    })
-
-    // 响应拦截器
-    server.interceptors.response.use(
-        (response) => {
-            // 设置不允许修改原始data
-            responseInterceptor && responseInterceptor(response)
-            return response
-        },
-        (err: any) => {
-            // 失败拦截处理
-            errResponseInterceptor && errResponseInterceptor(err)
-            // return err
-        })
+export function createAxios(config: HowAxiosInstance) {
+    const server = axios.create(config);
 
     // Axios hook
     /**
@@ -47,8 +19,8 @@ export function createAxios(options: HowAxiosOptions) {
      */
     function useAxiosRequest<T>(config: HowAxiosRequestConfig, options?: HowExRequestOptions) {
         const { defaultVal = {} } = options || {}
-        const isDebounce = isNumber(options?.delay) // 传入防抖函数的值，则认为开启防抖
-        const delay = options?.delay ?? 1 // 防抖默认时间设置为1 
+        const isDebounce = options?.isDebounce === undefined || options.isDebounce// 传入防抖函数的值，则认为开启防抖
+        const delay = options?.delay ?? 500 // 防抖默认时间设置为1 
 
         const isLoading = shallowRef(false)
         const isFinished = shallowRef(false)
@@ -79,7 +51,7 @@ export function createAxios(options: HowAxiosOptions) {
         // 不是节流的方式
         const preRequest = ({ params: p, data: d, path: pv }: HowAxiosRequestConfig) => {
             const c = { ...config, params: p, data: d, path: pv }
-            server.request({ ...c, cancelToken: cancelToken.token })
+            return server.request({ ...c, cancelToken: cancelToken.token })
                 .then(r => {
                     response.value = r
                     data.value = r.data
@@ -92,21 +64,20 @@ export function createAxios(options: HowAxiosOptions) {
                 })
         }
 
-        const request = debounce(preRequest, delay)
+        // 防抖请求
+        const request = (config: HowAxiosRequestConfig): Promise<AxiosResponse> => {
+            return new Promise((resolve,reject)=>{
+                const _debounce = debounce<Promise<AxiosResponse>>(preRequest, delay, (response)=>{
+                    response.then(resolve)
+                    response.catch(reject)
+                })
+                _debounce(config)
+            })
+        }
 
         const execute = (config: Pick<HowAxiosRequestConfig, 'params' | 'data' | 'path'> = { params: {}, data: {}, path: {} }) => {
-            loading(true)
-
-            isDebounce ? request(config) : preRequest(config)
-
-            return new Promise(resolve => {
-                const resultInterval = setInterval(() => {
-                    if (isFinished.value) {
-                        clearInterval(resultInterval)
-                        resolve(data)
-                    }
-                }, 100)
-            })
+           loading(true)
+           return isDebounce ? request(config) : preRequest(config)
         }
 
         // 立即执行

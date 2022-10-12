@@ -1,55 +1,53 @@
-import * as echarts from 'echarts';
+import { useBaseECharts } from "./baseChart"
+import { useGeoJsonMap } from "./composition/uesGeoMap"
+import BarChart from "./components/BarChart.vue"
+import BaseChart from "./components/BaseChart.vue"
+import BoxplotChart from "./components/BoxplotChart.vue"
+import CandlestickChart from "./components/CandlestickChart.vue"
+import CustomChart from "./components/CustomChart.vue"
+import EffectScatterChart from "./components/EffectScatterChart.vue"
+import FunnelChart from "./components/FunnelChart.vue"
+import GaugeChart from "./components/GaugeChart.vue"
+import GraphChart from "./components/GraphChart.vue"
+import HeatmapChart from "./components/HeatmapChart.vue"
+import LineChart from "./components/LineChart.vue"
+import LinesChart from "./components/LinesChart.vue"
+import MapChart from "./components/MapChart.vue"
+import ParallelChart from "./components/ParallelChart.vue"
+import PictorialBarChart from "./components/PictorialBarChart.vue"
+import PieChart from "./components/PieChart.vue"
+import RadarChart from "./components/RadarChart.vue"
+import SankeyChart from "./components/SankeyChart.vue"
+import ScatterChart from "./components/ScatterChart.vue"
+import SunburstChart from "./components/SunburstChart.vue"
+import ThemeRiverChart from "./components/ThemeRiverChart.vue"
+import TreeChart from "./components/TreeChart.vue"
+import TreemapChart from "./components/TreemapChart.vue"
 
-import type { ECharts, EChartsOption } from "echarts"
-import { onMounted, nextTick, Ref, onUnmounted } from 'vue';
-import { addResizeListener, removeResizeListener } from "howtools"
-
-export default function useECharts(el: Ref ,
-    theme: 'light' | 'dark' | 'default' = 'light') {
-
-    //echarts图实例
-    let echartInstance: ECharts | null = null;
-
-    //设置默认样式数据
-    const defaultOption: EChartsOption = {
-        backgroundColor: theme == 'dark' ? 'rgba(0,0,0,0)' : 'rgba(255,555,255)'
-    }
-
-    function addDefaultOption(option: EChartsOption) {
-        Object.assign(defaultOption, option)
-    }
-
-
-    async function setOption(option: EChartsOption) {
-        if (!el.value) {
-            await nextTick();
-            echartInstance = echarts.init(el.value, theme);
-        }
-        if (!echartInstance) throw new Error("echarts 实例没有创建成功");
-
-        echartInstance?.setOption(Object.assign(defaultOption, option), true)
-    }
-
-
-    function resize() {
-        echartInstance?.resize()
-    }
-
-    //初始化echarts图
-    onMounted(() => {
-        if (!el.value) return
-        echartInstance = echarts.init(el.value, theme);
-        addResizeListener(el.value, resize)
-    })
-
-    onUnmounted(() => {
-        removeResizeListener(el.value, resize)
-    })
-
-    return {
-        addDefaultOption,
-        setOption,
-        resize,
-        echartInstance
-    }
+export {
+    useBaseECharts,
+    useGeoJsonMap,
+    BarChart as HowBarChart,
+    BaseChart as HowBaseChart,
+    BoxplotChart as HowBoxplotChart,
+    CandlestickChart as HowCandlestickChart,
+    CustomChart as HowCustomChart,
+    EffectScatterChart as HowEffectScatterChart,
+    FunnelChart as HowFunnelChart,
+    GaugeChart as HowGaugeChart,
+    GraphChart as HowGraphChart,
+    HeatmapChart as HowHeatmapChart,
+    LineChart as HowLineChart,
+    LinesChart as HowLinesChart,
+    MapChart as HowMapChart,
+    ParallelChart as HowParallelChart,
+    PictorialBarChart as HowPictorialBarChart,
+    PieChart as HowPieChart,
+    RadarChart as HowRadarChart,
+    SankeyChart as HowSankeyChart,
+    ScatterChart as HowScatterChart,
+    SunburstChart as HowSunburstChart,
+    ThemeRiverChart as HowThemeRiverChart,
+    TreeChart as HowTreeChart,
+    TreemapChart as HowTreemapChart,
 }

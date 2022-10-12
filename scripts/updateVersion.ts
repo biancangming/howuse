@@ -5,7 +5,6 @@
 import { readFileSync, writeFileSync } from "fs"
 import path from 'path';
 import consola from 'consola';
-import { createExport, paths } from "./exportsJson";
 
 const input = process.argv
 consola.warn(input)
@@ -65,7 +64,6 @@ function release(pkg) {
     // 读取导出文件
     const releasePkg = { ...pkg }
     const exportsJ = {}
-    for (const path of paths) Object.assign(exportsJ, createExport(path))
     releasePkg.exports = exportsJ
     releasePkg.scripts = {}
 

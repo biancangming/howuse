@@ -8,8 +8,12 @@ on:
 
 jobs:
   publish:
+    if: github.
     runs-on: ubuntu-latest
     steps:
+      - name: check version is beta
+        run: node scripts/check.js beta
+      - id: publish
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -23,3 +27,4 @@ jobs:
           tag: beta
           package_path: dist
           token: ${{ secrets.NPM_TOKEN }}
+      - if: steps.publish.outputs.version != 'none'

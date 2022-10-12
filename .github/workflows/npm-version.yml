@@ -11,14 +11,13 @@ jobs:
     if: github.
     runs-on: ubuntu-latest
     steps:
-      - name: check version is beta
-        run: node scripts/check.js beta
-      - id: publish
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: "16.13.0"
+      - name: check version is beta and package 
       - run: |
+         node scripts/check.js beta
          npm i
          npm run build
       - name: publish npm 
@@ -27,4 +26,3 @@ jobs:
           tag: beta
           package_path: dist
           token: ${{ secrets.NPM_TOKEN }}
-      - if: steps.publish.outputs.version != 'none'

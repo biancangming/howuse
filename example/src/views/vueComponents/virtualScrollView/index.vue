@@ -9,5 +9,5 @@
 </template>
 <script lang="ts" setup>
 import virtualScrollDemo from "./demo/index.vue";
-import virtualScrollCode from "./demo/Index.md";
+import virtualScrollCode from "./demo/index.md";
 </script>

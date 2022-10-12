@@ -1,6 +1,6 @@
 {
   "name": "howuse",
-  "version": "0.0.1-beta.17",
+  "version": "0.0.1-beta.18",
   "description": "a simple Vue Composition utils",
   "main": "dist/index.js",
   "scripts": {

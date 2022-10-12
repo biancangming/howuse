@@ -4,6 +4,16 @@
   <p>依赖插件 <code>jspdf</code> <code>html2canvas</code></p>
   <CodeView title="pdf下载示例">
     <UseHtmlAsImageDemo />
+    <template #desc>
+      如果不需要打印范围内存在不需要打印的内容，添加如下css即可
+      <pre>
+        @media print {
+        .no-print {
+          display: none;
+        }
+      }
+      </pre>
+    </template>
     <template #code>
       <UseHtmlAsImageCode />
     </template>

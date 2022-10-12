@@ -6,11 +6,13 @@ import { createImgPreview } from "./imgPreview/functional"
 import HowDragDialog from "./dragDialog/Index.vue"
 import HowJsonPreview from './jsonPreview/JsonPreview.vue';
 import { createJsonPreview } from './jsonPreview/JsonPreviewDialog';
+import HowVirtualScroll from './virtualScroll/Index.vue';
 export {
   HowMask,
   HowImgPreview,
   createImgPreview,
   HowDragDialog, // 可拖拽弹窗
   HowJsonPreview, // 组件
-  createJsonPreview // 指令模式
+  createJsonPreview, // 指令模式
+  HowVirtualScroll, // 虚拟滚动
 }

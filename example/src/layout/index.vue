@@ -3,8 +3,8 @@
     <a-layout-header style="background: rgba(255,255,255,.7)" class="howuse-layout-sticky">
       <div :class="prefixCls">
         <div :class="`${prefixCls}__title`">
-          <span :class="`${prefixCls}__title--logo`" title="一个好用的vue增强库">howuse</span>
-          <span :class="`${prefixCls}__title--desc`">一个好用的vue增强库</span>
+          <span :class="`${prefixCls}__title--logo`" title="一个好用的vue3增强库">howuse</span>
+          <span :class="`${prefixCls}__title--desc`">一个好用的vue3增强库</span>
         </div>
         <div :class="`${prefixCls}__action`">
           <a-menu v-model:selectedKeys="actionSelectedKeys" mode="horizontal">
@@ -22,14 +22,10 @@
   </a-layout>
 </template>
 <script lang="ts" setup>
-import { MenuUnfoldOutlined, MenuFoldOutlined, GithubOutlined } from "@ant-design/icons-vue";
+import { GithubOutlined } from "@ant-design/icons-vue";
 import { useSessionStorage } from "@vueuse/core";
-import { ref } from "vue";
 import { usePrefixCls } from '../../../src/less/useDesign';
-import menus from '../router/menu';
 
-
-const selectedKeys = useSessionStorage("_menu_about", ["axios"])
 const actionSelectedKeys = useSessionStorage("_menu_action", ["about"])
 
 const prefixCls = usePrefixCls("header")

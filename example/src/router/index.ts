@@ -94,7 +94,12 @@ const router = createRouter({
                   path: "mask",
                   name: "componentMask",
                   component: () => import("../views/vueComponents/Mask.vue"),
-                }
+                },
+                {
+                  path: "virtualScroll",
+                  name: "componentVirtualScroll",
+                  component: () => import("../views/vueComponents/virtualScrollView/index.vue"),
+                },
               ]
             },
           ]

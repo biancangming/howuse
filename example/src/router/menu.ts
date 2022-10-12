@@ -57,6 +57,10 @@ const menus: Menu[] = [
         title: "图片预览",
         routerName: "componentImgPreview"
       },
+      {
+        title: "虚拟滚动",
+        routerName: "componentVirtualScroll"
+      },
     ]
   },
 ]

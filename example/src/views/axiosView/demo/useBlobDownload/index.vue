@@ -4,7 +4,7 @@
 <script lang="ts" setup>
 import { createAxios } from "howuse/axios";
 const { useBlobDownload } = createAxios({
-  baseURL: "http://www.httpbin.org",
+  baseURL: "//www.httpbin.org",
 });
 
 const { execute: downloadPng } = useBlobDownload(

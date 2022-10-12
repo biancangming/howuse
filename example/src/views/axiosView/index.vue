@@ -10,7 +10,7 @@ import useAxiosRequestDemo from "./demo/useAxiosRequest/index.vue";
 import useAxiosRequestCode from "./demo/useAxiosRequest/index.md";
 
 const { useAxiosRequest, useBlobDownload } = createAxios({
-  baseURL: "http://www.httpbin.org",
+  baseURL: "//www.httpbin.org",
 });
 
 //测试基本数据请求

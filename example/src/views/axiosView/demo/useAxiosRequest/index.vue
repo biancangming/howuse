@@ -7,7 +7,7 @@ import { message } from "ant-design-vue";
 import { createAxios } from "howuse/axios";
 
 const { useAxiosRequest } = createAxios({
-  baseURL: "http://www.httpbin.org",
+  baseURL: "//www.httpbin.org",
 });
 
 const { data, response, loading, finished, execute, edata } = useAxiosRequest<any>(

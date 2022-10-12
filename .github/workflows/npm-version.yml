@@ -8,7 +8,6 @@ on:
 
 jobs:
   publish:
-    if: github.
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

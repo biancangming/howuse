@@ -1,4 +1,4 @@
-name: npm publish
+name: npm publish beta
 on: 
   push:
     branches:
@@ -23,5 +23,5 @@ jobs:
         uses: JS-DevTools/npm-publish@v1
         with:
           tag: beta
-          package_path: dist
+          package: dist/package.json
           token: ${{ secrets.NPM_TOKEN }}

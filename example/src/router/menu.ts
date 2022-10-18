@@ -58,6 +58,10 @@ const menus: Menu[] = [
         routerName: "componentImgPreview"
       },
       {
+        title: "加水印",
+        routerName: "componentWatermark"
+      },
+      {
         title: "虚拟滚动",
         routerName: "componentVirtualScroll"
       },

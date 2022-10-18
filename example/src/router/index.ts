@@ -100,6 +100,11 @@ const router = createRouter({
                   name: "componentVirtualScroll",
                   component: () => import("../views/vueComponents/virtualScrollView/index.vue"),
                 },
+                {
+                  path: "watermark",
+                  name: "componentWatermark",
+                  component: () => import("../views/vueComponents/watermark/index.vue"),
+                },
               ]
             },
           ]

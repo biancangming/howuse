@@ -7,6 +7,7 @@ import HowDragDialog from "./dragDialog/Index.vue"
 import HowJsonPreview from './jsonPreview/JsonPreview.vue';
 import { createJsonPreview } from './jsonPreview/JsonPreviewDialog';
 import HowVirtualScroll from './virtualScroll/Index.vue';
+import HowWatermark from './watermark/Index.vue';
 export {
   HowMask,
   HowImgPreview,
@@ -15,4 +16,5 @@ export {
   HowJsonPreview, // 组件
   createJsonPreview, // 指令模式
   HowVirtualScroll, // 虚拟滚动
+  HowWatermark, // 水印
 }

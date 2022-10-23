@@ -1,6 +1,6 @@
 {
   "name": "howuse",
-  "version": "0.0.4-beta.2",
+  "version": "0.0.4-beta.3",
   "description": "a simple Vue Composition utils",
   "main": "dist/index.js",
   "scripts": {
@@ -56,6 +56,7 @@
     "unplugin-vue-components": "^0.22.4",
     "vite": "^3.1.6",
     "vite-plugin-css-injected-by-js": "^2.1.0",
+    "vite-plugin-dts": "^1.6.6",
     "vite-plugin-md": "^0.20.4",
     "vite-plugin-static-copy": "^0.9.0",
     "vite-plugin-top-level-await": "^1.1.1",
@@ -74,7 +75,6 @@
   },
   "dependencies": {
     "howtools": "^0.2.2-beta.4",
-    "mitt": "^3.0.0",
-    "vite-plugin-dts": "^1.6.4"
+    "mitt": "^3.0.0"
   }
 }

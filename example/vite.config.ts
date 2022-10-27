@@ -82,7 +82,8 @@ export default defineConfig({
     assetsDir: 'static', // 指定生成静态资源的存放路径
     rollupOptions: {
       external: ["prismjs"]
-    }
+    },
+    sourcemap: true
   },
   css: {
     preprocessorOptions: {

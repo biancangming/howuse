@@ -81,6 +81,11 @@ const router = createRouter({
                   component: () => import("../views/vueComponents/Drag.vue"),
                 },
                 {
+                  path: "dragDrop",
+                  name: "componentDragDrop",
+                  component: () => import("../views/vueComponents/dragDrop/index.vue"),
+                },
+                {
                   path: "imgPreview",
                   name: "componentImgPreview",
                   component: () => import("../views/vueComponents/Img.vue"),

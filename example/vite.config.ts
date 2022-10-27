@@ -40,12 +40,16 @@ export default defineConfig({
         md.use(CustomBlock, {
           code(url) {
             const file = fs.readFileSync(url).toString()
-            const code = Prism.highlight(file, Prism.languages.html, "html").trim();
+            const code = Prism.highlight(file, Prism.languages.html, "html").trim().
+              replaceAll("{{", "&#123&#123").
+              replaceAll("}}", "&#125&#125")
             return `<pre class="language-vue"><code class="language-vue">${code}</code></pre>`
           },
           js(url) {
             const file = fs.readFileSync(url).toString()
-            const code = Prism.highlight(file, Prism.languages.js, "js").trim();
+            const code = Prism.highlight(file, Prism.languages.js, "js").trim().
+              replaceAll("{{", "&#123&#123").
+              replaceAll("}}", "&#125&#125")
             return `<pre class="language-js"><code class="language-js">${code}</code></pre>`
           }
         })

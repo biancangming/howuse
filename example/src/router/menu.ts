@@ -46,6 +46,10 @@ const menus: Menu[] = [
         routerName: "componentDragDialog"
       },
       {
+        title: "拖放组件",
+        routerName: "componentDragDrop"
+      },
+      {
         title: "蒙版",
         routerName: "componentMask"
       },

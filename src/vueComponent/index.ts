@@ -8,7 +8,7 @@ import HowJsonPreview from './jsonPreview/JsonPreview.vue';
 import { createJsonPreview } from './jsonPreview/JsonPreviewDialog';
 import HowVirtualScroll from './virtualScroll/Index.vue';
 import HowWatermark from './watermark/Index.vue';
-import { drapDrop as HowDragDrop } from './dragDrop'; // 拖放
+import { drapDrop as HowDragDrop } from './dragDrop'; // 托拽
 export {
   HowMask,
   HowImgPreview,
@@ -18,5 +18,5 @@ export {
   createJsonPreview, // 指令模式
   HowVirtualScroll, // 虚拟滚动
   HowWatermark, // 水印
-  HowDragDrop, // 拖放功能
+  HowDragDrop, // 托拽功能
 }

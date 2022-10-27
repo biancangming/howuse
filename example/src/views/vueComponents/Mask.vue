@@ -1,5 +1,5 @@
 <template>
-  <CodeView title="蒙版">
+  <CodeView title="蒙版，打开后可按空白区域关闭">
     <MaskDemo />
     <template #code>
       <MaskCode />

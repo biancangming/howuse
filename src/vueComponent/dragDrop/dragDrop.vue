@@ -6,7 +6,7 @@
   </span>
 </template>
 <script lang="ts" setup>
-import { usePrefixCls } from 'howuse/less/useDesign';
+import { usePrefixCls } from '../../less/useDesign';
 import { useTransferContext } from './context';
 import { PropType } from 'vue';
 const props = defineProps({

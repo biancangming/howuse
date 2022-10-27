@@ -23,7 +23,7 @@
         "src/*"
       ],
     },
-    "types": ["vite/client", "node"],
+    "types": ["vite/client", "node", ""],
     /* Specify a set of entries that re-map imports to additional lookup locations. */
     /* Specify a file that bundles all outputs into one JavaScript file. If `declaration` is true, also designates a file that bundles all .d.ts output. */
     "outDir": "./", /* Specify an output folder for all emitted files. */
@@ -40,7 +40,8 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "example/**/*",
-    "example/**/*.vue"
+    "example/**/*.vue",
+    "example/**/*.md",
   ],
   "exclude": [
     "node_modules"

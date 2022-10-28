@@ -2,7 +2,7 @@
   <div class="drag-wrapper">
     <div class="data-wrapper">
       <!-- how-drag-drop 默认宽高都是继承父元素100%，
-        托拽会将容器内部元素拖走，建议只有一个根元素，否则会有点问题 
+        拖放会将容器内部元素拖走，建议只有一个根元素，否则会有点问题 
       -->
       <how-drag-drop>
         <div class="drag">HOWUSE</div>

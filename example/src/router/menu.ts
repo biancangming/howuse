@@ -53,10 +53,10 @@ const menus: Menu[] = [
         title: "蒙版",
         routerName: "componentMask"
       },
-      {
-        title: "json预览",
-        routerName: "componentJsonPreview"
-      },
+      // {
+      //   title: "json预览",
+      //   routerName: "componentJsonPreview"
+      // },
       {
         title: "图片预览",
         routerName: "componentImgPreview"

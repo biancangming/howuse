@@ -90,11 +90,11 @@ const router = createRouter({
                   name: "componentImgPreview",
                   component: () => import("../views/vueComponents/Img.vue"),
                 },
-                {
-                  path: "jsonPreview",
-                  name: "componentJsonPreview",
-                  component: () => import("../views/vueComponents/Json.vue"),
-                },
+                // {
+                //   path: "jsonPreview",
+                //   name: "componentJsonPreview",
+                //   component: () => import("../views/vueComponents/Json.vue"),
+                // },
                 {
                   path: "mask",
                   name: "componentMask",

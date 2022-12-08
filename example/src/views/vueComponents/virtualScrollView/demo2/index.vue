@@ -5,7 +5,7 @@
         <component :is="template"></component>
       </template>
       <template #default="{ item }">
-        <component :is="templateContent(item)"></component>
+        <component :is="templateContent(item)" :key="item"></component>
       </template>
     </how-virtual-scroll>
   </div>

@@ -28,6 +28,7 @@ export const update = {
   updateSelectDropdownValue: Symbol("updateSelectDropdownValue"),
   updateSelectTreeValue: Symbol("updateSelectTreeValue"),
   updateSelectTreeDropdownValue: Symbol("updateSelectTreeDropdownValue"),
+  updateSlotValue: Symbol("updateSlotValue"),
 }
 
 function useUpdate(emitter) {
@@ -117,6 +118,11 @@ function useUpdate(emitter) {
     updateSelectTreeDropdownValue(dataIndex, data)
   }
 
+  // 修改 slot 插槽内的数据
+  function updateSlotValue(dataIndex: string, value: any) {
+    emitter.emit(update.updateSlotValue, { dataIndex, value })
+  }
+
   return {
     updateInputValue,
     updateSwitchValue,
@@ -134,11 +140,12 @@ function useUpdate(emitter) {
     updateSelectTreeValue,
     updateSelectTreeDropdownValue,
     updateSelectTreeDropdownAndValue,
+    updateSlotValue
   }
 }
 
 // formSetting form 表单总体配置
-// user setting 
+// user setting
 export interface UserSetting {
   key?: string;// 同一个组件内多个表单共存时需要设置
   span?: number; // 列属性，默认分为几列， 默认是1
@@ -209,6 +216,9 @@ export function useAntdCrudForm(opts: CrudFormInterface = {}) {
               break;
             case 'time-range':
               updateEmit.updateAnyDatePicker(dataIndex, val)
+              break;
+            case 'slot':
+              updateEmit.updateSlotValue(dataIndex, val)
               break;
             default:
               break;

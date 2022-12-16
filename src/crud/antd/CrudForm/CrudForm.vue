@@ -6,7 +6,7 @@
         <a-col :span="myProps.userSetting?.span" v-show="expand || index < (myProps.userSetting?.expandNumber || 0)">
           <a-form-item :label="p.label" :name="p.dataIndex" :rules="p.rules || []">
             <Widget :type="p.type" :default-value="p.defaultValue" :dataIndex="p.dataIndex" :extra-attrs="p.extraAttrs"
-              :mittKey="myProps.mittKey" />
+              :mittKey="myProps.mittKey" :slots="$slots"/>
           </a-form-item>
         </a-col>
       </template>
@@ -71,7 +71,7 @@ const props = defineProps({
 
 // 搜索模式按钮位置摆放，如果在不存在展开情况，且只有一行按钮时，这行按钮不构成一行，则按钮放置在末尾
 const btnInline = computed(()=>{
-  if(!props.footer) return false 
+  if(!props.footer) return false
   const expandNumber = unref(myProps).userSetting?.expandNumber || 0
   if(!expandNumber) return false
   const spanNumber = 24 / (unref(myProps).userSetting?.span || 24)

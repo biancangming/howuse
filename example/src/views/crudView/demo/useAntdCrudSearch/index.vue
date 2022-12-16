@@ -1,6 +1,10 @@
 <template>
   <div>
-    <AntdCrudForm :columns="searchColumns" @submit="seachHeader" @register="register"/>
+    <AntdCrudForm :columns="searchColumns" @submit="seachHeader" @register="register">
+      <template #slot="value">
+        <a-input @input="(e) =>  updateSlotValue('slot', e.target.value)" :value="value"/>
+      </template>
+    </AntdCrudForm>
   </div>
 </template>
 <script lang="ts" setup>
@@ -161,7 +165,7 @@ const searchColumns: SearchOpts[] = [
       api: server({url: "/area/city1"}),
       name: "name",
       value: "id",
-      onChange(val: string, { name }){ 
+      onChange(val: string, { name }){
         server({url: "/area/city2", data: {name}}).then(res=>{
           updateSelectDropdownAndValue("link2", res.data.data || [])
         })
@@ -190,12 +194,17 @@ const searchColumns: SearchOpts[] = [
       multiple: true, // 多选
     },
   },
+  {
+    label: "自定义输入框",
+    dataIndex: "slot",
+    type: "slot",
+    defaultValue: 'slot'
+  }
 ];
 
 function seachHeader(result: any) {
   message.success(JSON.stringify(result, null, 2))
 }
-
-const { updateInputValue, updateSelectDropdownAndValue ,updateSelectDropdownValue, register } = useAntdCrudForm({ userSetting: { span: 6, search: true, expandNumber: 4 }, formSetting: { labelCol: {span: 6 },  wrapperCol: { span: 17 }} });
+const { updateInputValue, updateSelectDropdownAndValue ,updateSelectDropdownValue, register, updateSlotValue } = useAntdCrudForm({ userSetting: { span: 6, search: true, expandNumber: 4 }, formSetting: { labelCol: {span: 6 },  wrapperCol: { span: 17 }} });
 </script>
 <style lang="less" scoped></style>

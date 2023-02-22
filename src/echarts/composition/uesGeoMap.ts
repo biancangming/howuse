@@ -25,14 +25,12 @@ export function useGeoJsonMap(opts?: GeoMapOpts) {
         resolve("ok")
       }).catch(reject)
     } else if (_type === "custom") {
-      return new Promise((resolve, reject) => {
-        if (!data) {
-          reject("custom模式需要传入data geojson格式文件")
-          return
-        }
-        registerMap(name, data)
-        resolve("ok")
-      })
+      if (!data) {
+        reject("custom模式需要传入data geojson格式文件")
+        return
+      }
+      registerMap(name, data)
+      resolve("ok")
     }
   })
 }

@@ -8,6 +8,7 @@
   <Rate v-else-if="props.type === 'rate'" v-bind="props"/>
   <Upload v-else-if="props.type === 'upload'" v-bind="props"/>
   <TreeSelect v-else-if="props.type === 'tree-select'" v-bind="props"/>
+  <SlotComponent v-else-if="props.type === 'slot'" v-bind="props"/>
   <DatePicker v-else v-bind="props"/>
 </template>
 <script lang="ts" setup>
@@ -21,6 +22,7 @@ import Rate from "./Rate.vue"
 import TreeSelect from "./TreeSelect.vue"
 import Input from "./Input.vue"
 import DatePicker from "./DatePicker.vue"
+import SlotComponent from './SlotComponent.tsx'
 
 import _props from "../itemcomposition/props";
 const props = defineProps(_props);

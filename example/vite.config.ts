@@ -10,7 +10,7 @@ import AutoImport from "unplugin-auto-import/vite"
 import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import CustomBlock from "markdown-it-custom-block"
-import topLevelAwait from 'vite-plugin-top-level-await'
+// import topLevelAwait from 'vite-plugin-top-level-await'
 // import svgLoader from 'vite-svg-loader'
 
 function pathResolve(dir: string) {
@@ -28,10 +28,10 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/],
     }),
     vueJsx(),
-    topLevelAwait({
-      promiseExportName: '__tla',
-      promiseImportName: i => `__tla_${i}`
-    }),
+    // topLevelAwait({
+    //   promiseExportName: '__tla',
+    //   promiseImportName: i => `__tla_${i}`
+    // }),
     // svgLoader(),
     Markdown({
       builders: [code()],

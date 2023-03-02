@@ -21,6 +21,7 @@ jobs:
       - name: package example page
         run: |  
           npm i 
+          cd example
           npm run example:build
       - name: push 
         uses: crazy-max/ghaction-github-pages@v3

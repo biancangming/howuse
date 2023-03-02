@@ -5,10 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "use-nvm": "nvm use 16.13.0",
-    "example:run": "cd example && vite",
-    "example:build": "cd example && vite build",
-    "example:preview": "cd example && vite preview",
-    "build": "node ./build/index.js",
+    "build": "node ./build/index",
     "update:beta-version": "node ./scripts/updateVersion.js beta",
     "update:release-version": "node ./scripts/updateVersion.js release",
     "update:publish": "npx ts-node ./scripts/publish.ts"
@@ -18,7 +15,6 @@
     "type": "git",
     "url": "git@github.com:biancangming/howuse.git"
   },
-  "type": "module",
   "exports": {},
   "keywords": [
     "vue3",

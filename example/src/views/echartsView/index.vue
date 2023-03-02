@@ -19,6 +19,15 @@
       <BarEchartCode />
     </template>
   </CodeView>
+  <CodeView title="混入模式-柱状图举例">
+    <MixBarEchartDemo />
+    <template #code>
+      <MixBarEchartCode />
+    </template>
+    <template #desc>
+      支持多个option 同时传入,自动合并
+    </template>
+  </CodeView>
   <CodeView title="饼图">
     <PieEchartDemo />
     <template #code>
@@ -59,6 +68,8 @@ import LineChartDemo from "./demo/LineChart/index.vue";
 import LineChartCode from "./demo/LineChart/index.md";
 import BarEchartDemo from "./demo/BarEchart/index.vue";
 import BarEchartCode from "./demo/BarEchart/index.md";
+import MixBarEchartDemo from "./demo/MixInBarEchart/index.vue";
+import MixBarEchartCode from "./demo/MixInBarEchart/index.md";
 import PieEchartDemo from "./demo/PieEchart/index.vue";
 import PieEchartCode from "./demo/PieEchart/index.md";
 import BaseEchartDemo from "./demo/BaseChart/index.vue";

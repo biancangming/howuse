@@ -14,7 +14,7 @@ echarts.use(EffectScatterChart)
 const props = defineProps({
   option: {
     default: () => ({}),
-    type: Object as PropType<EChartsOption>
+    type: Object as PropType<EChartsOption | EChartsOption[]>
   }
 })
 

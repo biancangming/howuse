@@ -14,7 +14,7 @@ echarts.use(CandlestickChart)
 const props = defineProps({
   option: {
     default: () => ({}),
-    type: Object as PropType<EChartsOption>
+    type: Object as PropType<EChartsOption | EChartsOption[]>
   }
 })
 

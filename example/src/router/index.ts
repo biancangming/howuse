@@ -110,6 +110,11 @@ const router = createRouter({
                   name: "componentWatermark",
                   component: () => import("../views/vueComponents/watermark/index.vue"),
                 },
+                {
+                  path: "ClickOutSide",
+                  name: "componentClickOutSide",
+                  component: () => import("../views/vueComponents/ClickOutSide.vue"),
+                },
               ]
             },
           ]

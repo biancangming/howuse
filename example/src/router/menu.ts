@@ -69,6 +69,10 @@ const menus: Menu[] = [
         title: "虚拟滚动",
         routerName: "componentVirtualScroll"
       },
+      {
+        title: "点击区域外部",
+        routerName: "componentClickOutSide"
+      },
     ]
   },
 ]

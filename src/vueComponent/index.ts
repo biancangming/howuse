@@ -9,6 +9,7 @@ import HowDragDialog from "./dragDialog/Index.vue"
 import HowVirtualScroll from './virtualScroll/Index.vue';
 import HowWatermark from './watermark/Index.vue';
 import { drapDrop as HowDragDrop } from './dragDrop'; // 托拽
+import { useClickOutSide, ClickOutSide as HowClickOutSide } from "./clickOutSide"
 export {
   HowMask,
   HowImgPreview,
@@ -19,4 +20,6 @@ export {
   HowVirtualScroll, // 虚拟滚动
   HowWatermark, // 水印
   HowDragDrop, // 托拽功能
+  useClickOutSide, // 点击外部区域
+  HowClickOutSide, // 点击外部区域
 }

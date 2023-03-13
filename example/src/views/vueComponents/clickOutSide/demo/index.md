@@ -1,1 +1,1 @@
-@[code](./src/views/vueComponents/clickOutSide/demo2/index.vue)
+@[code](./src/views/vueComponents/clickOutSide/demo/index.vue)

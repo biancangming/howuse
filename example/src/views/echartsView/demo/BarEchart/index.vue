@@ -1,11 +1,15 @@
 <template>
-  <div style="height: 300px;">
-    <how-bar-chart :option="option"></how-bar-chart>
+  <button @click="theme='dark'">深色</button>
+  <button @click="theme='lignht'">浅色</button>
+  <div style="height: 300px;" :style="{backgroundColor: theme == 'dark' ? '#000' : '#fff'}">
+    <how-bar-chart :option="option" :theme="theme"></how-bar-chart>
   </div>
 </template>
 <script lang="ts" setup>
 import { HowBarChart } from "howuse/echarts";
 import { EChartsOption } from 'echarts';
+import { ref } from 'vue';
+const theme = ref()
 
 const option: EChartsOption = {
   xAxis: {

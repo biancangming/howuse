@@ -13,15 +13,16 @@ echarts.use([GridComponent, LegendComponent, TooltipComponent, TitleComponent])
 
 
 export function useBaseECharts(el: Ref<HTMLDivElement>, theme?: string | object, opts?: HowEchartsInitOpts) {
+  let lastTheme = createDef(theme, "light")
   // 渲染模式 默认canvas
   const renderer = opts?.renderer
   echarts.use(createDef(renderer, 'canvas') === 'canvas' ? CanvasRenderer : SVGRenderer)
   //echarts图实例
-  let echartInstance: EChartsType;
+  let echartInstance: EChartsType | undefined;
 
   //设置默认样式数据
   const defaultOption: EChartsOption = {
-    backgroundColor: createDef(theme, "light") ? 'rgba(0,0,0,0)' : 'rgba(255,555,255)'
+    backgroundColor: createDef(theme, "light") ? 'rgba(0,0,0,0)' : 'rgba(255,555,255,0)'
   }
 
   function addDefaultOption(option: EChartsOption) {
@@ -29,19 +30,28 @@ export function useBaseECharts(el: Ref<HTMLDivElement>, theme?: string | object,
   }
 
 
-  async function setOption(option: EChartsOption | EChartsOption[]) {
+  async function setOption(option: EChartsOption | EChartsOption[], theme?: string | object) {
+    // 判断主题是否为默认主题，否则创建实例切换主题
+    if (theme != lastTheme) {
+      lastTheme = theme
+      defaultOption.backgroundColor = createDef(theme, "light") ? 'rgba(0,0,0,0)' : 'rgba(255,555,255, 0)'
+      if (echartInstance) {
+        setOption(option, theme)
+      }
+    }
+
     if (!el.value) {
       await nextTick();
-      if(echartInstance){ echartInstance.dispose() } //*预防实例多次创建，导致告警。在创建前检测是否需要销毁实例
+      if (echartInstance) { echartInstance.dispose() } //*预防实例多次创建，导致告警。在创建前检测是否需要销毁实例
       echartInstance = echarts.init(el.value, theme);
     }
     if (!echartInstance) throw new Error("echarts 实例没有创建成功");
-    
-    if(isArray(option)){
+
+    if (isArray(option)) {
       echartInstance?.setOption(merge(defaultOption, ...option), true)
-    }else if(isObject(option)){
+    } else if (isObject(option)) {
       echartInstance?.setOption(merge(defaultOption, option), true)
-    }else{
+    } else {
       throw new Error("echarts option only support EChartsOption[] or EChartsOption");
     }
   }

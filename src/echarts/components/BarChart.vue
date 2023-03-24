@@ -15,6 +15,10 @@ const props = defineProps({
   option: {
     default: () => ({}),
     type: Object as PropType<EChartsOption | EChartsOption[]>
+  },
+  theme: {
+    default: "",
+    type: [String, Object],
   }
 })
 
@@ -22,9 +26,9 @@ defineExpose({
   getInstance: echartInstance()
 })
 
-watch(() => props.option,
-  (option) => {
-    setOption(option)
+watch([() => props.option, ()=>props.theme],
+  ([option, theme]) => {
+    setOption(option, theme)
   },
   {
     immediate: true

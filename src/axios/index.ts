@@ -2,22 +2,22 @@ import axios from "axios"
 import type { AxiosError, AxiosResponse, CancelTokenSource } from "axios"
 import { ref, shallowRef, computed, unref, watchEffect } from 'vue';
 import { debounce } from 'howtools';
-import { HowAxiosRequestConfig, HowExRequestOptions, HowDownLoadExRequestOptions, HowAxiosInstance } from "./types/axios";
+import { UseAxiosRequestConfig, UseExRequestOptions, UseDownLoadExRequestOptions, UseAxiosInstance } from "./types/axios";
 import { useResponseBlobDownLoad } from './help/download';
 export * from "./help/download"
 export * from "./types/axios.d"
+export { HttpStatus } from "./help/http"
 
-
-export function createAxios(config: HowAxiosInstance) {
+export function createAxios(config: UseAxiosInstance) {
     const server = axios.create(config);
 
     // Axios hook
     /**
      * @param  {AxiosRequestConfig} config
-     * @param  {HowExRequestOptions} options?
+     * @param  {UseExRequestOptions} options?
      * @returns
      */
-    function useAxiosRequest<T>(config: HowAxiosRequestConfig, options?: HowExRequestOptions) {
+    function useAxiosRequest<T>(config: UseAxiosRequestConfig, options?: UseExRequestOptions) {
         const { defaultVal = {} } = options || {}
         const isDebounce = options?.isDebounce === undefined || options.isDebounce// 传入防抖函数的值，则认为开启防抖
         const delay = options?.delay ?? 500 // 防抖默认时间设置为1 
@@ -49,25 +49,28 @@ export function createAxios(config: HowAxiosInstance) {
         const edata = ref<T>() // axios 错误响应数据
 
         // 不是节流的方式
-        const preRequest = ({ params: p, data: d, path: pv }: HowAxiosRequestConfig) => {
+        const preRequest = ({ params: p, data: d, path: pv }: UseAxiosRequestConfig): Promise<AxiosResponse<T>> => {
             const c = { ...config, params: p, data: d, path: pv }
-            return server.request({ ...c, cancelToken: cancelToken.token })
-                .then(r => {
-                    response.value = r
-                    data.value = r.data
-                    loading(false)
-                })
-                .catch((e: AxiosError) => {
+            const resuest = server.request({ ...c, cancelToken: cancelToken.token })
+
+            resuest.then(r => {
+                response.value = r
+                data.value = r.data
+                loading(false)
+            }).catch((e: AxiosError) => {
                     error.value = e
                     edata.value = e.response ? e.response.data : ""
                     loading(false)
                 })
+
+            return resuest
         }
 
+
         // 防抖请求
-        const request = (config: HowAxiosRequestConfig): Promise<AxiosResponse> => {
-            return new Promise((resolve,reject)=>{
-                const _debounce = debounce<Promise<AxiosResponse>>(preRequest, delay, (response)=>{
+        const request = (config: UseAxiosRequestConfig): Promise<AxiosResponse<T>> => {
+            return new Promise((resolve, reject) => {
+                const _debounce = debounce<Promise<AxiosResponse>>(preRequest, delay, (response) => {
                     response.then(resolve)
                     response.catch(reject)
                 })
@@ -75,9 +78,9 @@ export function createAxios(config: HowAxiosInstance) {
             })
         }
 
-        const execute = (config: Pick<HowAxiosRequestConfig, 'params' | 'data' | 'path'> = { params: {}, data: {}, path: {} }) => {
-           loading(true)
-           return isDebounce ? request(config) : preRequest(config)
+        const execute = (config: Pick<UseAxiosRequestConfig, 'params' | 'data' | 'path'> = { params: {}, data: {}, path: {} }) => {
+            loading(true)
+            return isDebounce ? request(config) : preRequest(config)
         }
 
         // 立即执行
@@ -97,7 +100,7 @@ export function createAxios(config: HowAxiosInstance) {
     }
 
     // 流文件转化为下载函数
-    function useBlobDownload<T>(config: HowAxiosRequestConfig, options?: HowDownLoadExRequestOptions) {
+    function useBlobDownload<T>(config: UseAxiosRequestConfig, options?: UseDownLoadExRequestOptions) {
         const request = useAxiosRequest<T>({ ...config, responseType: 'blob' }, options)
         const { finished, download } = useResponseBlobDownLoad(options)
         // 全部下载完成标值
@@ -105,7 +108,7 @@ export function createAxios(config: HowAxiosInstance) {
 
         // 结果响应调用下载，转换blob流
         watchEffect(() => {
-            if(!unref(request.finished)) return
+            if (!unref(request.finished)) return
             download(unref(request.response) as AxiosResponse)
         })
 

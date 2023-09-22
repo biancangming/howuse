@@ -10,6 +10,21 @@ export * from "./types/axios.d"
 
 export function createAxios(config: HowAxiosInstance) {
     const server = axios.create(config);
+    server.interceptors.response.use((res) => {
+        const data = res.data;
+        Reflect.defineProperty(res, "data", {
+            configurable: false,
+            // writable: false,
+            set() {
+                console.error("拦截器中的data属性不能被修改")
+            },
+            get() {
+                return data;
+            }
+        });
+        return res;
+    })
+
 
     // Axios hook
     /**

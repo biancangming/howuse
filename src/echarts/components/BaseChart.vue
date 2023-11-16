@@ -31,7 +31,7 @@ if(!props.use || props.use.length === 0){
 }
 
 defineExpose({
-  getInstance: echartInstance()
+  getInstance: echartInstance
 })
 
 watch(() => props.option,

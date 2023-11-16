@@ -23,7 +23,7 @@ const props = defineProps({
 })
 
 defineExpose({
-  getInstance: echartInstance()
+  getInstance: echartInstance
 })
 
 watch([() => props.option, ()=>props.theme],

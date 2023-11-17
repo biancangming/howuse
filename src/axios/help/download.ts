@@ -28,7 +28,7 @@ export function useResponseBlobDownLoad(options?: HowDownLoadExRequestOptions) {
 
         // 读取文件名称
         const dispositionRegArr = filenameReg.exec(_response.headers['content-disposition'])
-        const _fileName = fileName ?? decodeURI(dispositionRegArr ? dispositionRegArr[0] : "") //读取文件类型
+        const _fileName = fileName ?? decodeURI(dispositionRegArr ? dispositionRegArr[1] : "") //读取文件类型
         if (!_fileName) throw new Error("fileName Cannot be empty")
 
         //下载数据

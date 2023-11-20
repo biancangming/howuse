@@ -1,7 +1,7 @@
 import axios from "axios"
 import type { AxiosError, AxiosResponse, CancelTokenSource } from "axios"
 import { ref, shallowRef, computed, unref, watchEffect } from 'vue';
-import { debounce } from 'howtools';
+import { debounce, isObject } from 'howtools';
 import { HowAxiosRequestConfig, HowExRequestOptions, HowDownLoadExRequestOptions, HowAxiosInstance } from "./types/axios";
 import { useResponseBlobDownLoad } from './help/download';
 export * from "./help/download"
@@ -66,6 +66,18 @@ export function createAxios(config: HowAxiosInstance) {
         // 不是节流的方式
         const preRequest = ({ params: p, data: d, path: pv }: HowAxiosRequestConfig): Promise<AxiosResponse<T>> => {
             const c = { ...config, params: p, data: d, path: pv }
+
+            // 替换url上边的空格
+            config.url = config.url?.replace(/ /g, "")
+
+            // 判断路径参数是否是一个
+            if (isObject(pv)) {
+                for (const [key, value] of Object.entries(pv)) {
+                    config.url = config.url?.replace(`{${key}}`, value)
+                }
+            }
+
+
             const resuest = server.request({ ...c, cancelToken: cancelToken.token })
 
             resuest.then(r => {

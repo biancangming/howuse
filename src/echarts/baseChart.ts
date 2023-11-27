@@ -48,9 +48,9 @@ export function useBaseECharts(el: Ref<HTMLDivElement>, theme?: string | object,
     if (!echartInstance) throw new Error("echarts 实例没有创建成功");
 
     if (isArray(option)) {
-      echartInstance?.setOption(merge(defaultOption, ...option), true)
+      echartInstance?.setOption(merge({}, defaultOption, ...option), true)
     } else if (isObject(option)) {
-      echartInstance?.setOption(merge(defaultOption, option), true)
+      echartInstance?.setOption(merge({}, defaultOption, option), true)
     } else {
       throw new Error("echarts option only support EChartsOption[] or EChartsOption");
     }

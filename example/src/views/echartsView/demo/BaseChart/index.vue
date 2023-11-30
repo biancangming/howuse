@@ -7,8 +7,8 @@
 import { HowBaseChart } from "howuse/echarts";
 import { EChartsOption } from 'echarts';
 import { BarChart, LineChart } from "echarts/charts"
-import { ToolboxComponent } from "echarts/components"
-const use = [BarChart, LineChart, ToolboxComponent]  // 一些额外需要引入的echarts插件需要在这里配置
+import { ToolboxComponent, MarkPointComponent } from "echarts/components"
+const use = [BarChart, LineChart, ToolboxComponent, MarkPointComponent]  // 一些额外需要引入的echarts插件需要在这里配置
 const option: EChartsOption = {
   tooltip: {
     trigger: 'axis',
@@ -94,6 +94,12 @@ const option: EChartsOption = {
         valueFormatter: function (value) {
           return value + ' °C';
         }
+      },
+      markPoint: {
+        data: [
+          { type: "max", name: "Max" },
+          { type: "min", name: "Min" },
+        ],
       },
       data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
     }

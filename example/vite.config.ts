@@ -97,6 +97,7 @@ export default defineConfig({
   },
   // 本地运行配置，及反向代理配置
   server: {
+    port: 7000,
     cors: true, // 默认启用并允许任何源
     // open: true, // 在服务器启动时自动在浏览器中打开应用程序
     proxy: {

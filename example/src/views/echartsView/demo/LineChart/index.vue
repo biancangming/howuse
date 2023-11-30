@@ -10,7 +10,7 @@
       <button @click="lineChartWidth = `100%`">100%宽</button>
     </div>
     </p>
-    <div style="height: 300px;" :style="{width: `${lineChartWidth}`}">
+    <div style="height: 300px;" :style="{ width: `${lineChartWidth}` }">
       <how-line-chart :option="option"></how-line-chart>
     </div>
   </div>
@@ -20,6 +20,10 @@ import { ref } from "vue";
 import { HowLineChart } from "howuse/echarts";
 import { EChartsOption } from 'echarts';
 const lineChartWidth = ref("100%");
+
+/**
+ * 测试echarts option 是否存在某个属性， 并且存在值
+*/
 
 const option: EChartsOption = {
   grid: {
@@ -44,8 +48,13 @@ const option: EChartsOption = {
   series: [
     {
       name: "我是x轴",
-      data: [150, 230, 224, 218, 135, 147, 260],
+      data: ['150', '230', '224', '218', '135', '147', '260.000'],
       type: "line",
+      markPoint: {
+        data: [
+          { type: "min", name: "Min" },
+        ],
+      },
     },
   ],
 }

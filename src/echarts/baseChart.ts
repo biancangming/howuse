@@ -1,5 +1,5 @@
 import * as echarts from 'echarts/core';
-import type { EChartsOption } from "echarts"
+import { EChartsOption } from "echarts"
 import { GridComponent, LegendComponent, TooltipComponent, TitleComponent } from "echarts/components"
 import { CanvasRenderer, SVGRenderer } from "echarts/renderers"
 import { onMounted, nextTick, Ref, onUnmounted } from 'vue';
@@ -8,12 +8,14 @@ import type { HowEchartsInitOpts } from "./types/echarts"
 import { createDef } from '../utils/util';
 import { EChartsType } from 'echarts/core';
 import { merge, isArray, isObject } from "lodash-es"
+import { fixOption } from './helper';
 
 echarts.use([GridComponent, LegendComponent, TooltipComponent, TitleComponent])
 
 
 export function useBaseECharts(el: Ref<HTMLDivElement>, theme?: string | object, opts?: HowEchartsInitOpts) {
   let lastTheme = createDef(theme, "light")
+  let keepData = createDef(opts?.keepData, true) // 保持后端返回数据的原有格式
   // 渲染模式 默认canvas
   const renderer = opts?.renderer
   echarts.use(createDef(renderer, 'canvas') === 'canvas' ? CanvasRenderer : SVGRenderer)
@@ -48,9 +50,9 @@ export function useBaseECharts(el: Ref<HTMLDivElement>, theme?: string | object,
     if (!echartInstance) throw new Error("echarts 实例没有创建成功");
 
     if (isArray(option)) {
-      echartInstance?.setOption(merge({}, defaultOption, ...option), true)
+      echartInstance?.setOption(merge({}, defaultOption, ...(keepData ? option.map(fixOption) : option)), true)
     } else if (isObject(option)) {
-      echartInstance?.setOption(merge({}, defaultOption, option), true)
+      echartInstance?.setOption(merge({}, defaultOption, keepData ? fixOption(option) : option), true)
     } else {
       throw new Error("echarts option only support EChartsOption[] or EChartsOption");
     }

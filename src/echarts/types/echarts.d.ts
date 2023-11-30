@@ -125,4 +125,5 @@ declare type EChartsInitOpts = { // 复制文件
 };
 export declare interface HowEchartsInitOpts extends EChartsInitOpts {
   chartType?: string;
+  keepData?: boolean; // 用于保持原数据格式，默认开启。例如： 1.0 保存为 1.0 
 }

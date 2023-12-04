@@ -7,6 +7,7 @@
   </p>
   <p>1. 在原生代码基础上增加页面响应式自适应</p>
   <p>2. 提供基本图形组件模板，组件内部按需引入，降低按需引入的编码成本</p>
+  <p>3. 默认内置了 GridComponent, LegendComponent, TooltipComponent, TitleComponent 几个常用组件，其余需要在使用时动态注入</p>
   <CodeView title="自适应折线图，其它自适应类似">
     <LineChartDemo />
     <template #code>

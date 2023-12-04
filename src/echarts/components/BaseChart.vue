@@ -6,6 +6,7 @@
 import { EChartsOption } from 'echarts';
 import { PropType } from 'vue';
 import { useBaseECharts } from '../baseChart';
+import { HowEchartsInitOpts } from '../types/echarts';
 const chartRef = ref();
 const { setOption, echartInstance, echarts } = useBaseECharts(chartRef)
 
@@ -21,14 +22,14 @@ const props = defineProps({
   use: {
     default: () => [],
     type: Object as PropType<any>
+  },
+  config: {
+    default: () => ({}),
+    type: Object as PropType<HowEchartsInitOpts>,
   }
 })
 
-if(!props.use || props.use.length === 0){
-  console.error("提示：必须传入可用的echart组件")
-}else{
-  echarts.use(props.use)
-}
+echarts.use(props.use)
 
 defineExpose({
   getInstance: echartInstance

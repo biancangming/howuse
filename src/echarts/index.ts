@@ -1,28 +1,145 @@
+import * as echarts from "echarts/core"
 import { useBaseECharts } from "./baseChart"
 import { useGeoJsonMap } from "./composition/uesGeoMap"
-import BarChart from "./components/BarChart.vue"
-import BaseChart from "./components/BaseChart.vue"
-import BoxplotChart from "./components/BoxplotChart.vue"
-import CandlestickChart from "./components/CandlestickChart.vue"
-import CustomChart from "./components/CustomChart.vue"
-import EffectScatterChart from "./components/EffectScatterChart.vue"
-import FunnelChart from "./components/FunnelChart.vue"
-import GaugeChart from "./components/GaugeChart.vue"
-import GraphChart from "./components/GraphChart.vue"
-import HeatmapChart from "./components/HeatmapChart.vue"
-import LineChart from "./components/LineChart.vue"
-import LinesChart from "./components/LinesChart.vue"
-import MapChart from "./components/MapChart.vue"
-import ParallelChart from "./components/ParallelChart.vue"
-import PictorialBarChart from "./components/PictorialBarChart.vue"
-import PieChart from "./components/PieChart.vue"
-import RadarChart from "./components/RadarChart.vue"
-import SankeyChart from "./components/SankeyChart.vue"
-import ScatterChart from "./components/ScatterChart.vue"
-import SunburstChart from "./components/SunburstChart.vue"
-import ThemeRiverChart from "./components/ThemeRiverChart.vue"
-import TreeChart from "./components/TreeChart.vue"
-import TreemapChart from "./components/TreemapChart.vue"
+
+const BaseChart = defineAsyncComponent(() => import("./components/BaseChart.vue"))
+
+const BarChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ BarChart }) => {
+        echarts.use(BarChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+
+const LineChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ LineChart }) => {
+        echarts.use(LineChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+
+const LinesChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ LinesChart }) => {
+        echarts.use(LinesChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+
+const BoxplotChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ BoxplotChart }) => {
+        echarts.use(BoxplotChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+
+const CandlestickChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ CandlestickChart }) => {
+        echarts.use(CandlestickChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const CustomChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ CustomChart }) => {
+        echarts.use(CustomChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const EffectScatterChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ EffectScatterChart }) => {
+        echarts.use(EffectScatterChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const FunnelChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ FunnelChart }) => {
+        echarts.use(FunnelChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const GaugeChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ GaugeChart }) => {
+        echarts.use(GaugeChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const GraphChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ GraphChart }) => {
+        echarts.use(GraphChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const HeatmapChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ HeatmapChart }) => {
+        echarts.use(HeatmapChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const MapChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ MapChart }) => {
+        echarts.use(MapChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const ParallelChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ ParallelChart }) => {
+        echarts.use(ParallelChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const PictorialBarChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ PictorialBarChart }) => {
+        echarts.use(PictorialBarChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const PieChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ PieChart }) => {
+        echarts.use(PieChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const RadarChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ RadarChart }) => {
+        echarts.use(RadarChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const ScatterChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ ScatterChart }) => {
+        echarts.use(ScatterChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const SunburstChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ SunburstChart }) => {
+        echarts.use(SunburstChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const ThemeRiverChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ ThemeRiverChart }) => {
+        echarts.use(ThemeRiverChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const TreemapChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ TreemapChart }) => {
+        echarts.use(TreemapChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const SankeyChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ SankeyChart }) => {
+        echarts.use(SankeyChart)
+    })
+    return import("./components/BaseChart.vue")
+})
+const TreeChart = defineAsyncComponent(() => {
+    import("echarts/charts").then(({ TreeChart }) => {
+        echarts.use(TreeChart)
+    })
+    return import("./components/BaseChart.vue")
+})
 
 export {
     useBaseECharts,

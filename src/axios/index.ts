@@ -1,7 +1,7 @@
 import axios from "axios"
 import type { AxiosError, AxiosResponse, CancelTokenSource } from "axios"
 import { ref, shallowRef, computed, unref, watchEffect } from 'vue';
-import { debounce, isObject } from 'howtools';
+import { isObject } from 'howtools';
 import { HowAxiosRequestConfig, HowExRequestOptions, HowDownLoadExRequestOptions, HowAxiosInstance } from "./types/axios";
 import { useResponseBlobDownLoad } from './help/download';
 export * from "./help/download"

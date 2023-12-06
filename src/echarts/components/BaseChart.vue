@@ -7,8 +7,9 @@ import { EChartsOption } from 'echarts';
 import { PropType } from 'vue';
 import { useBaseECharts } from '../baseChart';
 import { HowEchartsInitOpts } from '../types/echarts';
+import { use } from "echarts/core";
 const chartRef = ref();
-const { setOption, echartInstance, echarts } = useBaseECharts(chartRef)
+const { setOption, echartInstance } = useBaseECharts(chartRef)
 
 const props = defineProps({
   option: {
@@ -29,10 +30,12 @@ const props = defineProps({
   }
 })
 
-echarts.use(props.use)
+use(props.use)
 
 defineExpose({
-  getInstance: echartInstance
+  getInstance: echartInstance,
+  on: echartInstance()?.on,
+  dispatchAction: echartInstance()?.dispatchAction,
 })
 
 watch(() => props.option,

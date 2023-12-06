@@ -1,19 +1,18 @@
 import { createDef } from '../../utils/util';
 import { cnGeoJsonData, defaultGeoJsonData, GeoJsonMapType, GeoMapOpts } from "./data/jsongeo";
 
-
 export function useGeoJsonMap(opts?: GeoMapOpts) {
-  import("echarts").then(({ registerMap }) => {
-    const { type, code, data, name } = opts || {}
+  const { type, code, data, name } = opts || {}
 
-    if (!name) {
-      throw Error("地图名称不能为空！！！")
-    }
+  if (!name) {
+    throw Error("地图名称不能为空！！！")
+  }
 
-    const _type = createDef(type, "default")
-    const _code = createDef(code, "100000") as GeoJsonMapType
+  const _type = createDef(type, "default")
+  const _code = createDef(code, "100000") as GeoJsonMapType
 
-    return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
+    import("echarts").then(({ registerMap }) => {
       if (_type === "default") {
         defaultGeoJsonData(_code).then((json) => {
           registerMap(name, json)

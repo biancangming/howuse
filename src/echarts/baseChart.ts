@@ -1,6 +1,6 @@
 import * as echarts from 'echarts/core';
 import { EChartsOption } from "echarts"
-import { GridComponent, LegendComponent, TooltipComponent, TitleComponent } from "echarts/components"
+import { GridComponent, LegendComponent, TooltipComponent, TitleComponent, DatasetComponent } from "echarts/components"
 import { CanvasRenderer, SVGRenderer } from "echarts/renderers"
 import { onMounted, nextTick, Ref, onUnmounted } from 'vue';
 import { addResizeListener, removeResizeListener } from 'howtools';
@@ -10,8 +10,7 @@ import { EChartsType } from 'echarts/core';
 import { merge, isArray, isObject } from "lodash-es"
 import { fixOption } from './helper';
 
-echarts.use([GridComponent, LegendComponent, TooltipComponent, TitleComponent])
-
+echarts.use([GridComponent, LegendComponent, TooltipComponent, TitleComponent, DatasetComponent])
 
 export function useBaseECharts(el: Ref<HTMLDivElement>, theme?: string | object, opts?: HowEchartsInitOpts) {
   let lastTheme = createDef(theme, "light")
@@ -42,11 +41,21 @@ export function useBaseECharts(el: Ref<HTMLDivElement>, theme?: string | object,
       }
     }
 
-    if (!el.value) {
-      await nextTick();
-      if (echartInstance) { echartInstance.dispose() } //*预防实例多次创建，导致告警。在创建前检测是否需要销毁实例
+    // 等待el 被创建
+    async function _waitElCreate() {
+      if (!el.value) {
+        await nextTick();
+        _waitElCreate()
+      }
+    }
+
+    if (!el.value) await _waitElCreate();
+
+    // 创建echarts 实例
+    if (!echartInstance) {
       echartInstance = echarts.init(el.value, theme);
     }
+
     if (!echartInstance) throw new Error("echarts 实例没有创建成功");
 
     if (isArray(option)) {
@@ -79,6 +88,5 @@ export function useBaseECharts(el: Ref<HTMLDivElement>, theme?: string | object,
     setOption,
     resize,
     echartInstance: () => echartInstance,
-    echarts
   }
 }

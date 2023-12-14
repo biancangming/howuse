@@ -93,22 +93,19 @@ export function createAxios(config: HowAxiosInstance) {
             return resuest
         }
 
-
-        let _is_requested = false  // 是否已经创建防抖实例，如果创建，则不会再次创建
+        
+        let _is_requested: any = 0  // 是否已经创建防抖实例，如果创建，则不会再次创建
         // 防抖请求
         const request = (config: HowAxiosRequestConfig): Promise<AxiosResponse<T>> => {
-            if (!_is_requested) {
-                _is_requested = true
-
-                return new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                        preRequest(config).then(resolve).catch(reject)
-                        _is_requested = false
-                    }, delay);
-                })
-            } else {
-                return Promise.reject(unref(error))
+            if (_is_requested) {
+                clearTimeout(_is_requested)
             }
+
+            return new Promise((resolve, reject) => {
+                _is_requested = setTimeout(() => {
+                    preRequest(config).then(resolve).catch(reject)
+                }, delay);
+            })
         }
 
         const execute = (config: Pick<HowAxiosRequestConfig, 'params' | 'data' | 'path'> = { params: {}, data: {}, path: {} }) => {

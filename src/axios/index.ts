@@ -68,12 +68,12 @@ export function createAxios(config: HowAxiosInstance) {
             const c = { ...config, params: p, data: d, path: pv }
 
             // 替换url上边的空格
-            config.url = config.url?.replace(/ /g, "")
+            c.url = config.url?.replace(/ /g, "")
 
             // 判断路径参数是否是一个
             if (isObject(pv)) {
                 for (const [key, value] of Object.entries(pv)) {
-                    config.url = config.url?.replace(`{${key}}`, value)
+                    c.url = c.url?.replace(`{${key}}`, value)
                 }
             }
 

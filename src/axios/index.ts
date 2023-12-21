@@ -1,15 +1,30 @@
 import axios from "axios"
 import type { AxiosError, AxiosResponse, CancelTokenSource } from "axios"
 import { ref, shallowRef, computed, unref, watchEffect } from 'vue';
-import { debounce } from 'howtools';
+import { isObject } from 'howtools';
 import { HowAxiosRequestConfig, HowExRequestOptions, HowDownLoadExRequestOptions, HowAxiosInstance } from "./types/axios";
 import { useResponseBlobDownLoad } from './help/download';
 export * from "./help/download"
 export * from "./types/axios.d"
-
+export { HttpStatus } from "./help/http"
 
 export function createAxios(config: HowAxiosInstance) {
     const server = axios.create(config);
+    server.interceptors.response.use((res) => {
+        const data = res.data;
+        Reflect.defineProperty(res, "data", {
+            configurable: false,
+            // writable: false,
+            set() {
+                console.error("拦截器中的data属性不能被修改")
+            },
+            get() {
+                return data;
+            }
+        });
+        return res;
+    })
+
 
     // Axios hook
     /**
@@ -49,35 +64,53 @@ export function createAxios(config: HowAxiosInstance) {
         const edata = ref<T>() // axios 错误响应数据
 
         // 不是节流的方式
-        const preRequest = ({ params: p, data: d, path: pv }: HowAxiosRequestConfig) => {
+        const preRequest = ({ params: p, data: d, path: pv }: HowAxiosRequestConfig): Promise<AxiosResponse<T>> => {
             const c = { ...config, params: p, data: d, path: pv }
-            return server.request({ ...c, cancelToken: cancelToken.token })
-                .then(r => {
-                    response.value = r
-                    data.value = r.data
-                    loading(false)
-                })
-                .catch((e: AxiosError) => {
-                    error.value = e
-                    edata.value = e.response ? e.response.data : ""
-                    loading(false)
-                })
+
+            // 替换url上边的空格
+            c.url = config.url?.replace(/ /g, "")
+
+            // 判断路径参数是否是一个
+            if (isObject(pv)) {
+                for (const [key, value] of Object.entries(pv)) {
+                    c.url = c.url?.replace(`{${key}}`, value)
+                }
+            }
+
+
+            const resuest = server.request({ ...c, cancelToken: cancelToken.token })
+
+            resuest.then(r => {
+                response.value = r
+                data.value = r.data
+                loading(false)
+            }).catch((e: AxiosError) => {
+                error.value = e
+                edata.value = e.response ? e.response.data : ""
+                loading(false)
+            })
+
+            return resuest
         }
 
+        
+        let _is_requested: any = 0  // 是否已经创建防抖实例，如果创建，则不会再次创建
         // 防抖请求
-        const request = (config: HowAxiosRequestConfig): Promise<AxiosResponse> => {
-            return new Promise((resolve,reject)=>{
-                const _debounce = debounce<Promise<AxiosResponse>>(preRequest, delay, (response)=>{
-                    response.then(resolve)
-                    response.catch(reject)
-                })
-                _debounce(config)
+        const request = (config: HowAxiosRequestConfig): Promise<AxiosResponse<T>> => {
+            if (_is_requested) {
+                clearTimeout(_is_requested)
+            }
+
+            return new Promise((resolve, reject) => {
+                _is_requested = setTimeout(() => {
+                    preRequest(config).then(resolve).catch(reject)
+                }, delay);
             })
         }
 
         const execute = (config: Pick<HowAxiosRequestConfig, 'params' | 'data' | 'path'> = { params: {}, data: {}, path: {} }) => {
-           loading(true)
-           return isDebounce ? request(config) : preRequest(config)
+            loading(true)
+            return isDebounce ? request(config) : preRequest(config)
         }
 
         // 立即执行
@@ -105,7 +138,7 @@ export function createAxios(config: HowAxiosInstance) {
 
         // 结果响应调用下载，转换blob流
         watchEffect(() => {
-            if(!unref(request.finished)) return
+            if (!unref(request.finished)) return
             download(unref(request.response) as AxiosResponse)
         })
 

@@ -28,4 +28,8 @@ export default {
     default: () => ({}),
     type: Object,
   },
+  slots: {
+    default: () => ({}),
+    type: Object,
+  }
 }

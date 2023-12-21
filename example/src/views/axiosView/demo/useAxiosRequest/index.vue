@@ -17,15 +17,22 @@ const { data, response, loading, finished, execute, edata } = useAxiosRequest<an
   },
   {
     defaultVal: {}, // 设置默认响应值，默认是 []
-    isDebounce: false
+    isDebounce: true
   }
 );
 
 // 响应式用法
-watch(finished, ()=> message.info("响应式调用完成"))
+watch(finished, (finished)=> finished && message.info("响应式调用完成"))
+
 
 // 一般请求用法
 function request() {
+  execute().then((data) => {
+    message.info(`一般调用完成`);
+  });
+  execute().then((data) => {
+    message.info(`一般调用完成`);
+  });
   execute().then((data) => {
     message.info(`一般调用完成`);
   });

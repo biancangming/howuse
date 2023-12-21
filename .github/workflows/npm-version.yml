@@ -15,8 +15,8 @@ jobs:
         with:
           node-version: "16.13.0"
       - name: check version is beta and package 
-      - run: |
-         node scripts/check.js beta
+        run: |
+         node scripts/checkVersion.js beta
          npm i
          npm run build
       - name: publish npm 

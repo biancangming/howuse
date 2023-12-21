@@ -46,20 +46,32 @@ const menus: Menu[] = [
         routerName: "componentDragDialog"
       },
       {
+        title: "托放组件",
+        routerName: "componentDragDrop"
+      },
+      {
         title: "蒙版",
         routerName: "componentMask"
       },
-      {
-        title: "json预览",
-        routerName: "componentJsonPreview"
-      },
+      // {
+      //   title: "json预览",
+      //   routerName: "componentJsonPreview"
+      // },
       {
         title: "图片预览",
         routerName: "componentImgPreview"
       },
       {
+        title: "加水印",
+        routerName: "componentWatermark"
+      },
+      {
         title: "虚拟滚动",
         routerName: "componentVirtualScroll"
+      },
+      {
+        title: "点击区域外部",
+        routerName: "componentClickOutSide"
       },
     ]
   },

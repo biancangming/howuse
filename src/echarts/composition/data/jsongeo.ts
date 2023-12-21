@@ -1,5 +1,5 @@
 const defaultGeoBaseUrl = "//echartsgeojson.bianbingdang.com"
-const cnGeoJson = "//geojson.cn/api/data"
+const cnGeoJson = "//echartsgeojson.bianbingdang.com/geojson"
 
 export type GeoJsonMapType = "default" | "custom" | "datav" | "cnGeoJson"
 export type AreaCode = string

@@ -4,7 +4,7 @@
       <div :class="prefixCls">
         <div :class="`${prefixCls}__title`">
           <span :class="`${prefixCls}__title--logo`" title="一个好用的vue3增强库">howuse</span>
-          <span :class="`${prefixCls}__title--desc`">一个好用的vue3增强库</span>
+          <span :class="`${prefixCls}__title--desc`">一个好用的vue3增强库， 文档版本：v {{pkg.version}}</span>
         </div>
         <div :class="`${prefixCls}__action`">
           <a-menu v-model:selectedKeys="actionSelectedKeys" mode="horizontal">
@@ -25,7 +25,7 @@
 import { GithubOutlined } from "@ant-design/icons-vue";
 import { useSessionStorage } from "@vueuse/core";
 import { usePrefixCls } from '../../../src/less/useDesign';
-
+import pkg from "../../../package.json"
 const actionSelectedKeys = useSessionStorage("_menu_action", ["about"])
 
 const prefixCls = usePrefixCls("header")

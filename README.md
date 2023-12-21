@@ -31,3 +31,6 @@
 
 如有任何问题，可以在这里提问。https://github.com/biancangming/howuse/issues
 
+## 功能列表
+
+https://biancangming.github.io/howuse/#/about

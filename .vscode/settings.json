@@ -19,5 +19,6 @@
     "Git Bash": {
       "source": "Git Bash"
     }
-  }
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

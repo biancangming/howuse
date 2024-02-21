@@ -1,5 +1,5 @@
 import * as echarts from 'echarts/core';
-import { EChartsOption } from "echarts"
+import type { EChartsOption } from "echarts"
 import { GridComponent, LegendComponent, TooltipComponent, TitleComponent, DatasetComponent } from "echarts/components"
 import { CanvasRenderer, SVGRenderer } from "echarts/renderers"
 import { onMounted, nextTick, Ref, onUnmounted } from 'vue';
@@ -32,11 +32,14 @@ export function useBaseECharts(el: Ref<HTMLDivElement>, theme?: string | object,
 
 
   async function setOption(option: EChartsOption | EChartsOption[], theme?: string | object) {
+    const optionTheme = createDef(theme, "light") // 没有设置主题，赋值为默认值
     // 判断主题是否为默认主题，否则创建实例切换主题
-    if (theme != lastTheme) {
-      lastTheme = theme
+    if (optionTheme != lastTheme) {
+      lastTheme = optionTheme
       defaultOption.backgroundColor = createDef(theme, "light") ? 'rgba(0,0,0,0)' : 'rgba(255,555,255, 0)'
       if (echartInstance) {
+        echartInstance.dispose()
+        echartInstance = echarts.init(el.value, lastTheme);
         setOption(option, theme)
       }
     }
@@ -53,7 +56,7 @@ export function useBaseECharts(el: Ref<HTMLDivElement>, theme?: string | object,
 
     // 创建echarts 实例
     if (!echartInstance) {
-      echartInstance = echarts.init(el.value, theme);
+      echartInstance = echarts.init(el.value, lastTheme);
     }
 
     if (!echartInstance) throw new Error("echarts 实例没有创建成功");
@@ -75,7 +78,7 @@ export function useBaseECharts(el: Ref<HTMLDivElement>, theme?: string | object,
   //初始化echarts图
   onMounted(() => {
     if (!el.value) return
-    echartInstance = echarts.init(el.value, theme);
+    echartInstance = echarts.init(el.value, lastTheme);
     addResizeListener(el.value, resize)
   })
 

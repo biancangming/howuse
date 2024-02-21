@@ -1,6 +1,6 @@
 <template>
   <button @click="theme = 'dark'">深色</button>
-  <button @click="theme = 'lignht'">浅色</button>
+  <button @click="theme = 'light'">浅色</button>
   <div style="height: 300px;" :style="{ backgroundColor: theme == 'dark' ? '#000' : '#fff' }">
     <how-bar-chart :option="option" :theme="theme" :config="{ keepData: true }"></how-bar-chart>
   </div>

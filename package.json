@@ -1,14 +1,14 @@
 {
   "name": "howuse",
-  "version": "0.0.4",
+  "version": "0.0.5-beta.1",
   "description": "a simple Vue Composition utils",
   "main": "dist/index.js",
   "scripts": {
     "use-nvm": "nvm use 16.13.0",
     "build": "node ./build/index",
+    "build:publish": "npx ts-node ./scripts/publish.ts",
     "update:beta-version": "node ./scripts/updateVersion.js beta",
-    "update:release-version": "node ./scripts/updateVersion.js release",
-    "update:publish": "npx ts-node ./scripts/publish.ts"
+    "update:release-version": "node ./scripts/updateVersion.js release"
   },
   "homepage": "https://github.com/biancangming/howuse",
   "repository": {

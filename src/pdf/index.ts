@@ -44,8 +44,29 @@ export function useHtmlAsImage(opts: HtmlAsImageOpts) {
       });
     })
   }
+
+  // 获取图片的二进制温锦
+  function saveCanvasBlob() {
+    return new Promise((resovle, reject) => {
+      loading.value = true
+      html2canvas(unref(opts.ref)).then(canvas => {
+        canvas.toBlob((blob) => {
+          if (!blob) {
+            loading.value = false
+            console.error("转换出错")
+            reject("转换出错")
+            return
+          }
+          loading.value = false
+          resovle(blob)
+        }, contentType, 1)
+      });
+    })
+  }
+
   return {
     downloadImg,
+    saveCanvasBlob,
     loading
   }
 }

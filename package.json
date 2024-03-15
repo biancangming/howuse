@@ -80,8 +80,5 @@
     "lodash-es": "^4.17.21",
     "mitt": "^3.0.0",
     "xlsx": "^0.18.5"
-  },
-  "overrides": {
-    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.1/xlsx-0.20.1.tgz"
   }
 }

@@ -58,6 +58,14 @@ const router = createRouter({
               }
             },
             {
+              path: '/xlsx',
+              name: 'xlsx',
+              component: () => import("../views/xlsxView/index.vue"),
+              meta: {
+                title: "xlsx",
+              }
+            },
+            {
               path: '/crudAntd',
               name: 'crudAntd',
               component: () => import("../views/crudView/index.vue"),

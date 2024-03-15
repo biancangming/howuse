@@ -21,6 +21,10 @@ const menus: Menu[] = [
         title: "jsPDF",
         routerName: "jsPDF"
       },
+      {
+        title: "xlsx",
+        routerName: "xlsx"
+      },
     ]
   },
   {

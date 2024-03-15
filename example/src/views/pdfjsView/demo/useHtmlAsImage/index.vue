@@ -21,7 +21,9 @@ import { useHtmlAsImage, useHtmlAsPdf } from "howuse/pdf";
 
 const fileArea = ref();
 const fileArea2 = ref();
-const { downloadImg, loading: loadingImg } = useHtmlAsImage({
+
+// saveCanvasBlob 保存为一个blob流，Promise对象。 0.0.5-beta.2 以上版本
+const { downloadImg, saveCanvasBlob, loading: loadingImg } = useHtmlAsImage({
   ref: fileArea,
   fileName: "雨巷.png",
 });

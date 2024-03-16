@@ -1,1 +1,1 @@
-@[js](./src/views/echartsView/demo/BarEchart/index.vue)
+@[js](./src/views/xlsxView/demo/xlsxImport/index.vue)

@@ -27,20 +27,20 @@ const menus: Menu[] = [
       },
     ]
   },
-  {
-    title: "增删改查",
-    routerName: "crud",
-    children: [
-      {
-        title: "antd-design-vue",
-        routerName: "crudAntd"
-      },
-      {
-        title: "element-plus",
-        routerName: "crudElement"
-      }
-    ]
-  },
+  // {
+  //   title: "增删改查",
+  //   routerName: "crud",
+  //   children: [
+  //     {
+  //       title: "antd-design-vue",
+  //       routerName: "crudAntd"
+  //     },
+  //     {
+  //       title: "element-plus",
+  //       routerName: "crudElement"
+  //     }
+  //   ]
+  // },
   {
     title: "组件",
     routerName: "crud",

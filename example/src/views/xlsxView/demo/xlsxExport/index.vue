@@ -9,16 +9,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { xlsxFileToJson, jsonToXlsxFile } from "howuse/xlsx";
-import { loadLocalFile } from "howtools"
+import { jsonToXlsxFile } from "howuse/xlsx";
 import { ElTable, ElTableColumn } from "element-plus"
 import "element-plus/es/components/table/style/css"
 
 const table = ref()
 
-watchEffect(() => {
-  console.log(table.value)
-})
 const data = [
   {
     a: 1,

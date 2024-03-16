@@ -1,4 +1,4 @@
-import { createDef } from "howuse/utils/util";
+import { createDef } from "../../utils/util"
 import { type Table2SheetOpts, utils, writeFile } from "xlsx";
 
 

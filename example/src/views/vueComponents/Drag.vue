@@ -1,4 +1,7 @@
 <template>
+  <p>1. 支持初始化位置</p>
+  <p>2. 支持同时打开多个操作不受影响</p>
+  <p>3. 支持自定义内容的弹窗</p>
   <CodeView title="可拖拽弹窗">
     <DragDialogDemo />
     <template #desc>
@@ -8,11 +11,10 @@
       <DragDialogCode />
     </template>
   </CodeView>
+  <Api/>
 </template>
 <script lang="ts" setup>
 import DragDialogDemo from "./dragDialog/index.vue"
 import DragDialogCode from "./dragDialog/Index.md"
+import Api from "./dragDialog/api.md"
 </script>
-<style lang="less" scoped>
-
-</style>

@@ -6,8 +6,10 @@
       <watermarkCode />
     </template>
   </CodeView>
+  <Api />
 </template>
 <script lang="ts" setup>
 import watermarkDemo from "./demo/index.vue";
 import watermarkCode from "./demo/index.md";
+import Api from "./api.md"
 </script>

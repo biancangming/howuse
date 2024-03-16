@@ -1,12 +1,12 @@
 
 <template>
-  <div ref="wrapper">
+  <div style="position: relative;">
+    <div ref="marker" style="position: absolute; inset: 0;pointer-events: none;"></div>
     <slot></slot>
   </div>
 </template>
 <script lang="ts" setup>
 import { createMarkBase64 } from "./util"
-const wrapper = ref<HTMLElement>()
 const props = defineProps({
   text: {
     default: () => "水印",
@@ -15,16 +15,23 @@ const props = defineProps({
   show: {
     default: true,
     type: Boolean
+  },
+  opacity: {
+    default: 0.15
   }
 })
+
+const marker = ref<HTMLElement>(document.createElement("div"))
 
 let lastMark = undefined
 
 // 显示水印
-function showMark() {
-  const src = lastMark ?? createMarkBase64(props.text)
-  const el = unref(wrapper) as HTMLElement
-  el.style.background = `url(${src})`
+async function showMark() {
+  if (!unref(marker)) await nextTick()
+  const d = unref(marker)
+  d.style.zIndex = "1000"
+  const src = lastMark ?? createMarkBase64(props.text, props.opacity)
+  d.style.background = `url(${src})`
 }
 
 onMounted(() => { if (props.show) { showMark() } })
@@ -34,11 +41,9 @@ watch(
   ([text, show]) => {
     if (show) { showMark() }
     else {
-      const el = unref(wrapper) as HTMLElement
+      const el = unref(marker) as HTMLElement
       el.style.background = ``
     }
   })
 </script>
-<style lang="less" scoped>
-
-</style>
+<style lang="less" scoped></style>

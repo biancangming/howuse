@@ -4,11 +4,11 @@ import pkg from "../package.json"
 import { writeFileSync, readFileSync, existsSync, mkdirSync } from "fs";
 
 // 创建dist 文件夹
-if(!existsSync(path.resolve(__dirname, "../dist"))){
+if (!existsSync(path.resolve(__dirname, "../dist"))) {
   mkdirSync(path.resolve(__dirname, "../dist"))
 }
 
-const libs = ["axios", "echarts", "crud", "vueComponent", "pdf"]
+const libs = ["axios", "echarts", "crud", "vueComponent", "pdf", "xlsx"]
 
 const _exports = {}
 
@@ -21,12 +21,13 @@ for (const lib of libs) {
 }
 
 (
- async function(){
+  async function () {
     await build({ configFile: path.join(__dirname, `./vite/axios.config.ts`) })
     await build({ configFile: path.join(__dirname, `./vite/echarts.config.ts`) })
     await build({ configFile: path.join(__dirname, `./vite/crud.config.ts`) })
     await build({ configFile: path.join(__dirname, `./vite/vueComponent.config.ts`) })
     await build({ configFile: path.join(__dirname, `./vite/pdf.config.ts`) })
+    await build({ configFile: path.join(__dirname, `./vite/xlsx.config.ts`) })
   }
 )()
 // --------------------------------------------------

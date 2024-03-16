@@ -58,6 +58,14 @@ const router = createRouter({
               }
             },
             {
+              path: '/xlsx',
+              name: 'xlsx',
+              component: () => import("../views/xlsxView/index.vue"),
+              meta: {
+                title: "xlsx",
+              }
+            },
+            {
               path: '/crudAntd',
               name: 'crudAntd',
               component: () => import("../views/crudView/index.vue"),
@@ -81,15 +89,20 @@ const router = createRouter({
                   component: () => import("../views/vueComponents/Drag.vue"),
                 },
                 {
+                  path: "dragDrop",
+                  name: "componentDragDrop",
+                  component: () => import("../views/vueComponents/dragDrop/index.vue"),
+                },
+                {
                   path: "imgPreview",
                   name: "componentImgPreview",
                   component: () => import("../views/vueComponents/Img.vue"),
                 },
-                {
-                  path: "jsonPreview",
-                  name: "componentJsonPreview",
-                  component: () => import("../views/vueComponents/Json.vue"),
-                },
+                // {
+                //   path: "jsonPreview",
+                //   name: "componentJsonPreview",
+                //   component: () => import("../views/vueComponents/Json.vue"),
+                // },
                 {
                   path: "mask",
                   name: "componentMask",
@@ -99,6 +112,16 @@ const router = createRouter({
                   path: "virtualScroll",
                   name: "componentVirtualScroll",
                   component: () => import("../views/vueComponents/virtualScrollView/index.vue"),
+                },
+                {
+                  path: "watermark",
+                  name: "componentWatermark",
+                  component: () => import("../views/vueComponents/watermark/index.vue"),
+                },
+                {
+                  path: "ClickOutSide",
+                  name: "componentClickOutSide",
+                  component: () => import("../views/vueComponents/ClickOutSide.vue"),
                 },
               ]
             },

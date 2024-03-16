@@ -2,14 +2,14 @@ name: "git pages"
 on: 
   push:
     branches:
-      - "dev"
+      - "main"
     paths:
       - "example/**"
 
 # 作业
 jobs:
   build-example-dev:
-    runs-on: "ubuntu-latest"
+    runs-on: "windows-latest"
     strategy:
       matrix:
         node-version: [16.13.0]
@@ -21,6 +21,7 @@ jobs:
       - name: package example page
         run: |  
           npm i 
+          cd example
           npm run example:build
       - name: push 
         uses: crazy-max/ghaction-github-pages@v3

@@ -1,7 +1,7 @@
 import { shallowRef } from 'vue';
 import type { AxiosResponse } from "axios"
 import { saveFileFromBlob } from "howtools";
-import { HowDownLoadExRequestOptions } from "types/axios"
+import type { HowDownLoadExRequestOptions } from "../types/axios"
 
 /**
  * @param  {Ref<AxiosResponse<T>>|any} data 需要下载的blob数据
@@ -28,7 +28,7 @@ export function useResponseBlobDownLoad(options?: HowDownLoadExRequestOptions) {
 
         // 读取文件名称
         const dispositionRegArr = filenameReg.exec(_response.headers['content-disposition'])
-        const _fileName = fileName ?? decodeURI(dispositionRegArr ? dispositionRegArr[0] : "") //读取文件类型
+        const _fileName = fileName ?? decodeURI(dispositionRegArr ? dispositionRegArr[1] : "") //读取文件类型
         if (!_fileName) throw new Error("fileName Cannot be empty")
 
         //下载数据

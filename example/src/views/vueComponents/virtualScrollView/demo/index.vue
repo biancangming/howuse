@@ -1,10 +1,10 @@
 <template>
   <h3>渲染10万条数据示例</h3>
   <div class="data-wrapper">
-    <how-virtual-scroll :data-source="data" :el-height="100">
+    <how-virtual-scroll :data-source="data" :el-height="35">
       <template #default="{ item }">
         <div class="data-item">
-          {{ item }}
+          条目_{{ item }}
         </div>
       </template>
     </how-virtual-scroll>

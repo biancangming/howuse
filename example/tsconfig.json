@@ -1,11 +1,11 @@
 {
   "extends": "../tsconfig.json",
   "include": [
-    "env.d.ts",
     "src/**/*",
     "vite.config.ts",
     "*.d.ts",
   ],
+
   "compilerOptions": {
     "lib": [
       "DOM",

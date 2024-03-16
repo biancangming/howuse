@@ -9,9 +9,8 @@ import code from '@yankeeinlondon/code-builder'
 import AutoImport from "unplugin-auto-import/vite"
 import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import CustomBlock from "markdown-it-custom-block"
-import topLevelAwait from 'vite-plugin-top-level-await'
+// import topLevelAwait from 'vite-plugin-top-level-await'
 // import svgLoader from 'vite-svg-loader'
 
 function pathResolve(dir: string) {
@@ -21,7 +20,7 @@ function pathResolve(dir: string) {
 export default defineConfig({
   base: "",
   define: {
-    __VUE_OPTIONS_API__: false,
+    // __VUE_OPTIONS_API__: false,
     __VUE_PROD_DEVTOOLS__: false,
   },
   plugins: [
@@ -29,10 +28,10 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/],
     }),
     vueJsx(),
-    topLevelAwait({
-      promiseExportName: '__tla',
-      promiseImportName: i => `__tla_${i}`
-    }),
+    // topLevelAwait({
+    //   promiseExportName: '__tla',
+    //   promiseImportName: i => `__tla_${i}`
+    // }),
     // svgLoader(),
     Markdown({
       builders: [code()],
@@ -40,12 +39,16 @@ export default defineConfig({
         md.use(CustomBlock, {
           code(url) {
             const file = fs.readFileSync(url).toString()
-            const code = Prism.highlight(file, Prism.languages.html, "html").trim();
+            const code = Prism.highlight(file, Prism.languages.html, "html").trim().
+              replaceAll("{{", "&#123&#123").
+              replaceAll("}}", "&#125&#125")
             return `<pre class="language-vue"><code class="language-vue">${code}</code></pre>`
           },
           js(url) {
             const file = fs.readFileSync(url).toString()
-            const code = Prism.highlight(file, Prism.languages.js, "js").trim();
+            const code = Prism.highlight(file, Prism.languages.js, "js").trim().
+              replaceAll("{{", "&#123&#123").
+              replaceAll("}}", "&#125&#125")
             return `<pre class="language-js"><code class="language-js">${code}</code></pre>`
           }
         })
@@ -78,7 +81,8 @@ export default defineConfig({
     assetsDir: 'static', // 指定生成静态资源的存放路径
     rollupOptions: {
       external: ["prismjs"]
-    }
+    },
+    sourcemap: true
   },
   css: {
     preprocessorOptions: {
@@ -93,6 +97,7 @@ export default defineConfig({
   },
   // 本地运行配置，及反向代理配置
   server: {
+    port: 7000,
     cors: true, // 默认启用并允许任何源
     // open: true, // 在服务器启动时自动在浏览器中打开应用程序
     proxy: {

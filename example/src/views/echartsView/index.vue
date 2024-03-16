@@ -7,6 +7,7 @@
   </p>
   <p>1. 在原生代码基础上增加页面响应式自适应</p>
   <p>2. 提供基本图形组件模板，组件内部按需引入，降低按需引入的编码成本</p>
+  <p>3. 默认内置了 GridComponent, LegendComponent, TooltipComponent, TitleComponent 几个常用组件，其余需要在使用时动态注入</p>
   <CodeView title="自适应折线图，其它自适应类似">
     <LineChartDemo />
     <template #code>
@@ -17,6 +18,15 @@
     <BarEchartDemo />
     <template #code>
       <BarEchartCode />
+    </template>
+  </CodeView>
+  <CodeView title="混入模式-柱状图举例">
+    <MixBarEchartDemo />
+    <template #code>
+      <MixBarEchartCode />
+    </template>
+    <template #desc>
+      支持多个option 同时传入,自动合并
     </template>
   </CodeView>
   <CodeView title="饼图">
@@ -59,6 +69,8 @@ import LineChartDemo from "./demo/LineChart/index.vue";
 import LineChartCode from "./demo/LineChart/index.md";
 import BarEchartDemo from "./demo/BarEchart/index.vue";
 import BarEchartCode from "./demo/BarEchart/index.md";
+import MixBarEchartDemo from "./demo/MixInBarEchart/index.vue";
+import MixBarEchartCode from "./demo/MixInBarEchart/index.md";
 import PieEchartDemo from "./demo/PieEchart/index.vue";
 import PieEchartCode from "./demo/PieEchart/index.md";
 import BaseEchartDemo from "./demo/BaseChart/index.vue";

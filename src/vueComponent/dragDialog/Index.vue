@@ -1,14 +1,17 @@
 <template>
-  <Transition name="custom-classes" enter-active-class="animate__animated animate__faster animate__zoomIn" leave-active-class="animate__animated animate__faster animate__zoomOut">
+  <Transition name="custom-classes" enter-active-class="animate__animated animate__faster animate__zoomIn"
+    leave-active-class="animate__animated animate__faster animate__zoomOut">
     <Draggable :class="prefixCls" v-slot="{ x, y }" :handle="handle" :prevent-default="true" v-if="visible"
-      :position="position">
+      :position="position" :lock-boundary="lockBoundary">
       <template v-if="any">
-        <div style="user-select: none;"><slot :x="x" :y="y"></slot></div>
+        <div style="user-select: none;">
+          <slot :x="x" :y="y"></slot>
+        </div>
       </template>
       <template v-else>
         <div :class="`${prefixCls}__move`" ref="handle">
           <div :class="`${prefixCls}__move--title`">
-              <slot name="header" :x="x" :y="y"></slot>
+            <slot name="header" :x="x" :y="y"></slot>
           </div>
           <div :class="`${prefixCls}__move--close`" @click="close">X</div>
         </div>
@@ -46,6 +49,9 @@ const props = defineProps({
   any: {
     default: false,
     type: Boolean
+  },
+  lockBoundary: {
+    default: true
   }
 })
 
@@ -113,5 +119,4 @@ function close() {
     display: flex;
     align-items: center;
   }
-}
-</style>
+}</style>

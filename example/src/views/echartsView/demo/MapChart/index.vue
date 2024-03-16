@@ -74,7 +74,7 @@ const option: EChartsOption = {
  *  datav  http://datav.aliyun.com/portal/school/atlas/area_selector 服务似乎下架了2022/10/11 官网一直提示服务升级中
  *  cnGeoJson geojson.cn 数据
  */
-useGeoJsonMap({ code: "610500", name: "weinan", type: "cnGeoJson" }).then(() => {
+useGeoJsonMap({ code: "610500", name: "weinan", type: 'custom', data: {} }).then(() => {
   mapVisible.value = true
 }) // name 是必传条件
 </script>

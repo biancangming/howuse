@@ -6,33 +6,41 @@
 import { EChartsOption } from 'echarts';
 import { PropType } from 'vue';
 import { useBaseECharts } from '../baseChart';
+import { HowEchartsInitOpts } from '../types/echarts';
+import { use } from "echarts/core";
 const chartRef = ref();
-const { setOption, echartInstance, echarts } = useBaseECharts(chartRef)
+const { setOption, echartInstance } = useBaseECharts(chartRef)
 
 const props = defineProps({
   option: {
     default: () => ({}),
-    type: Object as PropType<EChartsOption>
+    type: Object as PropType<EChartsOption | EChartsOption[]>
+  },
+  theme: {
+    default: undefined,
+    type: [String, Object],
   },
   use: {
     default: () => [],
     type: Object as PropType<any>
+  },
+  config: {
+    default: () => ({}),
+    type: Object as PropType<HowEchartsInitOpts>,
   }
 })
 
-if(!props.use || props.use.length === 0){
-  console.error("提示：必须传入可用的echart组件")
-}else{
-  echarts.use(props.use)
-}
+use(props.use)
 
 defineExpose({
-  getInstance: echartInstance()
+  getInstance: echartInstance,
+  on: echartInstance()?.on,
+  dispatchAction: echartInstance()?.dispatchAction,
 })
 
-watch(() => props.option,
-  (option) => {
-    setOption(option)
+watch([() => props.option, () => props.theme],
+  ([option, theme]) => {
+    setOption(option, theme)
   },
   {
     immediate: true

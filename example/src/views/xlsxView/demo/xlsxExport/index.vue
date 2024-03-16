@@ -13,8 +13,6 @@ import { jsonToXlsxFile } from "howuse/xlsx";
 import { ElTable, ElTableColumn } from "element-plus"
 import "element-plus/es/components/table/style/css"
 
-const table = ref()
-
 const data = [
   {
     a: 1,
@@ -42,10 +40,11 @@ function exportExcel() {
         data: data // 表格数据
       }
     ],
-    // 替换字段
+    // 替换字段 把 a 替换成 第一列
     replaceFields: {
       a: "第一列"
-    }
+    },
+    fileName: "hahaha.xlsx"
   })
 }
 </script>

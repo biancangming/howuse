@@ -5,7 +5,7 @@ import { isDefined } from "@vueuse/core"
  * @param  {} defVal=undefined
  * 为某个字段创建一个默认值，即undefined
  */
-export function createDef<T = any>(val: T, defVal: Exclude<T, undefined>) {
+export function createDef<T = any>(val: T, defVal: Exclude<Partial<T>, undefined>) {
   return val === undefined || val === defVal ? defVal : val
 }
 

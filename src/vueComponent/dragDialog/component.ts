@@ -32,9 +32,7 @@ export const UseDraggable = defineComponent<UseDraggableProps>({
     const bodyRect = () => bodyBoundary.value = document.body.getBoundingClientRect()
     onMounted(bodyRect)
     addResizeListener(document.body as HTMLDivElement, bodyRect)
-    onUnmounted(() => {
-      removeResizeListener(document.body as HTMLDivElement, bodyRect)
-    })
+    onUnmounted(() => removeResizeListener(document.body as HTMLDivElement, bodyRect))
 
 
     const dragStype = computed(() => {
@@ -44,9 +42,12 @@ export const UseDraggable = defineComponent<UseDraggableProps>({
       const targetRect = unref(target)?.getBoundingClientRect()
       const targetWidth = unref(targetRect)?.width
       const targetHeight = unref(targetRect).height
-      // 姐u三拖动最大边界
+      // 拖动最大边界
       const _x = Math.min(Math.max(bodyBoundary.value.x, data.x.value), bodyBoundary.value.width - targetWidth)
       const _y = Math.min(Math.max(bodyBoundary.value.y, data.y.value), bodyBoundary.value.height - targetHeight)
+      // 修改data的值
+      data.x.value = _x
+      data.y.value = _y
       return `top:${_y}px;left:${_x}px`
     })
 

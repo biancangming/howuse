@@ -2,7 +2,7 @@
   <Transition name="custom-classes" enter-active-class="animate__animated animate__faster animate__zoomIn"
     leave-active-class="animate__animated animate__faster animate__zoomOut">
     <Draggable :class="prefixCls" v-slot="{ x, y }" :handle="handle" :prevent-default="true" v-if="visible"
-      :position="position" :lock-boundary="lockBoundary">
+      :position="position" :lock-boundary="lockBoundary" :boundary="boundary">
       <template v-if="any">
         <div style="user-select: none;">
           <slot :x="x" :y="y"></slot>
@@ -52,6 +52,10 @@ const props = defineProps({
   },
   lockBoundary: {
     default: true
+  },
+  boundary: {
+    default: () => document.body, // 拖动活动边界元素
+    type: [HTMLDivElement, HTMLElement]
   }
 })
 
@@ -119,4 +123,5 @@ function close() {
     display: flex;
     align-items: center;
   }
-}</style>
+}
+</style>

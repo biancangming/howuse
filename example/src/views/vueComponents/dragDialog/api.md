@@ -1,6 +1,6 @@
 # API 说明
 
-在 [https://vueuse.org/core/useDraggable/](https://vueuse.org/core/useDraggable/) 基础上封装了自定义的`UseDraggable`组件。支持任意拖动，支持边界锁定。
+[https://vueuse.org/core/useDraggable/](https://vueuse.org/core/useDraggable/) 这里其实实现了大部分内容，本组件也是在这个方法的基础上封装，做了轻微修改，以便于适应自身业务
 
 ## props & event 
 | 属性         | 说明                              |                 |

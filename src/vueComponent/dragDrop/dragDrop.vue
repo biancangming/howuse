@@ -35,7 +35,6 @@ const emit = defineEmits<{
   (e: "dragleave", ev: DragEventInit): void;
   (e: "dragenter", ev: DragEventInit): void;
   (e: "dragover", ev: DragEventInit): void;
-  (e: "dragdrop", ev: DragEventInit): void;
   (e: "dragend", ev: DragEventInit): void;
   (e: "drop", ev: DragEventInit, { }): void;
 }>()

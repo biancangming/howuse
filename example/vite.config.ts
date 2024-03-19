@@ -10,8 +10,6 @@ import AutoImport from "unplugin-auto-import/vite"
 import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import CustomBlock from "markdown-it-custom-block"
-// import topLevelAwait from 'vite-plugin-top-level-await'
-// import svgLoader from 'vite-svg-loader'
 
 function pathResolve(dir: string) {
   return resolve(__dirname, ".", dir);
@@ -97,7 +95,7 @@ export default defineConfig({
   },
   // 本地运行配置，及反向代理配置
   server: {
-    port: 7000,
+    port: 5175,
     cors: true, // 默认启用并允许任何源
     // open: true, // 在服务器启动时自动在浏览器中打开应用程序
     proxy: {

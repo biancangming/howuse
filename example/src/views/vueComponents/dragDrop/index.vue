@@ -14,6 +14,13 @@
       <howDragDropCode2 />
     </template>
   </CodeView>
+  <CodeView title="拖拽元素到另一个可拖拽区域">
+    <howDragDropDemo3 />
+    <template #desc>有一些组态的例子，从左侧拖拽到右边，以便于保存一些按钮操作。通常比较简易的做法下边放一张底图，上边一些按钮拖动就行了。</template>
+    <template #code>
+      <howDragDropCode3 />
+    </template>
+  </CodeView>
   <Api style="margin-top: 10px;"/>
 </template>
 <script lang="ts" setup>
@@ -21,5 +28,7 @@ import howDragDropDemo from "./demo/index.vue";
 import howDragDropCode from "./demo/index.md";
 import howDragDropDemo2 from "./demo2/index.vue";
 import howDragDropCode2 from "./demo2/index.md";
+import howDragDropDemo3 from "./demo3/index.vue";
+import howDragDropCode3 from "./demo3/index.md";
 import Api from "./api.md";
 </script>

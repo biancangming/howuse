@@ -33,7 +33,7 @@
     "@types/prismjs": "^1.26.0",
     "@vitejs/plugin-vue": "^3.1.0",
     "@vitejs/plugin-vue-jsx": "^2.0.1",
-    "@vueuse/core": "^9.3.0",
+    "@vueuse/core": "^10.9.0",
     "@yankeeinlondon/code-builder": "1.0.7",
     "ant-design-vue": "^3.2.12",
     "axios": "^0.25.0",
